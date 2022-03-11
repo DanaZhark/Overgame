@@ -1,0 +1,32 @@
+{% extends 'register_base.html' %}
+{%  load static %}
+{% block content %}
+<style>
+    .loginScreen {
+        color: #c8deff;
+        padding: 10px 40px;
+        position: absolute;
+        bottom: 13%;
+    }
+</style>
+<div class="loginScreen">
+    <h1>Login</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <input style="letter-spacing: 0;
+                       width: 90px;background: rgb(115,158,225);
+                       color: #fff; float: left; padding: 5px;
+                       font-family: 'Press Start 2P', cursive;" type="submit"
+               value="Login">
+        <input name="next" type="hidden" value="{% url 'accounts:success' %}">
+        <br><br>
+        <p>If you do not have an account, please, click <a href="{% url 'accounts:register' %}">here</a></p>
+    </form>
+</div>
+
+{% endblock %}
+
+
+

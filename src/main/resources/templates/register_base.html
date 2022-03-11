@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <title>Overgame</title>
+
+    <!--Links to external CSS stylesheet-->
+    <link href="/static/css/style_login.css" rel="stylesheet" type="text/css"/>
+
+    <!--Links to external JS-->
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js' type='text/javascript'>
+
+        <
+            script
+            src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+
+
+<div class="center">
+
+    <div class="monitor" style="z-index: 10;">
+        <div class="screen" style="background-color: #0d0e47;">
+            {% block content %}
+
+            {% endblock %}
+        </div>
+        <div class="light">
+        </div>
+        <div>
+            <button class="mainbutton" onclick="myFunction()">
+
+            </button>
+        </div>
+    </div>
+
+    <div class="block">
+        <div class="cd">
+        </div>
+        <div class="button1">
+        </div>
+        <div class="button2 blinking">
+        </div>
+        <div class="button3">
+        </div>
+        <div class="button4">
+        </div>
+    </div>
+
+</div>
+</body>
+
+</html>

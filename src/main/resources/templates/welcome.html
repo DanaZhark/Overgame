@@ -1,0 +1,328 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Overgame</title>
+
+    <!--Links to external CSS stylesheet-->
+    <link href="/static/css/style_login.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/css/style2.css" rel="stylesheet">
+
+    <!--Links to external JS-->
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js' type='text/javascript'>
+
+        <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+
+<body style="background-image: url(/static/images/back.png)">
+
+<div class="center">
+
+    <div class="monitor" style="z-index: 10;">
+        <div class="screen" style="background-color: black;">
+            <div class="text zero">
+            </div>
+
+            <div class="text one">
+            </div>
+
+            <div class="text two">
+            </div>
+
+            <div class="text three">
+            </div>
+
+            <div id="skip"></div>
+        </div>
+        <div class="light">
+        </div>
+        <div>
+            <button class="mainbutton" onclick="myFunction()">
+
+            </button>
+        </div>
+    </div>
+
+    <div class="block">
+        <div class="cd">
+        </div>
+        <div class="button1">
+        </div>
+        <div class="button2 blinking">
+        </div>
+        <div class="button3">
+        </div>
+        <div class="button4">
+        </div>
+    </div>
+
+</div>
+<div class="desk">
+    <img class="controller1" src="/static/images/controller1.png">
+    <img class="controller2" src="/static/images/controller2.png">
+</div>
+
+<script>
+    var coef = 1;
+
+    function getCoef() {
+        return coef;
+    }
+
+    function addRow2() {
+        const input = document.createElement('input');
+
+        input.type = "radio";
+        input.name = "radio";
+        input.value = "user";
+        input.id = "user";
+
+        const theFirstChild = document.getElementsByClassName("two")[0].firstElementChild;
+        // Вставляем новый элемент перед первым дочерним элементом
+        document.getElementsByClassName("two")[0].insertBefore(input, theFirstChild);
+    }
+
+    function addRow1() {
+        const input = document.createElement('input');
+
+        input.type = "radio";
+        input.name = "radio";
+        input.value = "guest";
+        input.id = "guest";
+        input.checked = true;
+        //  document.getElementsByClassName("one")[0].appendChild(input);
+
+        const theFirstChild = document.getElementsByClassName("one")[0].firstElementChild;
+        // Вставляем новый элемент перед первым дочерним элементом
+        document.getElementsByClassName("one")[0].insertBefore(input, theFirstChild);
+
+    }
+
+    function choiceText() {
+        set4();
+
+        const label = document.createElement('label');
+        const span = document.createElement('span');
+        label.id = "first";
+        span.id = "checkmark";
+        document.getElementsByClassName("one")[0].appendChild(label);
+        document.getElementsByClassName("one")[0].appendChild(span);
+        setTimeout(set5, 2000 * getCoef());
+
+        const label2 = document.createElement('label');
+        const span2 = document.createElement('span');
+        label2.id = "second";
+        span2.id = "checkmark2";
+        document.getElementsByClassName("two")[0].appendChild(label2);
+        document.getElementsByClassName("two")[0].appendChild(span2);
+        setTimeout(set6, 2000 * getCoef());
+        setTimeout(addRow1, 1000 * getCoef());
+        setTimeout(addRow2, 1000 * getCoef());
+
+    }
+
+    function removeText() {
+        document.getElementsByClassName("text")[0].textContent = "";
+        document.getElementsByClassName("text")[1].textContent = "";
+        document.getElementsByClassName("text")[2].textContent = "";
+        document.getElementsByClassName("text")[3].textContent = "";
+        setTimeout(choiceText, 1000 * getCoef());
+        document.getElementById("skip").style.opacity = "0";
+        document.getElementById("skip").style.cursor = "default";
+    }
+
+    var i = 0;
+    var speed = 50;
+    var txt0 = "Welcome, dear gamer!";
+
+    function typeWriter0() {
+        if (i < txt0.length) {
+            document.getElementsByClassName("text")[0].innerHTML += txt0.charAt(i);
+            i++;
+            setTimeout(typeWriter0, speed * coef);
+        }
+
+    }
+
+    var j = 0;
+    var txt1 = "You are on the best website";
+
+    function typeWriter1() {
+        if (j < txt1.length) {
+            document.getElementsByClassName("text")[1].innerHTML += txt1.charAt(j);
+            j++;
+            setTimeout(typeWriter1, speed * coef);
+        }
+    }
+
+    var k = 0;
+    var txt2 = "with the best flash games";
+
+    function typeWriter2() {
+        if (k < txt2.length) {
+            document.getElementsByClassName("text")[2].innerHTML += txt2.charAt(k);
+            k++;
+            setTimeout(typeWriter2, speed * coef);
+        }
+    }
+
+    var l = 0;
+    var txt3 = "that you've never played before!!!";
+
+    function typeWriter3() {
+        if (l < txt3.length) {
+            document.getElementsByClassName("text")[3].innerHTML += txt3.charAt(l);
+            l++;
+            setTimeout(typeWriter3, speed * coef);
+        }
+    }
+
+    var m = 0;
+    var txt4 = "How do you want to go to the site?";
+
+    function typeWriter4() {
+        if (m < txt4.length) {
+            document.getElementsByClassName("text")[0].innerHTML += txt4.charAt(m);
+            m++;
+            setTimeout(typeWriter4, speed * coef);
+        }
+    }
+
+    var n = 0;
+    var txt5 = "Guest";
+
+    function typeWriter5() {
+        if (n < txt5.length) {
+            document.getElementById("first").innerHTML += txt5.charAt(n);
+            n++;
+            setTimeout(typeWriter5, speed * coef);
+        }
+    }
+
+    var p = 0;
+    var txt6 = "User";
+
+    function typeWriter6() {
+        if (p < txt6.length) {
+            document.getElementById("second").innerHTML += txt6.charAt(p);
+            p++;
+            setTimeout(typeWriter6, speed * coef);
+        }
+    }
+
+    var t = 0;
+    var txt10 = "skip>>";
+
+    function typeWriter10() {
+        if (t < txt10.length) {
+            document.getElementById("skipbutton").innerHTML += txt10.charAt(t);
+            t++;
+            setTimeout(typeWriter10, speed);
+        }
+    }
+
+    function set3() {
+        setTimeout(typeWriter3, speed * coef);
+        setTimeout(removeText, 3000 * getCoef());
+    }
+
+    function set2() {
+        setTimeout(typeWriter2, speed * coef);
+        setTimeout(set3, 1800 * getCoef());
+    }
+
+    function set1() {
+        setTimeout(typeWriter1, speed * coef);
+        setTimeout(set2, 1800 * getCoef());
+    }
+
+    function set0() {
+        setTimeout(typeWriter0, speed * coef);
+        setTimeout(set1, 1500 * getCoef());
+    }
+
+
+    function set4() {
+        setTimeout(typeWriter4, speed * getCoef());
+    }
+
+    function set5() {
+        setTimeout(typeWriter5, speed * getCoef());
+    }
+
+    function set6() {
+        setTimeout(typeWriter6, speed * getCoef());
+    }
+
+    function set10() {
+        setTimeout(typeWriter10, speed);
+    }
+
+
+    function skipfunction() {
+        coef = 0.1;
+    }
+
+    function skipbutton() {
+        const skipbutton = document.createElement('button');
+
+
+        skipbutton.id = "skipbutton";
+
+        document.getElementById("skip").appendChild(skipbutton);
+
+        var btn = document.getElementById("skipbutton");
+        btn.onclick = skipfunction;
+        set10();
+    }
+
+
+    function myFunction() {
+        document.getElementsByClassName("monitor")[0].style.boxShadow = "0 4px 2px -2px #3f48cc";
+
+        document.getElementsByClassName("screen")[0].style.backgroundColor = "#0d0e47";
+        document.getElementsByClassName("screen")[0].style.boxShadow = "0 0 25px #3f48cc";
+
+        document.getElementsByClassName("mainbutton")[0].style.backgroundColor = "#ffffff";
+        document.getElementsByClassName("mainbutton")[0].style.borderColor = "#56e690";
+        document.getElementsByClassName("mainbutton")[0].style.boxShadow = "0 0 15px #56e690";
+
+        document.getElementsByClassName("button1")[0].style.boxShadow = "0 8px 8px #5754b1";
+        document.getElementsByClassName("button2")[0].style.backgroundColor = "white";
+        document.getElementsByClassName("button2")[0].style.boxShadow = "0 8px 8px white";
+        document.getElementsByClassName("button3")[0].style.boxShadow = "0 8px 15px #5754b1";
+        document.getElementsByClassName("button4")[0].style.boxShadow = "0 8px 15px #5754b1";
+
+
+        setTimeout(skipbutton, 2000);
+        setTimeout(set10, 6000);
+
+        setTimeout(set0, 3000 * getCoef() * getCoef());
+
+
+        $(document).ready(function () {
+            $(document).on('keydown', function (e) {
+                if (e.which == 13) {
+                    var answ = document.getElementById("guest").checked;
+                    if (answ == true) {
+                        removeText();
+                        window.location = "main";
+                    } else {
+                        removeText();
+                        window.location = "user/login";
+
+                    }
+                }
+            });
+        });
+
+
+    }
+</script>
+<script src="../static/js/requests.js"></script>
+
+</body>
+
+</html>

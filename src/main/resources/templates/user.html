@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>main</title>
+    <link href="/static/css/style.css" rel="stylesheet" type="text/css"/>
+
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
+    <link crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Baloo+Thambi|Bungee|Cuprum|Fredoka+One|Knewave|Monda|Monoton|Permanent+Marker|Press+Start+2P|Righteous&display=swap"
+          rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <style>
+
+        #profileTop {
+            background: #076283;
+            width: 900px;
+            height: 250px;
+            margin: 50px auto 0;
+            opacity: 95%;
+            border: 10px solid rgba(0, 255, 255, 0.5);
+            border-bottom: none;
+        }
+
+        .person {
+            width: 160px;
+            margin: 25px 40px;
+            background-size: cover;
+            float: left;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .person p {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 80%;
+            color: #4fe5e5;
+            background-color: #0d0e47;
+        }
+
+        #ava {
+            width: 160px;
+            height: 155px;
+            background-size: cover;
+            float: left;
+            overflow: hidden;
+            border: 5px solid #0d0e47;
+        }
+
+        #ava img {
+            width: 150px;
+            height: auto;
+            background-color: #ffffff;
+        }
+
+        #description {
+            width: 250px;
+            height: 150px;
+            margin: 25px 5px;
+            float: left;
+        }
+
+        .leftPart {
+            margin: 8px 0;
+            padding: 8px 0;
+        }
+
+        .rightPart {
+            width: 250px;
+            height: 150px;
+            margin: 25px 40px;
+            float: right;
+        }
+
+        .editProfile {
+            background-color: #4fe5e5;
+            color: white;
+            padding: 10px 30px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 20px 20px 20px 35%;
+            cursor: pointer;
+        }
+
+        #profileBottom {
+            background: rgba(24, 34, 91, 0.9);
+            width: 900px;
+            margin: 0 auto;
+            border: 10px solid rgba(0, 255, 255, 0.5);
+            border-top: none;
+        }
+
+        h3 {
+            height: 50px;
+            padding: 40px;
+        }
+
+        #achievements {
+            width: 100%;
+            height: 50px;
+        }
+
+        .firstBlock {
+            margin-left: 40px;
+        }
+
+        .block {
+            width: 50px;
+            height: 50px;
+            background: #a59fdd;
+            float: left;
+            margin-right: 25px;
+        }
+
+        #listFavGames {
+            width: 100%;
+        }
+
+        .scroll, .scroll1 {
+            width: 90%;
+            text-align: center;
+            margin: 5%;
+            display: inline-block;
+        }
+
+        #userPosts {
+            width: 90%;
+            height: 160px;
+            margin: auto;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        #slideLeft,
+        #slideRight, #slideLeft1,
+        #slideRight1 {
+            display: inline-block;
+            border-radius: 100%;
+            padding: 5px;
+            background-color: rgba(219, 47, 0, 0.9);
+        }
+
+        .gameItem {
+            position: relative;
+            background-color: rgba(165, 159, 221, 0.8);
+            border-radius: 15px;
+            padding: 5px;
+            text-align: center;
+            display: inline-block;
+            width: 120px;
+            height: 140px;
+            margin: 10px;
+        }
+
+        .gameItem img {
+            width: 110px;
+            height: 110px;
+            border-radius: 15px;
+            border: 2px solid #0d0e47;
+        }
+
+        .gameItem p {
+            font-family: 'Fredoka One', cursive;
+            color: #0d0e47;
+            overflow: hidden;
+        }
+
+        h1, h2, h3, h4, h5, p, .nickname, .empty {
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        .empty a {
+            font-family: 'Press Start 2P', cursive;
+            color: rgba(219, 47, 0, 0.9);
+            text-transform: uppercase;
+        }
+
+        body {
+            background-image: url(/static/images/space.gif);
+        }
+
+        @media screen and (min-height: 800px) {
+            .sidenav {
+                padding-top: 30px;
+            }
+
+            .sidenav a {
+                font-size: 18px;
+            }
+        }
+
+        button {
+            font-family: 'Press Start 2P', cursive;
+            color: #c8deff;
+        }
+
+        ul {
+            list-style: none;
+            font-family: 'Monoton', cursive;
+        }
+
+        .navitem ul {
+            list-style: square;
+        }
+
+        .username button {
+            float: right;
+            display: inline-block;
+            font-size: 20px;
+            margin: 10px;
+            font-family: 'Press Start 2P', cursive;
+            color: #c8deff;
+            border: none;
+            background-color: rgba(219, 47, 0, 0);
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .username {
+            position: relative;
+            display: block;
+            float: right;
+            border-radius: 30px;
+            border: 3px solid rgba(219, 47, 0, .5);
+            background-color: rgba(219, 47, 0, 0.8);
+            text-align: center;
+            margin: 15px;
+        }
+
+        .dropdown:hover .dropbtn {
+            float: none;
+            font-size: 25px;
+        }
+
+        .dropdown-content {
+            display: none;
+        }
+
+        .dropdown-content:hover {
+            display: inline-block;
+        }
+
+        .dropdown-content a {
+            font-size: 16px;
+            margin-top: 10px;
+            font-family: 'Press Start 2P', cursive;
+            color: #c8deff;
+            text-decoration: none;
+        }
+
+        .username a {
+            font-family: 'Press Start 2P', cursive;
+            padding: 10px 0;
+            color: #c8deff;
+            text-decoration: none;
+        }
+
+        .username a:hover {
+            animation: blinker 1.2s linear infinite;
+            color: #a59fdd;
+        }
+
+        .navitem a {
+            margin: 0;
+            padding: 0;
+        }
+
+        .item {
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .tagItem a {
+            color: #c8deff;
+            margin: 0 5px;
+            font-family: 'Fredoka One', cursive;
+        }
+
+        h1 {
+            -webkit-text-fill-color: #0d0e47;
+            -webkit-text-stroke-color: #c8deff;
+            -webkit-text-stroke-width: 2px;
+            padding: 50px;
+        }
+
+        .poster {
+            position: relative;
+            width: 400px;
+            height: 250px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 1em;
+            border-radius: 10px;
+            border: 7px solid rgba(13, 17, 71, 1);
+        }
+
+        p {
+            display: inline-block;
+            text-align: justify;
+        }
+
+    </style>
+
+</head>
+<body>
+<header>
+
+    <div class="username">
+        <div class="dropdown">
+            <button class="dropbtn">Username</button>
+            <ul class="dropdown-content">
+                <li><a class="user-profile-button">Profile</a></li>
+                <li><a class="login-page-button">Change user</a></li>
+                <li><a class="logout-button">EXIT</a></li>
+                <li><a class="login-page-button">Login</a></li>
+            </ul>
+
+        </div>
+    </div>
+
+
+    <a href="main.html"><img class="over" src="/static/images/over.png"
+                             style="display: block; margin-left: 19%; margin-right: auto; width: 62%;"></a>
+
+
+    <div class="sidenav" id="mySidenav" onmouseenter="openNav()" onmouseleave="closeNav()">
+        <!--sidnav--->
+        <nav class="navbar">
+            <a href="main.html"><img src="/static/images/logo.png" style="width: 90%;padding: 10px;"/></a>
+            <ul>
+                <li>
+                    <div class="item">
+                        <div class="search-box">
+                            <input class="search-txt" name="search" placeholder="Type to search" type="search">
+                            <a class="search-btn" href="#">
+                                <i class="fas fa-search"></i>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="item blinking"><span class="menu_icon"><img src="/static/images/circle.png"/></span><a
+                            href="main.html" id="nav1" style="display: none;">MAIN</a></div>
+                </li>
+
+                <li>
+                    <div class="dropdown">
+                        <div><span class="menu_icon"><img src="/static/images/castle.png"/></span><a href="#" id="nav2"
+                                                                                                     style="display: none;">GENRE</a>
+                        </div>
+                        <ul class="dropdown-content navitem">
+                            <li class="blinking"><a href="{% url 'post:tagged_post' 'action' %}">Action</a></li>
+                            <li class="blinking"><a href="{% url 'post:tagged_post' 'adventure' %}">Adventure</a></li>
+                            <li class="blinking"><a href="{% url 'post:tagged_post' 'arcade' %}">Arcade</a></li>
+                            <li class="blinking"><a href="{% url 'post:tagged_post' 'clicker' %}">Clicker</a></li>
+                            <li class="blinking"><a href="{% url 'post:tagged_post' 'fighting' %}">Fighting</a></li>
+                            <li class="blinking"><a href="{% url 'post:tagged_post' 'logic' %}">Logic</a></li>
+                            <li class="blinking"><a href="{% url 'post:tagged_post' 'rpg' %}">RPG</a></li>
+                            <li class="blinking"><a href="{% url 'post:tagged_post' 'race' %}">Race</a></li>
+                            <li class="blinking"><a href="{% url 'post:tagged_post' 'sport' %}">Sport</a></li>
+                            <li class="blinking"><a href="{% url 'post:tagged_post' 'paid' %}">Paid</a></li>
+                            <li class="blinking"><a href="{% url 'post:tagged_post' 'other' %}">Other</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="dropdown">
+                        <div class="dropitem"><span class="menu_icon"><img src="/static/images/game.png"/></span><a
+                                href="#" id="nav3" style="display: none;">STYLE</a></div>
+                        <ul class="dropdown-content navitem">
+                            <li class="blinking"><a href="{% url 'post:tagged_post' 'multiplayer' %}">Multiplayer</a>
+                            </li>
+                            <li class="blinking"><a href="{% url 'post:tagged_post' 'singleplayer' %}">Singleplayer</a>
+                            </li>
+                            <li class="blinking"><a href="{% url 'post:tagged_post' 'girls' %}">For Girls</a></li>
+                            <li class="blinking"><a href="{% url 'post:tagged_post' 'boys' %}">For Boys</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="item blinking"><span class="menu_icon"><img src="/static/images/cup.png"/></span><a
+                            href="{% url 'post:tagged_post' 'best' %}" id="nav4" style="display: none;">POPULAR</a>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="item blinking"><span class="menu_icon"><img src="/static/images/new.png"/></span><a
+                            href="{% url 'post:tagged_post' 'new' %}" id="nav5" style="display: none;">NEW</a></div>
+                </li>
+            </ul>
+        </nav>
+
+    </div>
+</header>
+
+<main>
+
+    <div id="profileTop">
+        <div class="person">
+            <div id="ava">
+                <img src="/static/images/profile_img/pepe.jpg">
+            </div>
+        </div>
+
+        <div id="description">
+            <span class="nickname leftPart" style="font-size: 30px;">username</span>
+            <p class="leftPart">
+                Status: Noob
+            </p>
+            <span class="email leftPart">email</span>
+        </div>
+
+        <div class="rightPart">
+            <a href="{% url 'accounts:editProfile' %}" title="Edit Profile">
+                <button class="editProfile" style="margin-left: 5%; margin-top: 20%">Edit profile</button>
+            </a>
+        </div>
+
+    </div>
+
+    <div id="profileBottom">
+        <div class="profileBottomContent">
+            <h3>Achievements</h3>
+            <div id="achievements">
+                <div class="achieve firstBlock block"></div>
+                <div class="achieve block"></div>
+                <div class="achieve block"></div>
+                <div class="achieve block"></div>
+                <div class="achieve block"></div>
+                <div class="achieve block"></div>
+            </div>
+
+            <h3>Favourite games</h3>
+            <div id="listFavGames">
+                <div class="scroll1">
+                    <div class="gameItem">
+                        <a href="{% url 'post:detail' post.pk %}" style="text-decoration: none">
+                            <img src="{{ post.image.url }}" title="{{ post.title }}">
+                            <p></p>
+                        </a>
+                    </div>
+                    <h6 class="empty">No Favourite Games</h6>
+                    <button id="slideLeft1" style="float: left" type="button"><<</button>
+                    <button id="slideRight1" style="float: right" type="button">>></button>
+                </div>
+            </div>
+
+            <h3>My Games</h3>
+            <div class="scroll">
+
+                <div id="userPosts">
+                    <div class="gameItem">
+                        <a href="{% url 'post:detail' post.pk %}" style="text-decoration: none">
+                            <img src="{{ post.image.url }}" title="{{ post.title }}">
+                            <p></p>
+                        </a>
+                    </div>
+                    <h6 class="empty">No Games. Do you want to <a class="blinking"
+                                                                  href="{% url 'post:add-post' %}">upload</a> game?</h6>
+                </div>
+
+                <button id="slideLeft" style="float: left" type="button"><<</button>
+                <button id="slideRight" style="float: right" type="button">>></button>
+            </div>
+
+
+            <br>
+            <a href="{% url 'post:add-post' %}" style="margin-left: 4%" title="Add Game">
+                <button class="editProfile">Add Game</button>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const buttonRight = document.getElementById('slideRight');
+        const buttonLeft = document.getElementById('slideLeft');
+
+        buttonRight.onclick = function () {
+            document.getElementById('userPosts').scrollLeft += 50;
+        };
+        buttonLeft.onclick = function () {
+            document.getElementById('userPosts').scrollLeft -= 50;
+        };
+    </script>
+
+
+</main>
+
+<footer>
+    <img src="/static/images/land.png" style="width: 100%; z-index:1;">
+    <div class="col-md-12 text-center">
+        <p style=" position: absolute; font-size: 12px; margin: 0 auto; left: 0; right: 0; bottom:1em; letter-spacing: 4px; font-family: 'Fredoka One', cursive;z-index: 4; text-align: center;">
+            Copyright by Ranazh Shakieva, Andrey Kim, Dana Zharkimbaeva and Bota Duletbek. All rights reserved</p>
+    </div>
+</footer>
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("nav1").style.display = "inline-block";
+        document.getElementById("nav2").style.display = "inline-block";
+        document.getElementById("nav3").style.display = "inline-block";
+        document.getElementById("nav4").style.display = "inline-block";
+        document.getElementById("nav5").style.display = "inline-block";
+        document.getElementById("mainsize").style.width = "90%";
+        document.getElementById("mainsize").style.margin = "0 0 0 10%";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "60px";
+        document.getElementById("nav1").style.display = "none";
+        document.getElementById("nav2").style.display = "none";
+        document.getElementById("nav3").style.display = "none";
+        document.getElementById("nav4").style.display = "none";
+        document.getElementById("nav5").style.display = "none";
+        document.getElementById("mainsize").style.width = "100%";
+        document.getElementById("mainsize").style.margin = "0";
+    }
+</script>
+<script src="../static/js/requests.js"></script>
+</body>
+</html>

@@ -19,8 +19,24 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: ${JWT_SET_URI:}
+          jwk-set-uri: ${JWT_SET_URI:http://localhost:8090/auth/realms/overgame/protocol/openid-connect/certs}
   servlet:
     multipart:
       max-file-size: 50MB
       max-request-size: 50MB
+  mail:
+    username: zhandabo.overgame@gmail.com
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  main:
+    allow-circular-references: true
+
+keycloak:
+  value: keycloak
+  auth-server-url: ${AUTH_SERVER_URL:http://localhost:8090/auth}
+  bearer-only: true
+  realm: ${REALM:overgame}
+  resource: ${CLIENT_ID:overgame-client}
+  username: ${REALM_USERNAME:admin}
+  password: ${REALM_USER_PASSWORD:Pa55w0rd}

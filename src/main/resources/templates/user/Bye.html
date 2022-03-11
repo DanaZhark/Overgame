@@ -1,0 +1,31 @@
+{% extends 'register_base.html' %}
+{%  load static %}
+
+{% block content %}
+<style>
+    .screen img {
+        width: 500px;
+        height: 400px;
+        border-radius: 35%;
+    }
+
+    .bye {
+        position: absolute;
+        font-family: 'Press Start 2P', cursive;
+        color: #c8deff;
+        font-size: 200%;
+        bottom: 28%;
+        left: 32%;
+        text-align: center;
+        line-height: 1.6;
+    }
+
+    a {
+        color: #c8deff;
+        text-decoration: none;
+    }
+</style>
+
+<img src="{% static 'images/space.gif' %}">
+<div class="bye"><a href="/main" title="RETURN TO MAIN">See<br>You<br>Again</a></div>
+{% endblock %}
