@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{%  load static %}
+{% block back %}
+<a href="{% url 'main' %}"
+   style="text-align: center;font-family: 'Press Start 2P', cursive; float: left; padding: 20px 0 0 100px;">Back</a>
+{% endblock %}
+{% block content %}
+<style>
+    h1 {
+        text-size: 120%;
+        font-family: 'Press Start 2P', cursive;
+        text-align: center;
+        color: #c8deff;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+
+    .emptyTag {
+        margin: auto;
+        text-align: center;
+    }
+
+    .poster {
+        position: relative;
+        width: 400px;
+        height: 250px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 1em;
+        border-radius: 10px;
+        border: 7px solid rgba(13, 17, 71, 1);
+    }
+
+    p {
+        display: inline-block;
+        width: 400px;
+        text-align: justify;
+    }
+
+    .thumbnail {
+        background-color: rgba(219, 47, 0, 0.9);
+        padding: 2em 2em 10%;
+        border: none;
+        border-radius: 10px;
+        margin: 1em 1em;
+    }
+
+    .tag {
+        margin-bottom: 10px;
+    }
+
+    .screenAdd {
+        background-color: rgba(0, 9, 28, 0.91);
+        width: 60%;
+        margin-left: 20%;
+        padding: 5% 5% 8%;
+        border: 20px solid #83d0d1;
+        font-family: 'Press Start 2P', cursive;
+    }
+
+    .favourite {
+        float: right;
+        margin-top: -50px;
+        margin-right: -50px;
+        width: 50px;
+    }
+</style>
+
+
+<main id="mainsize">
+    <div class="container">
+        <h1 style="text-transform: uppercase;
+                -webkit-text-fill-color: #0d0e47;
+                -webkit-text-stroke-color: #4fe5e5;
+                -webkit-text-stroke-width: 2px;
+                margin-bottom: 30px;">
+            {{ tag.name }}
+        </h1>
+
+        <div class="row">
+            {% for post in posts %}
+            <div class="col-md-6 text-center">
+                <div class="thumbnail">
+                    <a href="{% url 'post:detail' post.pk %}"><img class="poster" src="{{ post.image.url }}"></a>
+                    <h5><a href="{% url 'post:detail' post.pk %}"
+                           style="font-family: 'Press Start 2P', cursive; color: #ffffff">{{ post.title|capfirst }}</a>
+                    </h5>
+
+                    <span class="more">
+                                <p>{{ post.text }}</p>
+                            <div class="tag">
+                                {% for tag in post.tags.all %}
+                                    <div class="tagItem">
+                                        <a href="/post/allpost/{{ tag.slug }}">{{ tag.name }}</a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            </span>
+
+                    <div class="item" style="display: block; margin-left: auto; margin-right: auto; width: 350px">
+                        <a href="{% url 'post:detail' post.pk %}">
+                            <button class="button"
+                                    style="letter-spacing: 0px; width: 120px;background: rgb(115,158,225); color: #fff; float: left; padding: 5px;"
+                                    title="PLAY"
+                                    type="button">PLAY
+                            </button>
+                        </a>
+                        <a href="{{ post.pk }}">
+                            <button class="button"
+                                    style="letter-spacing: 0px; width: 120px;background: rgb(115,158,225); color: #fff; float: right; padding: 5px;"
+                                    title="MORE"
+                                    type="button">MORE
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="screenAdd">
+                <a href="{% url 'main' %}" title="Return to Profile">
+                    <img class="favourite" src="{% static 'images/review.png' %}">
+                </a>
+                <p class="emptyTag">There are not posts tagged with {{ tag }}</p>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+
+{%  endblock %}

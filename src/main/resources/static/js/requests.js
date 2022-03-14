@@ -1,26 +1,42 @@
 $(document).ready(function () {
-    $('.login-page-button').click(function (e) {
-        e.preventDefault()
-        $(location).attr('href', window.location = 'user/login')
-    })
 
     $('.register-page-button').click(function (e) {
         e.preventDefault()
-        $(location).attr('href', window.location = 'user/register')
+        $(location).attr('href', 'http://localhost:8080/overgame/user/register')
     })
 
     $('.main-page-button').click(function (e) {
         e.preventDefault()
-        $(location).attr('href', window.location = 'main')
+        $(location).attr('href', 'http://localhost:8080/overgame/main')
     })
 
-    $('.logout-button').click(function (e) {
+    $('.welcome-page-button').click(function (e) {
         e.preventDefault()
-        $(location).attr('href', window.location = 'user/logout')
+        $(location).attr('href', 'http://localhost:8080/overgame/welcome')
     })
 
-    $('.user-profile-button').click(function (e) {
+    $('.login-page-button').click(function (e) {
         e.preventDefault()
-        $(location).attr('href', window.location = 'user/profile')
+        $(location).attr('href', 'http://localhost:8080/overgame/user/login')
+    })
+
+    $('.success-page-button').click(function (e) {
+        e.preventDefault()
+        $(location).attr('href', 'http://localhost:8080/success')
+    })
+
+    $('.logout-page-button').click(function (e) {
+        e.preventDefault()
+        $(location).attr('href', 'http://localhost:8080/overgame/user/logout')
+    })
+
+    $('.user-profile-page-button').click(function (e) {
+        e.preventDefault()
+        $(location).attr('href', 'http://localhost:8080/overgame/user/profile')
+    })
+
+    $('.user-edit-profile-page-button').click(function (e) {
+        e.preventDefault()
+        $(location).attr('href', 'http://localhost:8080/overgame/user/edit-profile')
     })
 });

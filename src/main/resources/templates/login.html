@@ -8,11 +8,8 @@
     <link href="/static/css/style_login.css" rel="stylesheet" type="text/css"/>
 
     <!--Links to external JS-->
-    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js' type='text/javascript'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-        <
-            script
-            src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
 
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
@@ -31,18 +28,14 @@
     label input {
         width: 250px !important;
     }
-
 </style>
 <body>
-
-
 <div class="center">
-
     <div class="monitor" style="z-index: 10;">
         <div class="screen" style="background-color: #0d0e47;">
             <div class="loginScreen">
                 <h1>Login</h1>
-                <form method="post">
+                <div>
                     <label><b>Username</b>
                         <input name="uname" placeholder="Enter Username" required type="text">
                     </label>
@@ -50,22 +43,20 @@
                         <input name="psw" placeholder="Enter Password" required type="password">
                     </label>
 
-                    <input class="main-page-button" style="letter-spacing: 0;
+                    <a class="success-page-button" style="letter-spacing: 0;
                        width: 90px;background: rgb(115,158,225);
                        color: #fff;
-                       font-family: 'Press Start 2P', cursive;" type="submit"
-                           value="Login">
-                    <input name="next" type="hidden" value="{% url 'accounts:success' %}">
+                       font-family: 'Press Start 2P', cursive;">Login</a>
+                    <a class="success-page-button"><input class="success-page-button" name="next" type="hidden"></a>
                     <br><br>
                     <p>If you do not have an account, please, click <a class="register-page-button">here</a></p>
-                </form>
+                </div>
             </div>
         </div>
         <div class="light">
         </div>
         <div>
             <button class="mainbutton" onclick="myFunction()">
-
             </button>
         </div>
     </div>
@@ -84,8 +75,6 @@
     </div>
 
 </div>
-<script src="../static/js/requests.js"></script>
-
+<script src="/static/js/requests.js"></script>
 </body>
-
 </html>

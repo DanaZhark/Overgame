@@ -1,120 +1,156 @@
-{% extends 'register_base.html' %}
-{%  load static %}
-<style>
-    body {
-        background-image: url(/static/images/space.gif);
-    !important;
-    }
-</style>
-{% block content %}
-<style>
-    .screen img {
-        width: 500px;
-        height: 400px;
-        border-radius: 35%;
-    }
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Overgame</title>
 
-    .welcome {
-        position: absolute;
-        padding: 15%;
-        line-height: 1.6;
-        text-align: center;
-        color: #c8deff;
-        letter-spacing: 7px;
-        bottom: 0%;
-    }
+    <link href="/static/css/style_login.css" rel="stylesheet" type="text/css"/>
 
-    a {
-        color: #4fe5e5;
-    }
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js' type='text/javascript'></script>
+    <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
 
-    .blink {
-        -webkit-animation: blink .75s linear infinite;
-        -moz-animation: blink .75s linear infinite;
-        -ms-animation: blink .75s linear infinite;
-        -o-animation: blink .75s linear infinite;
-        animation: blink .75s linear infinite;
-    }
+        .screen img {
+            width: 500px;
+            height: 400px;
+            border-radius: 35%;
+        }
 
-    @-webkit-keyframes blink {
-        0% {
-            opacity: 1;
+        .welcome {
+            position: absolute;
+            padding: 15%;
+            line-height: 1.6;
+            text-align: center;
+            color: #c8deff;
+            letter-spacing: 7px;
+            bottom: 0%;
         }
-        50% {
-            opacity: 1;
-        }
-        50.01% {
-            opacity: 0;
-        }
-        100% {
-            opacity: 0;
-        }
-    }
 
-    @-moz-keyframes blink {
-        0% {
-            opacity: 1;
+        a {
+            color: #4fe5e5;
         }
-        50% {
-            opacity: 1;
-        }
-        50.01% {
-            opacity: 0;
-        }
-        100% {
-            opacity: 0;
-        }
-    }
 
-    @-ms-keyframes blink {
-        0% {
-            opacity: 1;
+        .blink {
+            -webkit-animation: blink .75s linear infinite;
+            -moz-animation: blink .75s linear infinite;
+            -ms-animation: blink .75s linear infinite;
+            -o-animation: blink .75s linear infinite;
+            animation: blink .75s linear infinite;
         }
-        50% {
-            opacity: 1;
-        }
-        50.01% {
-            opacity: 0;
-        }
-        100% {
-            opacity: 0;
-        }
-    }
 
-    @-o-keyframes blink {
-        0% {
-            opacity: 1;
+        @-webkit-keyframes blink {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 1;
+            }
+            50.01% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 0;
+            }
         }
-        50% {
-            opacity: 1;
-        }
-        50.01% {
-            opacity: 0;
-        }
-        100% {
-            opacity: 0;
-        }
-    }
 
-    @keyframes blink {
-        0% {
-            opacity: 1;
+        @-moz-keyframes blink {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 1;
+            }
+            50.01% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 0;
+            }
         }
-        50% {
-            opacity: 1;
+
+        @-ms-keyframes blink {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 1;
+            }
+            50.01% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 0;
+            }
         }
-        50.01% {
-            opacity: 0;
+
+        @-o-keyframes blink {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 1;
+            }
+            50.01% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 0;
+            }
         }
-        100% {
-            opacity: 0;
+
+        @keyframes blink {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 1;
+            }
+            50.01% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 0;
+            }
         }
-    }
-</style>
-<img src="/static/images/space.gif">
-<div class="welcome">
-    <h1>Welcome<br>to<br>OVERGAME<br>{{ user.username }} </h1>
-    <a class="blink" href="{% url 'main' %}">CONTINUE</a>
+    </style>
+</head>
+<body style="background-image: url(/static/images/back.png)">
+<div class="center">
+    <div class="monitor" style="z-index: 10;">
+        <div class="screen" style="background-color: #0d0e47;">
+            <img src="/static/images/space.gif">
+            <div class="welcome">
+                <h1>Welcome<br>to<br>OVERGAME<br>username</h1>
+                <a class="blink main-page-button">CONTINUE</a>
+            </div>
+        </div>
+        <div class="light">
+        </div>
+        <div>
+            <button class="mainbutton" onclick="myFunction()">
+
+            </button>
+        </div>
+    </div>
+    <div class="block">
+        <div class="cd">
+        </div>
+        <div class="button1">
+        </div>
+        <div class="button2 blinking">
+        </div>
+        <div class="button3">
+        </div>
+        <div class="button4">
+        </div>
+    </div>
 </div>
+<div class="desk">
+    <img class="controller1" src="/static/images/controller1.png">
+    <img class="controller2" src="/static/images/controller2.png">
+</div>
+<script src="/static/js/requests.js"></script>
+</body>
+</html>
 
-{% endblock %}

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>main</title>
-    <link href="/static/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css"/>
 
     <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
@@ -13,8 +13,32 @@
           rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
     <style>
+        .screenAdd {
+            background-color: rgba(0, 9, 28, 0.91);
+            width: 60%;
+            margin-left: 20%;
+            padding: 5% 5% 8%;
+            border: 20px solid #83d0d1;
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        h1 {
+            font-family: 'Press Start 2P', cursive;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        .favourite {
+            float: right;
+            margin-top: -50px;
+            margin-right: -50px;
+            width: 50px;
+        }
+
         body {
             background-image: url(/static/images/space.gif);
         }
@@ -119,38 +143,14 @@
             font-family: 'Fredoka One', cursive;
         }
 
-        h1 {
-            -webkit-text-fill-color: #0d0e47;
-            -webkit-text-stroke-color: #c8deff;
-            -webkit-text-stroke-width: 2px;
-            padding: 50px;
+        li, strong {
+            display: none;
         }
 
-        .poster {
-            position: relative;
-            width: 400px;
-            height: 250px;
-            margin-left: auto;
-            margin-right: auto;
-            margin-bottom: 1em;
-            border-radius: 10px;
-            border: 7px solid rgba(13, 17, 71, 1);
-        }
-
-        p {
-            display: inline-block;
-            text-align: justify;
-        }
-
-        .thumbnail {
-            background-color: rgba(219, 47, 0, 0.9);
-            padding: 2em 2em 10%;
-            border: none;
-            border-radius: 10px;
-            margin: 1em 1em;
+        .username {
+            display: none;
         }
     </style>
-
 </head>
 <body>
 <header>
@@ -164,9 +164,9 @@
                 <li><a class="logout-page-button">EXIT</a></li>
                 <li><a class="login-page-button">Login</a></li>
             </ul>
+
         </div>
     </div>
-
 
     <a class="main-page-button"><img class="over" src="/static/images/over.png"
                                      style="display: block; margin-left: 19%; margin-right: auto; width: 62%;"></a>
@@ -245,75 +245,39 @@
     </div>
 </header>
 
-<div class="container">
-    <main id="mainsize">
-        <p style="text-align: center; font-family: 'Press Start 2P', cursive; color: #c8deff; background-color: rgba(13, 17, 71, 0.8);
-        border: 3px solid rgba(219, 47 , 0, 0.8); padding: 20px;">
-            Welcome, dear {% if user.is_authenticated %}{{ user.username }}{% else %}gamer{% endif %}!!!
-            You are on the best website with the best flash games that you've never played before!!!<br><br>
-            OVERGAME is a collection of interesting free online games. The site has a convenient catalog of free games,
-            compiled by keywords, which will make it easier for you to find the right online game.<br><br>
-            {% if user.is_authenticated %}
-            {% else %}
-            <a href="/accounts/login" style="font-family: 'Press Start 2P', cursive;
-                    color: #c8deff;">Login</a>
-            the site if you want to save your results in playing or upload your own game
-            {% endif %}
-        </p>
-
-        <h1 style="text-align: center; font-family: 'Press Start 2P', cursive; ">
-            The Best Games of the week
-        </h1>
-
-        <div class="row">
-            <div class="col-md-6 text-center">
-                <div class="thumbnail">
-                    <a href="{% url 'post:detail' post.pk %}"><img class="poster" src="{{ post.image.url }}"></a>
-                    <h5><a href="{% url 'post:detail' post.pk %}"
-                           style="font-family: 'Press Start 2P', cursive; color: #ffffff">{{ post.title }}</a></h5>
-
-                    <span class="more">
-                                <p style="padding: 10px">{{ post.text }}</p>
-
-                            <div class="item">
-                                    <div class="tagItem">
-                                        <a href="/post/allpost/{{ tag.slug }}">{{ tag.name }}</a>
-                                    </div>
-                            </div>
-
-                            </span>
-
-                    <div class="item" style="display: block; margin-left: auto; margin-right: auto; width: 350px;">
-                        <a href="{% url 'post:detail' post.pk %}">
-                            <button class="button"
-                                    style="letter-spacing: 0px; width: 120px;background: rgb(115,158,225); color: #fff; float: left; padding: 5px;"
-                                    title="PLAY"
-                                    type="button">PLAY
-                            </button>
-                        </a>
-                        <a href="">
-                            <button class="button"
-                                    style="letter-spacing: 0px; width: 120px;background: rgb(115,158,225); color: #fff; float: right; padding: 5px;"
-                                    title="MORE"
-                                    type="button">MORE
-                            </button>
-                        </a>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-    </main>
+<div class="screenAdd">
+    <a class="user-profile-page-button" title="Return to Profile">
+        <img class="favourite" src="/static/images/review.png">
+    </a>
+    <form method="post">
+        <label><b>Username</b>
+            <input name="uname" placeholder="Enter username" required type="text">
+        </label>
+        <label><b>Email</b>
+            <input name="psw" placeholder="Enter email" required type="text">
+        </label>
+        <label><b>Password</b>
+            <input name="psw" placeholder="Enter password" required type="password">
+        </label>
+        <label><b>Confirm password</b>
+            <input name="psw" placeholder="Enter password again" required type="password">
+        </label>
+        <input style="letter-spacing: 0;
+                           width: 120px;background: rgb(115,158,225);
+                           color: #fff; float: left; padding: 5px;
+                           font-family: 'Press Start 2P', cursive;" type="submit" value="Edit">
+    </form>
 </div>
 
 <footer>
     <img src="/static/images/land.png" style="width: 100%; z-index:1;">
     <div class="col-md-12 text-center">
         <p style=" position: absolute; font-size: 12px; margin: 0 auto; left: 0; right: 0; bottom:1em; letter-spacing: 4px; font-family: 'Fredoka One', cursive;z-index: 4; text-align: center;">
-            Copyright by Ranazh Shakieva, Andrey Kim, Dana Zharkimbaeva and Bota Duletbek. All rights reserved</p>
+            Copyright by Ranazh Shakieva and Dana Zharkimbaeva. All rights reserved</p>
     </div>
 </footer>
+</body>
+
 <script>
     function openNav() {
         document.getElementById("mySidenav").style.width = "250px";
@@ -337,6 +301,5 @@
         document.getElementById("mainsize").style.margin = "0";
     }
 </script>
-<script src="../static/js/requests.js"></script>
-</body>
+
 </html>

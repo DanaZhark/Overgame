@@ -27,7 +27,7 @@ public class MvcController {
 
     @GetMapping("/user/logout")
     public String byePage() {
-        return "bye";
+        return "logout";
     }
 
     @GetMapping("/user/login")
@@ -50,9 +50,9 @@ public class MvcController {
         return "success";
     }
 
-    @GetMapping("/user/update_profile")
+    @GetMapping("/user/edit-profile")
     public String update_profilePage() {
-        return "update_profile";
+        return "edit_profile";
     }
 
     @GetMapping("/user/profile")
