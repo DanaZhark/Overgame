@@ -25,7 +25,27 @@ spring:
       max-file-size: 50MB
       max-request-size: 50MB
   mail:
-    username: zhandabo.overgame@gmail.com
+    host: smtp.yandex.ru
+    username: noreply@ailytun.com
+    password: eybmmjcubfchmrha
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          connectiontimeout: 10000
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+            port: 587
+          starttls:
+            enable: true
+            required: true
+          timeout: 10000
+          writetimeout: 10000
+          setTLS: true
+        protocol: smtps
+        debug: true
+
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
@@ -37,6 +57,7 @@ keycloak:
   auth-server-url: ${AUTH_SERVER_URL:http://localhost:8090/auth}
   bearer-only: true
   realm: ${REALM:overgame}
-  resource: ${CLIENT_ID:overgame-client}
-  username: ${REALM_USERNAME:admin}
-  password: ${REALM_USER_PASSWORD:Pa55w0rd}
+  client-id: ${CLIENT_ID:overgame-client}
+  client-secret: ${CLIENT_SECRET:0rf43YiiKtZ8uRTb7v4E9WWfu4bjmWOQ}
+  username: ${REALM_USERNAME:overgame_admin}
+  password: ${REALM_USER_PASSWORD:admin}

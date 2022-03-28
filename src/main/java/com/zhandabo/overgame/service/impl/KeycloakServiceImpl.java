@@ -13,6 +13,7 @@ import org.keycloak.admin.client.resource.RealmResource;
 import org.keycloak.admin.client.resource.UserResource;
 import org.keycloak.admin.client.resource.UsersResource;
 import org.keycloak.representations.idm.CredentialRepresentation;
+import org.keycloak.representations.idm.RoleRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -25,6 +26,7 @@ import org.springframework.web.client.RestTemplate;
 import javax.annotation.PostConstruct;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -41,6 +43,7 @@ public class KeycloakServiceImpl implements KeycloakService {
     private static final String PARAM_REFRESH_TOKEN = "refresh_token";
     private static final String PARAM_GRANT_TYPE = "grant_type";
     private static final String PARAM_CLIENT_ID = "client_id";
+    private static final String PARAM_CLIENT_SECRET = "client_secret";
     private static final String PARAM_VAL_PASSWORD_GRANT_TYPE = "password";
     private static final String PARAM_VAL_REFRESH_TOKEN_GRANT_TYPE = "refresh_token";
 
@@ -53,8 +56,11 @@ public class KeycloakServiceImpl implements KeycloakService {
     @Value("${keycloak.realm}")
     private String myRealm;
 
-    @Value("${keycloak.resource}")
-    private String clientName;
+    @Value("${keycloak.client-id}")
+    private String clientId;
+
+    @Value("${keycloak.client-secret}")
+    private String clientSecret;
 
     @Value("${keycloak.username}")
     private String username;
@@ -67,7 +73,8 @@ public class KeycloakServiceImpl implements KeycloakService {
 
     @PostConstruct
     public void initializeKeycloak() {
-        keycloak = Keycloak.getInstance(url, myRealm, username, password, clientName);
+        log.info("initializeKeycloak: url={}, myRealm={}, username={}, password={}, clientId={}, clientSecret={}", url, myRealm, username, password, clientId, clientSecret);
+        keycloak = Keycloak.getInstance(url, myRealm, username, password, clientId, clientSecret);
         restTemplate = new RestTemplate();
     }
 
@@ -84,7 +91,14 @@ public class KeycloakServiceImpl implements KeycloakService {
                         "messages.exception.create-keycloak-user-error");
             }
         }
-        return getKeycloakId(user.getUsername());
+        String keycloakId = getKeycloakId(user.getUsername());
+        UserResource userResource = usersResource.get(keycloakId);
+        RoleRepresentation adminRole = realm.roles().get(dto.getRoleCode().name().toLowerCase()).toRepresentation();
+        List<RoleRepresentation> roles = new ArrayList<>(List.of(adminRole));
+        RoleRepresentation keycloakRole = realm.roles().get(dto.getRoleCode().name().toLowerCase()).toRepresentation();
+        roles.add(keycloakRole);
+        userResource.roles().realmLevel().add(roles);
+        return keycloakId;
     }
 
     @Override
@@ -93,6 +107,7 @@ public class KeycloakServiceImpl implements KeycloakService {
     }
 
     public KeycloakAuthResponse loginResponse(KeycloakAuthRequestDto keycloakAuthRequestDto) {
+        log.info("loginResponse: {}", keycloakAuthRequestDto);
         MultiValueMap<String, String> parameters = constructRequestBody(keycloakAuthRequestDto);
         HttpHeaders headers = constructRequestHeaders();
         String accessTokenUrl = url + String.format(TOKEN_PATH, myRealm);
@@ -102,6 +117,7 @@ public class KeycloakServiceImpl implements KeycloakService {
             log.info(String.format(RESPONSE_STATUS, response.getStatusCode(), response.getStatusCodeValue()));
             return response.getBody();
         } catch (HttpClientErrorException e) {
+            log.error("loginResponse: ", e);
             throw new OvergameException(HttpStatus.BAD_REQUEST, ErrorCodeConstant.KEYCLOAK_USER_TOKEN_RESPONSE_ERROR,
                     "messages.exception.keycloak-user-token-response-error"
             );
@@ -182,7 +198,8 @@ public class KeycloakServiceImpl implements KeycloakService {
 
     private MultiValueMap<String, String> constructRequestBody(KeycloakAuthRequestDto keycloakAuthRequestDto) {
         MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
-        parameters.add(PARAM_CLIENT_ID, clientName);
+        parameters.add(PARAM_CLIENT_ID, clientId);
+        parameters.add(PARAM_CLIENT_SECRET, clientSecret);
         parameters.add(PARAM_USERNAME, keycloakAuthRequestDto.getUsername());
         parameters.add(PARAM_PASSWORD, keycloakAuthRequestDto.getPassword());
         parameters.add(PARAM_GRANT_TYPE, PARAM_VAL_PASSWORD_GRANT_TYPE);
@@ -191,7 +208,8 @@ public class KeycloakServiceImpl implements KeycloakService {
 
     private MultiValueMap<String, String> constructRequestBody(String refreshToken) {
         MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
-        parameters.add(PARAM_CLIENT_ID, clientName);
+        parameters.add(PARAM_CLIENT_ID, clientId);
+        parameters.add(PARAM_CLIENT_SECRET, clientSecret);
         parameters.add(PARAM_GRANT_TYPE, PARAM_VAL_REFRESH_TOKEN_GRANT_TYPE);
         parameters.add(PARAM_REFRESH_TOKEN, refreshToken);
         return parameters;

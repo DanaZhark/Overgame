@@ -8,6 +8,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -32,19 +34,23 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @ApiModelProperty("Кем создан")
-    @Column(name = "created_by")
-    private String createdBy;
-
-    @ApiModelProperty("Кем последним был редактирован")
-    @Column(name = "updated_by")
-    private String updatedBy;
-
     @ApiModelProperty("Дата создания")
     @Column(name = "created_date")
     private Date createdDate;
 
-    @ApiModelProperty("Дата последнего редактирования")
-    @Column(name = "updated_date")
-    private Date updatedDate;
+    @ManyToMany(
+            fetch = FetchType.EAGER
+    )
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = {@JoinColumn(
+                    name = "user_id",
+                    referencedColumnName = "id"
+            )},
+            inverseJoinColumns = {@JoinColumn(
+                    name = "role_id",
+                    referencedColumnName = "id"
+            )}
+    )
+    private Set<Role> roles = new HashSet();
 }

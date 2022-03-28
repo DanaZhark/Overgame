@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 @Component
 @RequiredArgsConstructor
 public class UserConverter implements Converter<UserInfoDto, User> {
@@ -15,6 +17,7 @@ public class UserConverter implements Converter<UserInfoDto, User> {
         User target = new User();
         target.setUsername(source.getUsername());
         target.setEmail(source.getEmail());
-        return null;
+        target.setCreatedDate(new Date());
+        return target;
     }
 }

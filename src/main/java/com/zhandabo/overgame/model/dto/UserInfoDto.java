@@ -1,5 +1,7 @@
 package com.zhandabo.overgame.model.dto;
 
+import com.sun.istack.NotNull;
+import com.zhandabo.overgame.model.enums.RoleCode;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -21,4 +23,9 @@ public class UserInfoDto {
     @Email
     @ApiModelProperty("Почта пользователя")
     private String email;
+
+    @NotNull
+    @ApiModelProperty("Роль пользователя")
+    private RoleCode roleCode;
+
 }
