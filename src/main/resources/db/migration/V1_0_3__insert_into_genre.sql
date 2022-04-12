@@ -1,0 +1,25 @@
+-- insert into genre (code, name, description, img_link)
+-- VALUES ('DRAFT',
+--         json_build_object(
+--                 'ru', 'Черновик',
+--                 'en', 'Draft'),
+--         json_build_object(
+--                 'ru', 'Черновая версия товара',
+--                 'en', 'Draft version of item'),
+--         ''),
+--        ('PUBLISHED',
+--         json_build_object(
+--                 'ru', 'Опубликовано',
+--                 'en', 'Published'),
+--         json_build_object(
+--                 'ru', 'Товар опубликован',
+--                 'en', 'Item is published'),
+--         ''),
+--        ('ARCHIVED',
+--         json_build_object(
+--                 'ru', 'В архиве',
+--                 'en', 'Archived'),
+--         json_build_object(
+--                 'ru', 'Товар находится в архиве',
+--                 'en', 'Item is in archive'),
+--         '');

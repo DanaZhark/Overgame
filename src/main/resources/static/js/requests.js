@@ -20,11 +20,6 @@ $(document).ready(function () {
         $(location).attr('href', 'http://localhost:8080/overgame/user/login')
     })
 
-    $('.success-page-button').click(function (e) {
-        e.preventDefault()
-        $(location).attr('href', 'http://localhost:8080/success')
-    })
-
     $('.logout-page-button').click(function (e) {
         e.preventDefault()
         $(location).attr('href', 'http://localhost:8080/overgame/user/logout')

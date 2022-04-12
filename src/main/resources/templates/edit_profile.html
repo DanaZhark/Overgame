@@ -67,7 +67,7 @@
             list-style: square;
         }
 
-        .username button {
+        .user button {
             float: right;
             display: inline-block;
             font-size: 20px;
@@ -83,7 +83,7 @@
             display: inline-block;
         }
 
-        .username {
+        .user {
             position: relative;
             display: block;
             float: right;
@@ -115,14 +115,14 @@
             text-decoration: none;
         }
 
-        .username a {
+        .user a {
             font-family: 'Press Start 2P', cursive;
             padding: 10px 0;
             color: #c8deff;
             text-decoration: none;
         }
 
-        .username a:hover {
+        .user a:hover {
             animation: blinker 1.2s linear infinite;
             color: #a59fdd;
         }
@@ -147,7 +147,7 @@
             display: none;
         }
 
-        .username {
+        .user {
             display: none;
         }
     </style>
@@ -155,9 +155,9 @@
 <body>
 <header>
 
-    <div class="username">
+    <div class="user">
         <div class="dropdown">
-            <button class="dropbtn">Username</button>
+            <button class="dropbtn" class="username"></button>
             <ul class="dropdown-content">
                 <li><a class="user-profile-page-button">Profile</a></li>
                 <li><a class="login-page-button">Change user</a></li>
@@ -250,19 +250,19 @@
         <img class="favourite" src="/static/images/review.png">
     </a>
     <form method="post">
-        <label><b>Username</b>
-            <input name="uname" placeholder="Enter username" required type="text">
+        <label><b class="username"></b>
+            <input id="username" name="uname" placeholder="Enter username" required type="text">
         </label>
         <label><b>Email</b>
-            <input name="psw" placeholder="Enter email" required type="text">
+            <input id="email" name="psw" placeholder="Enter email" required type="text">
         </label>
         <label><b>Password</b>
-            <input name="psw" placeholder="Enter password" required type="password">
+            <input id="password" name="psw" placeholder="Enter password" required type="password">
         </label>
         <label><b>Confirm password</b>
-            <input name="psw" placeholder="Enter password again" required type="password">
+            <input id="confirmPassword" name="psw" placeholder="Enter password again" required type="password">
         </label>
-        <input style="letter-spacing: 0;
+        <input id="button" style="letter-spacing: 0;
                            width: 120px;background: rgb(115,158,225);
                            color: #fff; float: left; padding: 5px;
                            font-family: 'Press Start 2P', cursive;" type="submit" value="Edit">
@@ -301,5 +301,6 @@
         document.getElementById("mainsize").style.margin = "0";
     }
 </script>
-
+<script src="../static/js/requests.js"></script>
+<script src="../static/js/edit_profile.js"></script>
 </html>

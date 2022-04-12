@@ -54,7 +54,7 @@ public class KeycloakServiceImpl implements KeycloakService {
     private String url;
 
     @Value("${keycloak.realm}")
-    private String myRealm;
+    private String realm;
 
     @Value("${keycloak.client-id}")
     private String clientId;
@@ -73,8 +73,8 @@ public class KeycloakServiceImpl implements KeycloakService {
 
     @PostConstruct
     public void initializeKeycloak() {
-        log.info("initializeKeycloak: url={}, myRealm={}, username={}, password={}, clientId={}, clientSecret={}", url, myRealm, username, password, clientId, clientSecret);
-        keycloak = Keycloak.getInstance(url, myRealm, username, password, clientId, clientSecret);
+        log.info("initializeKeycloak: url={}, myRealm={}, username={}, password={}, clientId={}, clientSecret={}", url, realm, username, password, clientId, clientSecret);
+        keycloak = Keycloak.getInstance(url, realm, username, password, clientId, clientSecret);
         restTemplate = new RestTemplate();
     }
 
@@ -82,7 +82,7 @@ public class KeycloakServiceImpl implements KeycloakService {
     public String createUserAndGetKeycloakId(UserInfoDto dto, String password) {
         UserRepresentation user = userRepresentationConverter.convert(dto);
         setUserRepresentationCredentials(user, password);
-        RealmResource realm = keycloak.realm(myRealm);
+        RealmResource realm = keycloak.realm(this.realm);
         UsersResource usersResource = realm.users();
         try (Response response = usersResource.create(user)) {
             log.info(String.format(RESPONSE_STATUS, response.getStatus(), response.getStatusInfo()));
@@ -110,7 +110,7 @@ public class KeycloakServiceImpl implements KeycloakService {
         log.info("loginResponse: {}", keycloakAuthRequestDto);
         MultiValueMap<String, String> parameters = constructRequestBody(keycloakAuthRequestDto);
         HttpHeaders headers = constructRequestHeaders();
-        String accessTokenUrl = url + String.format(TOKEN_PATH, myRealm);
+        String accessTokenUrl = url + String.format(TOKEN_PATH, realm);
         HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(parameters, headers);
         try {
             ResponseEntity<KeycloakAuthResponse> response = restTemplate.exchange(accessTokenUrl, HttpMethod.POST, entity, KeycloakAuthResponse.class);
@@ -133,7 +133,7 @@ public class KeycloakServiceImpl implements KeycloakService {
         String refreshToken = keycloakAuthWithRefreshTokenDto.getRefreshToken();
         MultiValueMap<String, String> parameters = constructRequestBody(refreshToken);
         HttpHeaders headers = constructRequestHeaders();
-        String accessTokenUrl = url + String.format(TOKEN_PATH, myRealm);
+        String accessTokenUrl = url + String.format(TOKEN_PATH, realm);
         HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(parameters, headers);
         ResponseEntity<KeycloakAuthResponse> response = restTemplate.exchange(accessTokenUrl, HttpMethod.POST, entity, KeycloakAuthResponse.class);
         log.info(String.format(RESPONSE_STATUS, response.getStatusCode(), response.getStatusCodeValue()));
@@ -147,7 +147,7 @@ public class KeycloakServiceImpl implements KeycloakService {
 
     @Override
     public String getKeycloakId(String username) {
-        RealmResource realm = keycloak.realm(myRealm);
+        RealmResource realm = keycloak.realm(this.realm);
         UsersResource usersResource = realm.users();
         List<UserRepresentation> userRepresentations = usersResource.search(username);
         if (userRepresentations.isEmpty()) {
@@ -161,7 +161,7 @@ public class KeycloakServiceImpl implements KeycloakService {
 
     @Override
     public void deleteUserByKeycloakIdIfExists(String keycloakId) {
-        RealmResource realm = keycloak.realm(myRealm);
+        RealmResource realm = keycloak.realm(this.realm);
         UsersResource usersResource = realm.users();
         UserResource userResource = usersResource.get(keycloakId);
         try {
@@ -174,7 +174,7 @@ public class KeycloakServiceImpl implements KeycloakService {
 
     @Override
     public Boolean isFreeKeycloakUsername(String username) {
-        RealmResource realm = keycloak.realm(myRealm);
+        RealmResource realm = keycloak.realm(this.realm);
         UsersResource usersResource = realm.users();
         List<UserRepresentation> userRepresentations = usersResource.search(username);
         return userRepresentations.isEmpty();
@@ -182,7 +182,7 @@ public class KeycloakServiceImpl implements KeycloakService {
 
     @Override
     public void setUserDisabled(String keycloakId) {
-        RealmResource realm = keycloak.realm(myRealm);
+        RealmResource realm = keycloak.realm(this.realm);
         UsersResource usersResource = realm.users();
         UserRepresentation userRepresentation = usersResource.get(keycloakId).toRepresentation();
         userRepresentation.setEnabled(false);

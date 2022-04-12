@@ -1,8 +1,6 @@
 package com.zhandabo.overgame.service;
 
-import com.zhandabo.overgame.model.dto.KeycloakAuthRequestDto;
-import com.zhandabo.overgame.model.dto.KeycloakAuthResponseDto;
-import com.zhandabo.overgame.model.dto.UserInfoDto;
+import com.zhandabo.overgame.model.dto.*;
 import com.zhandabo.overgame.model.entity.User;
 
 public interface UserService {
@@ -12,4 +10,9 @@ public interface UserService {
     KeycloakAuthResponseDto login(KeycloakAuthRequestDto keycloakAuthRequestDto);
 
     User getCurrentUser();
+
+    KeycloakAuthResponseDto refresh(KeycloakAuthWithRefreshTokenDto keycloakAuthWithRefreshTokenDto);
+
+    void editUser(UserEditDto userEditDto);
+
 }

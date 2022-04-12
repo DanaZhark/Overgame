@@ -36,17 +36,17 @@
             <div class="loginScreen">
                 <h1>Login</h1>
                 <div>
-                    <label><b>Username</b>
-                        <input name="uname" placeholder="Enter Username" required type="text">
+                    <label><b>Email</b>
+                        <input id='email' name="uname" placeholder="Enter email" required type="text">
                     </label>
                     <label><b>Password</b>
-                        <input name="psw" placeholder="Enter Password" required type="password">
+                        <input id='password' name="psw" placeholder="Enter Password" required type="password">
                     </label>
 
-                    <a class="success-page-button" style="letter-spacing: 0;
+                    <button id='button' class="success-page-button" style="letter-spacing: 0;
                        width: 90px;background: rgb(115,158,225);
                        color: #fff;
-                       font-family: 'Press Start 2P', cursive;">Login</a>
+                       font-family: 'Press Start 2P', cursive;">Login</button>
                     <a class="success-page-button"><input class="success-page-button" name="next" type="hidden"></a>
                     <br><br>
                     <p>If you do not have an account, please, click <a class="register-page-button">here</a></p>
@@ -75,6 +75,7 @@
     </div>
 
 </div>
+<script src="/static/js/login.js"></script>
 <script src="/static/js/requests.js"></script>
 </body>
 </html>

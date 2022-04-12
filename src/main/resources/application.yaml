@@ -55,6 +55,7 @@ spring:
 keycloak:
   value: keycloak
   auth-server-url: ${AUTH_SERVER_URL:http://localhost:8090/auth}
+  reset-password-url: ${RESET_PASSWORD_URL:http://localhost:8090/auth/admin/realms/%s/users/%s/reset-password}
   bearer-only: true
   realm: ${REALM:overgame}
   client-id: ${CLIENT_ID:overgame-client}
