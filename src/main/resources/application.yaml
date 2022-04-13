@@ -45,6 +45,9 @@ spring:
           setTLS: true
         protocol: smtps
         debug: true
+  cloud:
+    compatibility-verifier:
+      enabled: false
 
   mvc:
     pathmatch:

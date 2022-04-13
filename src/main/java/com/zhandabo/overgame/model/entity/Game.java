@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -46,7 +47,7 @@ public class Game {
 
     @ApiModelProperty("Дата последнего редактирования")
     @Column(name = "date_created")
-    private String dateCreated;
+    private Date dateCreated;
 
     @ApiModelProperty("Дата последнего редактирования")
     @Column(name = "genre_id")

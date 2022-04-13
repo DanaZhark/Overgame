@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -26,11 +27,11 @@ public class Genre {
 
     @ApiModelProperty("Кем создан")
     @Column(name = "name")
-    private String name;
+    private Map<String, String> name;
 
     @ApiModelProperty("Кем последним был редактирован")
     @Column(name = "description")
-    private String description;
+    private Map<String, String> description;
 
     @ApiModelProperty("Дата создания")
     @Column(name = "img_link")

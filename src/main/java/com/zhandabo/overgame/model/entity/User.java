@@ -42,7 +42,7 @@ public class User {
             fetch = FetchType.EAGER
     )
     @JoinTable(
-            name = "users_roles",
+            name = "user_role",
             joinColumns = {@JoinColumn(
                     name = "user_id",
                     referencedColumnName = "id"
