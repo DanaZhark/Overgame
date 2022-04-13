@@ -1,12 +1,12 @@
 package com.zhandabo.overgame.model.dto.game;
 
-import com.sun.istack.NotNull;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +29,7 @@ public class GameCreateDto {
     private String gameLink;
 
     @NotBlank
-    @ApiModelProperty("Ссылка на игру")
+    @ApiModelProperty("Ссылка на картинку игры")
     private String imgLink;
 
     @NotNull

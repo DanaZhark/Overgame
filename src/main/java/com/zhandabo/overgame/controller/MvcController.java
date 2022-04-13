@@ -51,12 +51,17 @@ public class MvcController {
     }
 
     @GetMapping("/user/edit-profile")
-    public String update_profilePage() {
+    public String editProfilePage() {
         return "edit_profile";
     }
 
     @GetMapping("/user/profile")
-    public String userPage() {
-        return "user";
+    public String profilePage() {
+        return "profile";
+    }
+
+    @GetMapping("/user/game-create")
+    public String gameCreatePage() {
+        return "game_create";
     }
 }

@@ -16,6 +16,8 @@ create table if not exists genre
     img_link    text        not null
 );
 
+create index genre_id on genre (id);
+
 create table if not exists game
 (
     id           bigserial primary key,
@@ -26,10 +28,11 @@ create table if not exists game
     img_link     text  not null,
     price        double precision default 0,
     date_created timestamp        default now(),
-    genre_id     bigint references genre (id),
     creator_id   varchar(500) references users (keycloak_id),
     moderator_id varchar(500) references users (keycloak_id)
 );
+
+create index game_id on game (id);
 
 create table if not exists favorites
 (
@@ -47,3 +50,5 @@ create table if not exists rating
     game_id      bigint references game (id),
     user_id      varchar(500) references users (keycloak_id)
 );
+
+create index rating_game_id on rating (game_id);

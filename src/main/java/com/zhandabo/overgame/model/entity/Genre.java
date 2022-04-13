@@ -1,10 +1,13 @@
 package com.zhandabo.overgame.model.entity;
 
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import java.util.Map;
@@ -15,6 +18,7 @@ import java.util.Map;
 @Entity
 @Table(name = "genre")
 @ApiModel("Жанр игры")
+@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class Genre {
 
     @Id
@@ -26,11 +30,13 @@ public class Genre {
     private String code;
 
     @ApiModelProperty("Кем создан")
-    @Column(name = "name")
+    @Type(type = "jsonb")
+    @Column(columnDefinition = "jsonb", name = "name")
     private Map<String, String> name;
 
     @ApiModelProperty("Кем последним был редактирован")
-    @Column(name = "description")
+    @Type(type = "jsonb")
+    @Column(columnDefinition = "jsonb", name = "description")
     private Map<String, String> description;
 
     @ApiModelProperty("Дата создания")

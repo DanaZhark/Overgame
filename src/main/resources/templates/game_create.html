@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>main</title>
     <link href="/static/css/style.css" rel="stylesheet" type="text/css"/>
-
     <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
     <link crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
@@ -13,172 +12,34 @@
           rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
     <style>
-
-        #profileTop {
-            background: #076283;
-            width: 900px;
-            height: 250px;
-            margin: 50px auto 0;
-            opacity: 95%;
-            border: 10px solid rgba(0, 255, 255, 0.5);
-            border-bottom: none;
-        }
-
-        .person {
-            width: 160px;
-            margin: 25px 40px;
-            background-size: cover;
-            float: left;
-            text-transform: uppercase;
-            text-align: center;
-        }
-
-        .person p {
+        .screenAdd {
+            background-color: rgba(0, 9, 28, 0.91);
+            width: 60%;
+            margin-left: 20%;
+            padding: 5% 5% 8%;
+            border: 20px solid #83d0d1;
             font-family: 'Press Start 2P', cursive;
-            font-size: 80%;
-            color: #4fe5e5;
-            background-color: #0d0e47;
         }
 
-        #ava {
-            width: 160px;
-            height: 155px;
-            background-size: cover;
-            float: left;
-            overflow: hidden;
-            border: 5px solid #0d0e47;
+        h1 {
+            font-family: 'Press Start 2P', cursive;
+            margin-bottom: 20px;
         }
 
-        #ava img {
-            width: 150px;
-            height: auto;
-            background-color: #ffffff;
+        p {
+            font-family: 'Press Start 2P', cursive;
         }
 
-        #description {
-            width: 250px;
-            height: 150px;
-            margin: 25px 5px;
-            float: left;
+        .helptext {
+            font-size: 60%;
         }
 
-        .leftPart {
-            margin: 8px 0;
-            padding: 8px 0;
-        }
-
-        .rightPart {
-            width: 250px;
-            height: 150px;
-            margin: 25px 40px;
+        .favourite {
             float: right;
-        }
-
-        .editProfile {
-            background-color: #4fe5e5;
-            color: white;
-            padding: 10px 30px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 20px 20px 20px 35%;
-            cursor: pointer;
-        }
-
-        #profileBottom {
-            background: rgba(24, 34, 91, 0.9);
-            width: 900px;
-            margin: 0 auto;
-            border: 10px solid rgba(0, 255, 255, 0.5);
-            border-top: none;
-        }
-
-        h3 {
-            height: 50px;
-            padding: 40px;
-        }
-
-        #achievements {
-            width: 100%;
-            height: 50px;
-        }
-
-        .firstBlock {
-            margin-left: 40px;
-        }
-
-        .block {
+            margin-top: -50px;
+            margin-right: -50px;
             width: 50px;
-            height: 50px;
-            background: #a59fdd;
-            float: left;
-            margin-right: 25px;
-        }
-
-        #listFavGames {
-            width: 100%;
-        }
-
-        .scroll, .scroll1 {
-            width: 90%;
-            text-align: center;
-            margin: 5%;
-            display: inline-block;
-        }
-
-        #userPosts {
-            width: 90%;
-            height: 160px;
-            margin: auto;
-            overflow: hidden;
-            white-space: nowrap;
-        }
-
-        #slideLeft,
-        #slideRight, #slideLeft1,
-        #slideRight1 {
-            display: inline-block;
-            border-radius: 100%;
-            padding: 5px;
-            background-color: rgba(219, 47, 0, 0.9);
-        }
-
-        .gameItem {
-            position: relative;
-            background-color: rgba(165, 159, 221, 0.8);
-            border-radius: 15px;
-            padding: 5px;
-            text-align: center;
-            display: inline-block;
-            width: 120px;
-            height: 140px;
-            margin: 10px;
-        }
-
-        .gameItem img {
-            width: 110px;
-            height: 110px;
-            border-radius: 15px;
-            border: 2px solid #0d0e47;
-        }
-
-        .gameItem p {
-            font-family: 'Fredoka One', cursive;
-            color: #0d0e47;
-            overflow: hidden;
-        }
-
-        h1, h2, h3, h4, h5, p, .nickname, .empty {
-            font-family: 'Press Start 2P', cursive;
-        }
-
-        .empty a {
-            font-family: 'Press Start 2P', cursive;
-            color: rgba(219, 47, 0, 0.9);
-            text-transform: uppercase;
         }
 
         body {
@@ -279,37 +140,55 @@
             margin-bottom: 10px;
         }
 
+        .tagItem {
+            display: inline-block;
+            border-radius: 20px;
+            padding: 0 3px;
+            margin: 3px;
+            background-color: rgba(130, 197, 209, 0.9);
+        }
+
         .tagItem a {
             color: #c8deff;
             margin: 0 5px;
             font-family: 'Fredoka One', cursive;
         }
 
-        h1 {
-            -webkit-text-fill-color: #0d0e47;
-            -webkit-text-stroke-color: #c8deff;
-            -webkit-text-stroke-width: 2px;
-            padding: 50px;
+        .emptyTag {
+            display: block;
+            text-transform: bold;
+            margin: 100px 100px 100px 24%;
+            text-align: center;
+            font-family: 'Press Start 2P', cursive;
+            text-size: 200%;
+            color: rgba(219, 47, 0, 1);
         }
 
-        .poster {
-            position: relative;
-            width: 400px;
-            height: 250px;
-            margin-left: auto;
-            margin-right: auto;
-            margin-bottom: 1em;
-            border-radius: 10px;
-            border: 7px solid rgba(13, 17, 71, 1);
+        .items-collection {
+            margin: 20px 0 0 0;
         }
 
-        p {
-            display: inline-block;
-            text-align: justify;
+        .items-collection label.btn-default.active {
+            background-color: #007ba7;
+            color: #FFF;
         }
 
+        .items-collection label.btn-default {
+            width: 90%;
+            border: 1px solid #305891;
+            margin: 5px;
+            border-radius: 17px;
+            color: #305891;
+        }
+
+        .items-collection label .itemcontent {
+            width: 100%;
+        }
+
+        .items-collection .btn-group {
+            width: 90%
+        }
     </style>
-
 </head>
 <body>
 <header>
@@ -327,9 +206,8 @@
         </div>
     </div>
 
-
-    <a href="main.html"><img class="over" src="/static/images/over.png"
-                             style="display: block; margin-left: 19%; margin-right: auto; width: 62%;"></a>
+    <a class="main-page-button"><img class="over" src="/static/images/over.png"
+                                     style="display: block; margin-left: 19%; margin-right: auto; width: 62%;"></a>
 
 
     <div class="sidenav" id="mySidenav" onmouseenter="openNav()" onmouseleave="closeNav()">
@@ -405,106 +283,60 @@
     </div>
 </header>
 
-<main>
+<div class="screenAdd">
+    <a class="user-profile-page-button" title="Return to Profile">
+        <img class="favourite" src="/static/images/review.png">
+    </a>
+    <h1>Add Game : </h1>
+    <form enctype="multipart/form-data" method="post">
+        <div>
+            <label><b>Title</b>
+                <input id='game-title' placeholder="Give name for your game" required type="text">
+            </label>
+            <label><b>Description</b>
+                <input id='game-description' placeholder="Write some description" required type="text">
+            </label>
+            <label><b>Game link</b>
+                <input id='game-link' required type="text">
+            </label>
+            <label><b>Select image:</b>
+                <input accept="image/*" id='game-image-link' required type="file">
+            </label>
+            <label><b>Price</b>
+                <input id='game-price' required type="text">
+            </label>
 
-    <div id="profileTop">
-        <div class="person">
-            <div id="ava">
-                <img src="/static/images/profile_img/pepe.jpg">
-            </div>
-        </div>
-
-        <div id="description">
-            <span class="nickname leftPart" style="font-size: 30px;">username</span>
-            <p class="leftPart">
-                Status: Noob
-            </p>
-            <span class="email leftPart">email</span>
-        </div>
-
-        <div class="rightPart">
-            <a href="{% url 'accounts:editProfile' %}" title="Edit Profile">
-                <button class="editProfile" style="margin-left: 5%; margin-top: 20%">Edit profile</button>
-            </a>
-        </div>
-
-    </div>
-
-    <div id="profileBottom">
-        <div class="profileBottomContent">
-            <h3>Achievements</h3>
-            <div id="achievements">
-                <div class="achieve firstBlock block"></div>
-                <div class="achieve block"></div>
-                <div class="achieve block"></div>
-                <div class="achieve block"></div>
-                <div class="achieve block"></div>
-                <div class="achieve block"></div>
-            </div>
-
-            <h3>Favourite games</h3>
-            <div id="listFavGames">
-                <div class="scroll1">
-                    <div class="gameItem">
-                        <a href="{% url 'post:detail' post.pk %}" style="text-decoration: none">
-                            <img src="{{ post.image.url }}" title="{{ post.title }}">
-                            <p></p>
-                        </a>
+            <label><b>Choose genres</b>
+            </label>
+            <div class="container">
+                <div class="row">
+                    <div class="form-group">
+                        <div class="items-collection" id='game-genres'>
+                        </div>
                     </div>
-                    <h6 class="empty">No Favourite Games</h6>
-                    <button id="slideLeft1" style="float: left" type="button"><<</button>
-                    <button id="slideRight1" style="float: right" type="button">>></button>
                 </div>
             </div>
 
-            <h3>My Games</h3>
-            <div class="scroll">
 
-                <div id="userPosts">
-                    <div class="gameItem">
-                        <a href="{% url 'post:detail' post.pk %}" style="text-decoration: none">
-                            <img src="{{ post.image.url }}" title="{{ post.title }}">
-                            <p></p>
-                        </a>
-                    </div>
-                    <h6 class="empty">No Games. Do you want to <a class="blinking"
-                                                                  href="{% url 'post:add-post' %}">upload</a> game?</h6>
-                </div>
-
-                <button id="slideLeft" style="float: left" type="button"><<</button>
-                <button id="slideRight" style="float: right" type="button">>></button>
-            </div>
-
-
-            <br>
-            <a href="{% url 'post:add-post' %}" style="margin-left: 4%" title="Add Game">
-                <button class="editProfile">Add Game</button>
-            </a>
         </div>
-    </div>
 
-    <script>
-        const buttonRight = document.getElementById('slideRight');
-        const buttonLeft = document.getElementById('slideLeft');
+        <input style="letter-spacing: 0; width: 150px;background: rgb(115,158,225); color: #fff; float: left; padding: 5px; font-family: 'Press Start 2P', cursive;"
+               type="submit" value="ADD POST">
 
-        buttonRight.onclick = function () {
-            document.getElementById('userPosts').scrollLeft += 50;
-        };
-        buttonLeft.onclick = function () {
-            document.getElementById('userPosts').scrollLeft -= 50;
-        };
-    </script>
-
-
-</main>
+    </form>
+</div>
 
 <footer>
     <img src="/static/images/land.png" style="width: 100%; z-index:1;">
     <div class="col-md-12 text-center">
         <p style=" position: absolute; font-size: 12px; margin: 0 auto; left: 0; right: 0; bottom:1em; letter-spacing: 4px; font-family: 'Fredoka One', cursive;z-index: 4; text-align: center;">
-            Copyright by Ranazh Shakieva, Andrey Kim, Dana Zharkimbaeva and Bota Duletbek. All rights reserved</p>
+            Copyright by Ranazh Shakieva and Dana Zharkimbaeva. All rights reserved</p>
     </div>
 </footer>
+<script src="/static/js/genre.js"></script>
+<script src="/static/js/requests.js"></script>
+</body>
+
 <script>
     function openNav() {
         document.getElementById("mySidenav").style.width = "250px";
@@ -528,6 +360,7 @@
         document.getElementById("mainsize").style.margin = "0";
     }
 </script>
-<script src="/static/js/requests.js"></script>
-</body>
+
 </html>
+
+

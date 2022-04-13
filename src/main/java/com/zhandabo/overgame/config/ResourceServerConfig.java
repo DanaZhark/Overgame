@@ -29,6 +29,8 @@ public class ResourceServerConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/static/**").permitAll()
                 .antMatchers("/templates/**").permitAll()
                 .antMatchers("/v1/users/**").permitAll()
+                .antMatchers("/v1/genres/**").permitAll()
+                .antMatchers("/v1/games/**").permitAll()
                 .antMatchers("/error").permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -44,6 +46,8 @@ public class ResourceServerConfig extends WebSecurityConfigurerAdapter {
                 "/overgame/**",
                 "/v1/users/login",
                 "/v1/users/register",
+                "/v1/genres/**",
+                "/v1/games/**",
                 "/configuration/security",
                 "/swagger-ui.html",
                 "/webjars/**");

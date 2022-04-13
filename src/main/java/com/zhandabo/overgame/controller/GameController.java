@@ -20,19 +20,19 @@ public class GameController {
 
     @PostMapping
     @ApiOperation("Создание")
-    public void register(@RequestBody GameCreateDto gameCreateDto) {
+    public void create(@RequestBody GameCreateDto gameCreateDto) {
         gameService.create(gameCreateDto);
     }
 
     @GetMapping
     @ApiOperation("Получение всех игр")
-    public List<GameViewDto> register() {
+    public List<GameViewDto> getAllGames() {
         return gameService.getAll();
     }
 
-    @GetMapping
+    @GetMapping("/genres/{genreId}")
     @ApiOperation("Получение игр по жанру")
-    public List<GameViewDto> register(@RequestParam Long genreId) {
+    public List<GameViewDto> getGamesByGenre(@PathVariable Long genreId) {
         return gameService.getByGenreId(genreId);
     }
 }

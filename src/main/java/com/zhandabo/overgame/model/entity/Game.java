@@ -1,18 +1,28 @@
 package com.zhandabo.overgame.model.entity;
 
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Map;
+import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 @Table(name = "game")
 @ApiModel("Игра")
 public class Game {
@@ -21,43 +31,44 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ApiModelProperty("Логин")
-    @Column(name = "name")
-    private String name;
+    @ApiModelProperty("Название игры")
+    @Type(type = "jsonb")
+    @Column(columnDefinition = "jsonb", name = "name")
+    private Map<String, String> name;
 
-    @ApiModelProperty("Кем создан")
-    @Column(name = "description")
-    private String description;
+    @ApiModelProperty("Описание игры")
+    @Type(type = "jsonb")
+    @Column(columnDefinition = "jsonb", name = "description")
+    private Map<String, String> description;
 
-    @ApiModelProperty("Кем последним был редактирован")
+    @ApiModelProperty("Рейтинг игры")
     @Column(name = "rating")
-    private String rating;
+    private BigDecimal rating = BigDecimal.valueOf(0);
 
-    @ApiModelProperty("Дата создания")
+    @ApiModelProperty("Ссылка на игру")
     @Column(name = "game_link")
     private String gameLink;
 
-    @ApiModelProperty("Дата последнего редактирования")
+    @ApiModelProperty("Ссылка на картинку игры")
     @Column(name = "img_link")
     private String imgLink;
 
-    @ApiModelProperty("Дата последнего редактирования")
+    @ApiModelProperty("Цена игры")
     @Column(name = "price")
-    private String price;
+    private BigDecimal price;
 
-    @ApiModelProperty("Дата последнего редактирования")
+    @ApiModelProperty("Дата создания")
     @Column(name = "date_created")
     private Date dateCreated;
 
-    @ApiModelProperty("Дата последнего редактирования")
-    @Column(name = "genre_id")
-    private String genreId;
-
-    @ApiModelProperty("Дата последнего редактирования")
+    @ApiModelProperty("ID создателя")
     @Column(name = "creator_id")
     private String creatorId;
 
-    @ApiModelProperty("Дата последнего редактирования")
+    @ApiModelProperty("ID модератора")
     @Column(name = "moderator_id")
     private String moderatorId;
+
+    @OneToMany(mappedBy = "game")
+    Set<GameGenre> genres;
 }
