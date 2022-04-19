@@ -43,4 +43,15 @@ public class GenreServiceImpl implements GenreService {
         }
         return genreViewDtoList;
     }
+
+    @Override
+    public List<GenreViewDto> getGenresByGameId(Long gameId) {
+        List<GenreViewDto> genreViewDtoList = new ArrayList<>();
+        List<Genre> genres = genreRepository.getAllByGameId(gameId);
+
+        for (Genre genre : genres) {
+            genreViewDtoList.add(genreViewDtoConverter.convert(genre));
+        }
+        return genreViewDtoList;
+    }
 }

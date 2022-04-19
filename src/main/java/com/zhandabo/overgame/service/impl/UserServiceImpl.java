@@ -28,6 +28,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
+    private static final String KEYCLOAK_GRANT_TYPE_PASSWORD = "password";
     private final KeycloakService keycloakService;
     private final CredentialService credentialService;
     private final MailService mailService;
@@ -35,16 +36,11 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserConverter userConverter;
     private final RoleConverter roleConverter;
-
     private final KeycloakClient keycloakClient;
-
     @Value("${keycloak.reset-password-url}")
     private String keycloakResetPasswordUrl;
-
     @Value("${keycloak.realm}")
     private String realm;
-
-    private static final String KEYCLOAK_GRANT_TYPE_PASSWORD = "password";
 
     @Override
     public void create(UserInfoDto userInfoDto) {
@@ -62,6 +58,7 @@ public class UserServiceImpl implements UserService {
         }
 
         User newUser = userConverter.convert(userInfoDto);
+
 
         String keycloakId = null;
 
@@ -114,8 +111,6 @@ public class UserServiceImpl implements UserService {
         String keycloakId = JwtUtils.getKeycloakId();
 
         User user = userRepository.getByKeycloakId(keycloakId);
-
-
 
 
         if (!userEditDto.getNewPassword().equals(userEditDto.getValidateNewPassword())) {

@@ -10,4 +10,6 @@ public interface GenreService {
     void create(GenreCreateDto dto);
 
     List<GenreViewDto> getAll();
+
+    List<GenreViewDto> getGenresByGameId(Long gameId);
 }

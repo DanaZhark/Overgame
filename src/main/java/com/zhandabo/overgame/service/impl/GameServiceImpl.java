@@ -75,7 +75,13 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public List<GameViewDto> getByGenreId(Long genreId) {
-        return null;
+    public List<GameViewDto> getGamesByGenreId(Long genreId) {
+        List<GameViewDto> gameViewDtoList = new ArrayList<>();
+        List<Game> games = gameRepository.getAllByGenreId(genreId);
+
+        for (Game game : games) {
+            gameViewDtoList.add(gameViewDtoConverter.convert(game));
+        }
+        return gameViewDtoList;
     }
 }

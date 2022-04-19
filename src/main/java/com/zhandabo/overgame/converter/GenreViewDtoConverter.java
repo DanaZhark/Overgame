@@ -11,6 +11,7 @@ public class GenreViewDtoConverter implements Converter<Genre, GenreViewDto> {
     public GenreViewDto convert(Genre source) {
         GenreViewDto target = new GenreViewDto();
         target.setId(source.getId());
+        target.setCode(source.getCode());
         target.setName(source.getName().get("en"));
         target.setDescription(source.getDescription().get("en"));
         target.setImgLink(source.getImgLink());

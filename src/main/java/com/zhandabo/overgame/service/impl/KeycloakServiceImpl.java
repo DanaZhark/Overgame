@@ -81,6 +81,7 @@ public class KeycloakServiceImpl implements KeycloakService {
     @Override
     public String createUserAndGetKeycloakId(UserInfoDto dto, String password) {
         UserRepresentation user = userRepresentationConverter.convert(dto);
+        user.setEnabled(true);
         setUserRepresentationCredentials(user, password);
         RealmResource realm = keycloak.realm(this.realm);
         UsersResource usersResource = realm.users();

@@ -265,43 +265,8 @@
             The Best Games of the week
         </h1>
 
-        <div class="row">
-            <div class="col-md-6 text-center">
-                <div class="thumbnail">
-                    <a href="{% url 'post:detail' post.pk %}"><img class="poster" src="{{ post.image.url }}"></a>
-                    <h5><a href="{% url 'post:detail' post.pk %}"
-                           style="font-family: 'Press Start 2P', cursive; color: #ffffff">{{ post.title }}</a></h5>
+        <div class="row" id="games-list">
 
-                    <span class="more">
-                                <p style="padding: 10px">{{ post.text }}</p>
-
-                            <div class="item">
-                                    <div class="tagItem">
-                                        <a href="/post/allpost/{{ tag.slug }}">{{ tag.name }}</a>
-                                    </div>
-                            </div>
-
-                            </span>
-
-                    <div class="item" style="display: block; margin-left: auto; margin-right: auto; width: 350px;">
-                        <a href="{% url 'post:detail' post.pk %}">
-                            <button class="button"
-                                    style="letter-spacing: 0px; width: 120px;background: rgb(115,158,225); color: #fff; float: left; padding: 5px;"
-                                    title="PLAY"
-                                    type="button">PLAY
-                            </button>
-                        </a>
-                        <a href="">
-                            <button class="button"
-                                    style="letter-spacing: 0px; width: 120px;background: rgb(115,158,225); color: #fff; float: right; padding: 5px;"
-                                    title="MORE"
-                                    type="button">MORE
-                            </button>
-                        </a>
-                    </div>
-
-                </div>
-            </div>
         </div>
 
     </main>
@@ -337,7 +302,8 @@
         document.getElementById("mainsize").style.margin = "0";
     }
 </script>
-<script src="../static/js/requests.js"></script>
-<script src="../static/js/main.js"></script>
+<script src="/static/js/requests.js"></script>
+<script src="/static/js/main.js"></script>
+<script src="/static/js/game.js"></script>
 </body>
 </html>

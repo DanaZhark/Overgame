@@ -33,6 +33,6 @@ public class GameController {
     @GetMapping("/genres/{genreId}")
     @ApiOperation("Получение игр по жанру")
     public List<GameViewDto> getGamesByGenre(@PathVariable Long genreId) {
-        return gameService.getByGenreId(genreId);
+        return gameService.getGamesByGenreId(genreId);
     }
 }

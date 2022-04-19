@@ -1,0 +1,162 @@
+.screenAdd {
+    background-color: rgba(0, 9, 28, 0.91);
+    width: 60%;
+    margin-left: 20%;
+    padding: 5% 5% 8%;
+    border: 20px solid #83d0d1;
+    font-family: 'Press Start 2P', cursive;
+}
+
+h1, h5, h6, label {
+    font-family: 'Press Start 2P', cursive;
+    margin-bottom: 20px;
+}
+
+p {
+    font-family: 'Press Start 2P', cursive;
+}
+
+.favourite {
+    float: right;
+    margin-top: -50px;
+    margin-right: -50px;
+    width: 50px;
+}
+
+body {
+    background-image: url(/static/images/space.gif);
+}
+
+@media screen and (min-height: 800px) {
+    .sidenav {
+        padding-top: 30px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
+}
+
+button {
+    font-family: 'Press Start 2P', cursive;
+    color: #c8deff;
+}
+
+ul {
+    list-style: none;
+    font-family: 'Monoton', cursive;
+}
+
+.navitem ul {
+    list-style: square;
+}
+
+.username button {
+    float: right;
+    display: inline-block;
+    font-size: 20px;
+    margin: 10px;
+    font-family: 'Press Start 2P', cursive;
+    color: #c8deff;
+    border: none;
+    background-color: rgba(219, 47, 0, 0);
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.username {
+    position: relative;
+    display: block;
+    float: right;
+    border-radius: 30px;
+    border: 3px solid rgba(219, 47, 0, .5);
+    background-color: rgba(219, 47, 0, 0.8);
+    text-align: center;
+    margin: 15px;
+}
+
+.dropdown:hover .dropbtn {
+    float: none;
+    font-size: 25px;
+}
+
+.dropdown-content {
+    display: none;
+}
+
+.dropdown-content:hover {
+    display: inline-block;
+}
+
+.dropdown-content a {
+    font-size: 16px;
+    margin-top: 10px;
+    font-family: 'Press Start 2P', cursive;
+    color: #c8deff;
+    text-decoration: none;
+}
+
+.username a {
+    font-family: 'Press Start 2P', cursive;
+    padding: 10px 0;
+    color: #c8deff;
+    text-decoration: none;
+}
+
+.username a:hover {
+    animation: blinker 1.2s linear infinite;
+    color: #a59fdd;
+}
+
+.navitem a {
+    margin: 0;
+    padding: 0;
+}
+
+.item {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.tagItem a {
+    color: #c8deff;
+    margin: 0 5px;
+    font-family: 'Fredoka One', cursive;
+}
+
+.items-collection {
+    font-family: 'Press Start 2P', cursive;
+    margin: 20px 0 0 0;
+}
+
+.items {
+    font-family: 'Press Start 2P', cursive;
+    float: left;
+}
+
+.items-collection label.btn-default.active {
+    background-color: #007ba7;
+    color: #FFF;
+}
+
+.items-collection label.btn-default {
+    border: 1px solid #305891;
+    margin: 5px;
+    border-radius: 17px;
+    color: #305891;
+}
+
+.items-collection label .itemcontent {
+    width: 100%;
+}
+
+.items-collection .btn-group {
+    width: 90%
+}
+
+.info-block .block-info .clearfix {
+    background: red;
+}

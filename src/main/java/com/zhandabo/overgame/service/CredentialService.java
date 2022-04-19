@@ -33,12 +33,6 @@ public class CredentialService {
         String strDigit = generateRandomString(DIGIT, 2);
         result.append(strDigit);
 
-        String strSpecialChar = generateRandomString(OTHER_SPECIAL, 2);
-        result.append(strSpecialChar);
-
-        String strOther = generateRandomString(PASSWORD_ALLOW, PASSWORD_LENGTH - 8);
-        result.append(strOther);
-
         String password = result.toString();
 
         return shuffleString(password);

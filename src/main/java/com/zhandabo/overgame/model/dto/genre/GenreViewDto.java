@@ -13,6 +13,8 @@ public class GenreViewDto {
     @ApiModelProperty("ID игры")
     private Long id;
 
+    private String code;
+
     @ApiModelProperty("Название игры")
     private String name;
 

@@ -30,4 +30,10 @@ public class GenreController {
     public List<GenreViewDto> getAllGenres() {
         return genreService.getAll();
     }
+
+    @GetMapping("/games/{gameId}")
+    @ApiOperation("Получение жанров игры по айди игры")
+    public List<GenreViewDto> getAllGenres(@PathVariable Long gameId) {
+        return genreService.getGenresByGameId(gameId);
+    }
 }
