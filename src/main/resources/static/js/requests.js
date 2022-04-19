@@ -39,4 +39,9 @@ $(document).ready(function () {
         e.preventDefault()
         $(location).attr('href', 'http://localhost:8080/overgame/user/game-create')
     })
+
+    $('.game-play-page-button').click(function (e) {
+        e.preventDefault()
+        $(location).attr('href', 'http://localhost:8080/overgame/user/game-play')
+    })
 });

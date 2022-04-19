@@ -64,4 +64,9 @@ public class MvcController {
     public String gameCreatePage() {
         return "game_create";
     }
+
+    @GetMapping("/user/game-play")
+    public String gamePlayPage() {
+        return "game_play";
+    }
 }

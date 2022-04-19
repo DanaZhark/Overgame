@@ -10,6 +10,9 @@ import java.util.List;
 @Repository
 public interface GameRepository extends JpaRepository<Game, Long> {
 
+    @Query(value = "from Game g where g.id = :gameId")
+    Game getGameById(Long gameId);
+
     @Query(value = "from Game g " +
             "inner join GameGenre gg on g.id = gg.game.id " +
             "where gg.genre.id = :genreId")

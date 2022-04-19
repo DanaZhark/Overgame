@@ -9,9 +9,13 @@ public interface GameService {
 
     void create(GameCreateDto gameCreateDto);
 
+    void edit(GameCreateDto gameCreateDto, Long gameId);
+
     void createGameGenre(List<Long> genreIds, Long gameId);
 
-    List<GameViewDto> getAll();
+    List<GameViewDto> getAllGames();
+
+    GameViewDto getGameById(Long gameId);
 
     List<GameViewDto> getGamesByGenreId(Long genreId);
 }

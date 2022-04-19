@@ -69,6 +69,6 @@ public class Game {
     @Column(name = "moderator_id")
     private String moderatorId;
 
-    @OneToMany(mappedBy = "game")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "game")
     Set<GameGenre> genres;
 }

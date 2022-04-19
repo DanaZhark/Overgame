@@ -1,5 +1,6 @@
 package com.zhandabo.overgame.model.dto.game;
 
+import com.zhandabo.overgame.model.dto.genre.GenreShortViewDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -32,7 +33,7 @@ public class GameViewDto {
     private BigDecimal price;
 
     @ApiModelProperty("Список id жанров")
-    private List<Long> genreIds;
+    private List<GenreShortViewDto> genres;
 
     @ApiModelProperty("Ссылка на игру")
     private String creatorName;

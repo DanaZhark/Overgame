@@ -20,11 +20,13 @@ $(document).ready(function () {
                         "                                </h5>\n" +
                         "                                <span class=\"more\">\n" +
                         "                        <p style=\"padding: 10px\">" + elem.description + "</p>\n" +
+
                         "                        <div class=\"item\">\n" +
                         "                            <div class=\"tagItem\">\n" +
                         "                                <a href=\"/post/allpost/{{ tag.slug }}\">{{tag.name}}</a>\n" +
                         "                            </div>\n" +
                         "                        </div>\n" +
+
                         "                    </span>\n" +
                         "                                <div class=\"item\"\n" +
                         "                                     style=\"display: block; margin-left: auto; margin-right: auto; width: 350px;\">\n" +
@@ -32,12 +34,6 @@ $(document).ready(function () {
                         "                                        <button class=\"button\"\n" +
                         "                                                style=\"letter-spacing: 0px; width: 120px;background: rgb(115,158,225); color: #fff; float: left; padding: 5px;\"\n" +
                         "                                                title=\"PLAY\" type=\"button\">PLAY\n" +
-                        "                                        </button>\n" +
-                        "                                    </a>\n" +
-                        "                                    <a href=\"\">\n" +
-                        "                                        <button class=\"button\"\n" +
-                        "                                                style=\"letter-spacing: 0px; width: 120px;background: rgb(115,158,225); color: #fff; float: right; padding: 5px;\"\n" +
-                        "                                                title=\"MORE\" type=\"button\">MORE\n" +
                         "                                        </button>\n" +
                         "                                    </a>\n" +
                         "                                </div>\n" +

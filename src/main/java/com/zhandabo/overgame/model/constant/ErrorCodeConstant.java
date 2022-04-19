@@ -26,4 +26,5 @@ public class ErrorCodeConstant {
     public static final String THE_GIVEN_ID_DOES_NOT_EXISTS = "THE_GIVEN_ID_DOES_NOT_EXISTS";
     public static final String REVIEW_NPS_ID_NON_EXISTENT = "REVIEW_NPS_ID_NON_EXISTENT";
     public static final String NETWORK_ID_NON_EXISTENT = "NETWORK_ID_NON_EXISTENT";
+    public static final String IMG_ERROR = "IMG_ERROR";
 }
