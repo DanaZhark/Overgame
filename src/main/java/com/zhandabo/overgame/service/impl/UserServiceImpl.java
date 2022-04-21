@@ -6,8 +6,11 @@ import com.zhandabo.overgame.converter.UserConverter;
 import com.zhandabo.overgame.exception.OvergameException;
 import com.zhandabo.overgame.model.constant.ErrorCodeConstant;
 import com.zhandabo.overgame.model.dto.*;
+import com.zhandabo.overgame.model.entity.Favourite;
 import com.zhandabo.overgame.model.entity.User;
 import com.zhandabo.overgame.model.enums.RoleCode;
+import com.zhandabo.overgame.repository.FavouriteRepository;
+import com.zhandabo.overgame.repository.GameRepository;
 import com.zhandabo.overgame.repository.UserRepository;
 import com.zhandabo.overgame.service.*;
 import com.zhandabo.overgame.util.JwtUtils;
@@ -37,6 +40,8 @@ public class UserServiceImpl implements UserService {
     private final UserConverter userConverter;
     private final RoleConverter roleConverter;
     private final KeycloakClient keycloakClient;
+    private final GameRepository gameRepository;
+    private final FavouriteRepository favouriteRepository;
     @Value("${keycloak.reset-password-url}")
     private String keycloakResetPasswordUrl;
     @Value("${keycloak.realm}")
@@ -125,6 +130,17 @@ public class UserServiceImpl implements UserService {
         keycloakResetPasswordRequestDto.setType(KEYCLOAK_GRANT_TYPE_PASSWORD);
         keycloakResetPasswordRequestDto.setValue(userEditDto.getNewPassword());
         keycloakClient.resetPassword(uri, keycloakResetPasswordRequestDto);
+    }
+
+    @Override
+    public void addGameToFavourite(Long gameId) {
+        Favourite favourite = new Favourite();
+        String userId = JwtUtils.getKeycloakId();
+        User user = userRepository.getByKeycloakId(userId);
+        favourite.setGame(gameRepository.getById(gameId));
+        favourite.setUser(user);
+
+        favouriteRepository.save(favourite);
     }
 
     private boolean isRoleAvailable(RoleCode roleCode) {

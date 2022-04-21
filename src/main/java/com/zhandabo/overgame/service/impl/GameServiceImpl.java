@@ -10,6 +10,7 @@ import com.zhandabo.overgame.repository.GameGenreRepository;
 import com.zhandabo.overgame.repository.GameRepository;
 import com.zhandabo.overgame.repository.GenreRepository;
 import com.zhandabo.overgame.service.GameService;
+import com.zhandabo.overgame.service.KeycloakService;
 import com.zhandabo.overgame.util.JwtUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,9 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -32,6 +30,7 @@ public class GameServiceImpl implements GameService {
     private final GameGenreRepository gameGenreRepository;
     private final GenreRepository genreRepository;
     private final GameViewDtoConverter gameViewDtoConverter;
+    private final KeycloakService keycloakService;
 
     private final String uploadPath = "/home/danazharkimbayeva/Documents/IITU/overgame/src/main/resources/static/images/games/";
 
@@ -43,7 +42,6 @@ public class GameServiceImpl implements GameService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
 
         Game game = new Game();
         game.setName(dto.getName());
@@ -86,12 +84,10 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
+    @Transactional
     public void edit(GameCreateDto dto, Long gameId) {
-        byte[] bytes = new byte[0];
-        Path path = Paths.get(uploadPath + dto.getImgFile().getOriginalFilename());
         try {
-            bytes = dto.getImgFile().getBytes();
-            Files.write(path, bytes);
+            saveFile(dto.getImgFile());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -100,7 +96,7 @@ public class GameServiceImpl implements GameService {
         game.setName(dto.getName());
         game.setDescription(dto.getDescription());
         game.setGameLink(dto.getGameLink());
-        game.setImgLink(String.valueOf(path));
+        game.setImgLink("/static/images/games/" + dto.getImgFile().getOriginalFilename());
         game.setPrice(dto.getPrice());
         game.setDateCreated(new Date());
         game.setCreatorId(JwtUtils.getKeycloakId());
@@ -131,6 +127,18 @@ public class GameServiceImpl implements GameService {
     public List<GameViewDto> getAllGames() {
         List<GameViewDto> gameViewDtoList = new ArrayList<>();
         List<Game> games = gameRepository.findAll();
+
+        for (Game game : games) {
+            gameViewDtoList.add(gameViewDtoConverter.convert(game));
+        }
+        return gameViewDtoList;
+    }
+
+    @Override
+    public List<GameViewDto> getUserFavouriteGames() {
+        String userId = JwtUtils.getKeycloakId();
+        List<GameViewDto> gameViewDtoList = new ArrayList<>();
+        List<Game> games = gameRepository.getFavouriteGamesByUserId(userId);
 
         for (Game game : games) {
             gameViewDtoList.add(gameViewDtoConverter.convert(game));

@@ -17,4 +17,9 @@ public interface GameRepository extends JpaRepository<Game, Long> {
             "inner join GameGenre gg on g.id = gg.game.id " +
             "where gg.genre.id = :genreId")
     List<Game> getAllByGenreId(Long genreId);
+
+    @Query(value = "from Game g " +
+            "inner join Favourite f on g.id = f.game.id " +
+            "where f.user.keycloakId = :userId")
+    List<Game> getFavouriteGamesByUserId(String userId);
 }

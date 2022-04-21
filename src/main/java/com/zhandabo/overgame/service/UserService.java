@@ -15,4 +15,6 @@ public interface UserService {
 
     void editUser(UserEditDto userEditDto);
 
+    void addGameToFavourite(Long gameId);
+
 }

@@ -19,25 +19,22 @@ import java.util.Set;
 @ApiModel("Пользователь")
 public class User {
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "users")
+    Set<Favourite> favorites;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(name = "keycloak_id")
     private String keycloakId;
-
     @ApiModelProperty("Логин")
     @Column(name = "username")
     private String username;
-
     @ApiModelProperty("Электронная почта")
     @Column(name = "email")
     private String email;
-
     @ApiModelProperty("Дата создания")
     @Column(name = "created_date")
     private Date createdDate;
-
     @ManyToMany(
             fetch = FetchType.EAGER
     )
