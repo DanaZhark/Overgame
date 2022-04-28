@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "favorite")
+@Table(name = "favourite")
 @ApiModel("Связь игры и жанра")
 public class Favourite {
 

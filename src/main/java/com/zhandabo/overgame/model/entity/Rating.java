@@ -8,25 +8,28 @@ import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Getter
 @Setter
 @Entity
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "game_genre")
+@Table(name = "rating")
 @ApiModel("Связь игры и жанра")
-public class GameGenre {
+public class Rating {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "game_id")
     Game game;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "genre_id")
-    Genre genre;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    User user;
+
+    BigDecimal grade;
 }

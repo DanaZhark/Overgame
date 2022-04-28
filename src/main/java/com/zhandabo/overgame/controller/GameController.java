@@ -40,12 +40,6 @@ public class GameController {
         return gameService.getAllGames();
     }
 
-    @GetMapping("/favourite")
-    @ApiOperation("Получение списка любимых игр пользователя")
-    public List<GameViewDto> getUserFavouriteGames() {
-        return gameService.getUserFavouriteGames();
-    }
-
     @GetMapping("/{gameId}")
     @ApiOperation("Получение игры по айди")
     public GameViewDto getGameById(@PathVariable("gameId") Long gameId) {
@@ -57,4 +51,5 @@ public class GameController {
     public List<GameViewDto> getGamesByGenre(@PathVariable Long genreId) {
         return gameService.getGamesByGenreId(genreId);
     }
+
 }

@@ -1,5 +1,6 @@
 package com.zhandabo.overgame.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -70,5 +71,6 @@ public class Game {
     private String moderatorId;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "game")
+    @JsonIgnore
     Set<GameGenre> genres;
 }

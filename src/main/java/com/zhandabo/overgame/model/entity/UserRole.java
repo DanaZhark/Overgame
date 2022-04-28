@@ -14,19 +14,19 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "game_genre")
-@ApiModel("Связь игры и жанра")
-public class GameGenre {
+@Table(name = "user_role")
+@ApiModel("Связь пользователя и роли")
+public class UserRole {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "game_id")
-    Game game;
+    @JoinColumn(name = "user_id")
+    User user;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "genre_id")
-    Genre genre;
+    @JoinColumn(name = "role_id")
+    Role role;
 }

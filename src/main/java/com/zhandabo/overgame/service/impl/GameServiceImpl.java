@@ -9,8 +9,8 @@ import com.zhandabo.overgame.model.entity.Genre;
 import com.zhandabo.overgame.repository.GameGenreRepository;
 import com.zhandabo.overgame.repository.GameRepository;
 import com.zhandabo.overgame.repository.GenreRepository;
+import com.zhandabo.overgame.repository.UserRepository;
 import com.zhandabo.overgame.service.GameService;
-import com.zhandabo.overgame.service.KeycloakService;
 import com.zhandabo.overgame.util.JwtUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -29,8 +29,8 @@ public class GameServiceImpl implements GameService {
     private final GameRepository gameRepository;
     private final GameGenreRepository gameGenreRepository;
     private final GenreRepository genreRepository;
+    private final UserRepository userRepository;
     private final GameViewDtoConverter gameViewDtoConverter;
-    private final KeycloakService keycloakService;
 
     private final String uploadPath = "/home/danazharkimbayeva/Documents/IITU/overgame/src/main/resources/static/images/games/";
 
@@ -124,21 +124,10 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
+    @Transactional
     public List<GameViewDto> getAllGames() {
         List<GameViewDto> gameViewDtoList = new ArrayList<>();
         List<Game> games = gameRepository.findAll();
-
-        for (Game game : games) {
-            gameViewDtoList.add(gameViewDtoConverter.convert(game));
-        }
-        return gameViewDtoList;
-    }
-
-    @Override
-    public List<GameViewDto> getUserFavouriteGames() {
-        String userId = JwtUtils.getKeycloakId();
-        List<GameViewDto> gameViewDtoList = new ArrayList<>();
-        List<Game> games = gameRepository.getFavouriteGamesByUserId(userId);
 
         for (Game game : games) {
             gameViewDtoList.add(gameViewDtoConverter.convert(game));

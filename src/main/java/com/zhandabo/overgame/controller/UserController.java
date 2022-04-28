@@ -48,9 +48,5 @@ public class UserController {
         userService.editUser(userEditDto);
     }
 
-    @PostMapping("/games/{gameId}/favorite")
-    @ApiOperation("Создание игры")
-    public void create(@PathVariable("gameId") Long gameId) {
-        userService.addGameToFavourite(gameId);
-    }
+
 }

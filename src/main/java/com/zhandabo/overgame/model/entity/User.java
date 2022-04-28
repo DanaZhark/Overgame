@@ -1,5 +1,6 @@
 package com.zhandabo.overgame.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -8,7 +9,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -19,8 +19,6 @@ import java.util.Set;
 @ApiModel("Пользователь")
 public class User {
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "users")
-    Set<Favourite> favorites;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -35,19 +33,11 @@ public class User {
     @ApiModelProperty("Дата создания")
     @Column(name = "created_date")
     private Date createdDate;
-    @ManyToMany(
-            fetch = FetchType.EAGER
-    )
-    @JoinTable(
-            name = "user_role",
-            joinColumns = {@JoinColumn(
-                    name = "user_id",
-                    referencedColumnName = "id"
-            )},
-            inverseJoinColumns = {@JoinColumn(
-                    name = "role_id",
-                    referencedColumnName = "id"
-            )}
-    )
-    private Set<Role> roles = new HashSet();
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    private Set<UserRole> roles;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    @JsonIgnore
+    private Set<Favourite> favourites;
 }

@@ -11,6 +11,7 @@ import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import java.util.Map;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -21,24 +22,22 @@ import java.util.Map;
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class Genre {
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "genre")
+    Set<GameGenre> games;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @ApiModelProperty("Логин")
     @Column(name = "code")
     private String code;
-
     @ApiModelProperty("Кем создан")
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb", name = "name")
     private Map<String, String> name;
-
     @ApiModelProperty("Кем последним был редактирован")
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb", name = "description")
     private Map<String, String> description;
-
     @ApiModelProperty("Дата создания")
     @Column(name = "img_link")
     private String imgLink;
