@@ -40,4 +40,8 @@ public class User {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     @JsonIgnore
     private Set<Favourite> favourites;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    @JsonIgnore
+    private Set<AchievementUser> achievements;
 }

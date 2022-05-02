@@ -11,39 +11,35 @@ import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import java.util.Map;
-import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "genre")
-@ApiModel("Жанр игры")
+@Table(name = "achievement_type")
+@ApiModel("Тип достижения")
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
-public class Genre {
+public class AchievementType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ApiModelProperty("Логин")
+    @ApiModelProperty("Код")
     @Column(name = "code")
     private String code;
 
-    @ApiModelProperty("Кем создан")
+    @ApiModelProperty("Название")
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb", name = "name")
     private Map<String, String> name;
 
-    @ApiModelProperty("Кем последним был редактирован")
+    @ApiModelProperty("Описание")
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb", name = "description")
     private Map<String, String> description;
 
-    @ApiModelProperty("Дата создания")
+    @ApiModelProperty("Путь картинки")
     @Column(name = "img_link")
     private String imgLink;
-
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "genre")
-    private Set<GameGenre> games;
 }

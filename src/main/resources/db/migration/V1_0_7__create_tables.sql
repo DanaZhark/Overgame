@@ -1,9 +1,10 @@
 create table if not exists achievement_type
 (
-    id   bigserial primary key,
-    code varchar(255) not null,
-    name varchar(255) not null,
-    img  varchar(255) not null
+    id          bigserial primary key,
+    code        varchar(255) not null,
+    name        varchar(255) not null,
+    description varchar(255) not null,
+    img         varchar(255) not null
 );
 
 create table if not exists achievement
@@ -25,9 +26,10 @@ create table if not exists achievement_user
 
 create table if not exists banner_type
 (
-    id   bigserial primary key,
-    code varchar(255) not null,
-    name varchar(255) not null
+    id          bigserial primary key,
+    code        varchar(255) not null,
+    name        varchar(255) not null,
+    description varchar(255) not null
 );
 
 create table if not exists banner
