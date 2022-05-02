@@ -2,6 +2,7 @@ package com.zhandabo.overgame.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
+import com.zhandabo.overgame.model.enums.GameStatus;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AccessLevel;
@@ -64,13 +65,15 @@ public class Game {
 
     @ApiModelProperty("ID создателя")
     @Column(name = "creator_id")
-    private String creatorId;
+    private Long creatorId;
 
     @ApiModelProperty("ID модератора")
     @Column(name = "moderator_id")
-    private String moderatorId;
+    private Long moderatorId;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "game")
     @JsonIgnore
     Set<GameGenre> genres;
+
+    private GameStatus status;
 }

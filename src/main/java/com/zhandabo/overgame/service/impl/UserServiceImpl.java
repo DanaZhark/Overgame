@@ -3,6 +3,7 @@ package com.zhandabo.overgame.service.impl;
 import com.zhandabo.overgame.client.KeycloakClient;
 import com.zhandabo.overgame.converter.RoleConverter;
 import com.zhandabo.overgame.converter.UserConverter;
+import com.zhandabo.overgame.converter.UserViewDtoConverter;
 import com.zhandabo.overgame.exception.OvergameException;
 import com.zhandabo.overgame.model.constant.ErrorCodeConstant;
 import com.zhandabo.overgame.model.dto.*;
@@ -35,6 +36,7 @@ public class UserServiceImpl implements UserService {
     private final RoleService roleService;
     private final UserRepository userRepository;
     private final UserConverter userConverter;
+    private final UserViewDtoConverter userViewDtoConverter;
     private final RoleConverter roleConverter;
     private final KeycloakClient keycloakClient;
 
@@ -87,6 +89,16 @@ public class UserServiceImpl implements UserService {
         return userRepository.getByKeycloakId(JwtUtils.getKeycloakId());
     }
 
+    @Override
+    public List<UserViewDto> getDevelopers() {
+        List<UserViewDto> userViewDtoList = new ArrayList<>();
+        List<User> users = userRepository.getDevelopers();
+        for (User user : users) {
+            userViewDtoList.add(userViewDtoConverter.convert(user));
+        }
+        return userViewDtoList;
+    }
+
     public List<RoleDto> getAvailableRoles() {
         List<RoleDto> availableRoles = new ArrayList<>();
         availableRoles.add(roleConverter.convert(roleService.getByRoleCode(RoleCode.OVERGAME_ADMIN_ROLE)));
@@ -113,7 +125,6 @@ public class UserServiceImpl implements UserService {
         String keycloakId = JwtUtils.getKeycloakId();
 
         User user = userRepository.getByKeycloakId(keycloakId);
-
 
         if (!userEditDto.getNewPassword().equals(userEditDto.getValidateNewPassword())) {
             throw new OvergameException(HttpStatus.BAD_REQUEST, ErrorCodeConstant.PASSWORD_MISMATCH,

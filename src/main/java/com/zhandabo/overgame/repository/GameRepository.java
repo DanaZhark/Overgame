@@ -1,6 +1,7 @@
 package com.zhandabo.overgame.repository;
 
 import com.zhandabo.overgame.model.entity.Game;
+import com.zhandabo.overgame.model.enums.GameStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -19,7 +20,10 @@ public interface GameRepository extends JpaRepository<Game, Long> {
     List<Game> getAllByGenreId(Long genreId);
 
     @Query(value = "from Game g " +
-            "inner join Favourite f on g.id = f.game.id " +
+            "inner join FavouriteGames f on g.id = f.game.id " +
             "where f.user.keycloakId = :userId")
     List<Game> getFavouriteGamesByUserId(String userId);
+
+    @Query(value = "from Game g where g.status = :status")
+    List<Game> getAllByStatus(GameStatus status);
 }

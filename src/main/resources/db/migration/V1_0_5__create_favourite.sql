@@ -1,4 +1,4 @@
-create table if not exists favourite
+create table if not exists favouriteGames
 (
     id      bigserial primary key,
     game_id bigint references game (id),

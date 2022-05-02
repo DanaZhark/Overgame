@@ -1,11 +1,15 @@
 package com.zhandabo.overgame.service.impl;
 
 import com.zhandabo.overgame.converter.GameViewDtoConverter;
+import com.zhandabo.overgame.converter.UserViewDtoConverter;
+import com.zhandabo.overgame.model.dto.UserViewDto;
 import com.zhandabo.overgame.model.dto.game.GameViewDto;
-import com.zhandabo.overgame.model.entity.Favourite;
+import com.zhandabo.overgame.model.entity.FavouriteDevelopers;
+import com.zhandabo.overgame.model.entity.FavouriteGames;
 import com.zhandabo.overgame.model.entity.Game;
 import com.zhandabo.overgame.model.entity.User;
-import com.zhandabo.overgame.repository.FavouriteRepository;
+import com.zhandabo.overgame.repository.FavouriteDevelopersRepository;
+import com.zhandabo.overgame.repository.FavouriteGamesRepository;
 import com.zhandabo.overgame.repository.GameRepository;
 import com.zhandabo.overgame.repository.UserRepository;
 import com.zhandabo.overgame.service.FavouriteService;
@@ -21,27 +25,29 @@ import java.util.List;
 public class FavouriteServiceImpl implements FavouriteService {
 
     private final GameRepository gameRepository;
-    private final FavouriteRepository favouriteRepository;
+    private final FavouriteGamesRepository favouriteGamesRepository;
+    private final FavouriteDevelopersRepository favouriteDevelopersRepository;
     private final GameViewDtoConverter gameViewDtoConverter;
     private final UserRepository userRepository;
+    private final UserViewDtoConverter userViewDtoConverter;
 
     @Override
     public void addGameToFavourite(Long gameId) {
-        Favourite favourite = new Favourite();
+        FavouriteGames favouriteGames = new FavouriteGames();
         String userId = JwtUtils.getKeycloakId();
         User user = userRepository.getByKeycloakId(userId);
-        favourite.setGame(gameRepository.getById(gameId));
-        favourite.setUser(user);
+        favouriteGames.setGame(gameRepository.getById(gameId));
+        favouriteGames.setUser(user);
 
-        favouriteRepository.save(favourite);
+        favouriteGamesRepository.save(favouriteGames);
     }
 
     @Override
     public void removeGameFromFavorite(Long gameId) {
         String userId = JwtUtils.getKeycloakId();
-        Favourite favourite = favouriteRepository.getByGameId(gameId, userId);
+        FavouriteGames favouriteGames = favouriteGamesRepository.getByGameIdAndUserId(gameId, userId);
 
-        favouriteRepository.delete(favourite);
+        favouriteGamesRepository.delete(favouriteGames);
     }
 
     @Override
@@ -54,5 +60,37 @@ public class FavouriteServiceImpl implements FavouriteService {
             gameViewDtoList.add(gameViewDtoConverter.convert(game));
         }
         return gameViewDtoList;
+    }
+
+    @Override
+    public void addDeveloperToFavourite(Long developerId) {
+
+        FavouriteDevelopers favouriteDevelopers = new FavouriteDevelopers();
+        String userId = JwtUtils.getKeycloakId();
+        User user = userRepository.getByKeycloakId(userId);
+        User developer = userRepository.getById(developerId);
+
+        favouriteDevelopers.setDeveloper(developer);
+        favouriteDevelopers.setUser(user);
+
+        favouriteDevelopersRepository.save(favouriteDevelopers);
+    }
+
+    @Override
+    public void removeDeveloperFromFavorite(Long developerId) {
+        String userId = JwtUtils.getKeycloakId();
+        FavouriteDevelopers favouriteDevelopers = favouriteDevelopersRepository.getByDeveloperIdAndUserId(developerId, userRepository.getIdByKeycloakId(userId));
+        favouriteDevelopersRepository.delete(favouriteDevelopers);
+    }
+
+    @Override
+    public List<UserViewDto> getUserFavouriteDevelopers() {
+        String userId = JwtUtils.getKeycloakId();
+        List<UserViewDto> userViewDtoList = new ArrayList<>();
+        List<User> users = userRepository.getFavouriteDevelopersByUserId(userRepository.getIdByKeycloakId(userId));
+        for (User user : users) {
+            userViewDtoList.add(userViewDtoConverter.convert(user));
+        }
+        return userViewDtoList;
     }
 }

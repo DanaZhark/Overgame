@@ -180,14 +180,14 @@
             text-align: center;
         }
 
-        .favourite-section {
+        .favouriteGames-section {
             float: right;
             padding: 1px;
             font-size: 200%;
             font-family: 'Press Start 2P', cursive;
         }
 
-        .favourite-section button {
+        .favouriteGames-section button {
             background-color: rgba(219, 47, 0, 0.9);
             border-radius: 50px;
             height: 60px;
@@ -292,11 +292,11 @@
 
     <div class="container">
         <div class="thumbnail">
-            <div class="favourite-section">
+            <div class="favouriteGames-section">
                 {% if is_favourite %}
                 <button title="Remove From Favourite" type='submit'><i class="fas fa-heart"></i></button>
                 {% else %}
-                <a href="{% url 'post:favourite' post.pk %}" style="text-decoration: none">
+                <a href="{% url 'post:favouriteGames' post.pk %}" style="text-decoration: none">
                     <button title="Add To Favourite" type='submit'><i class="far fa-heart"></i></button>
                 </a>
                 {% endif %}

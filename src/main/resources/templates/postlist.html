@@ -60,7 +60,7 @@
         font-family: 'Press Start 2P', cursive;
     }
 
-    .favourite {
+    .favouriteGames {
         float: right;
         margin-top: -50px;
         margin-right: -50px;
@@ -120,7 +120,7 @@
             {% empty %}
             <div class="screenAdd">
                 <a href="{% url 'main' %}" title="Return to Profile">
-                    <img class="favourite" src="{% static 'images/review.png' %}">
+                    <img class="favouriteGames" src="{% static 'images/review.png' %}">
                 </a>
                 <p class="emptyTag">There are not posts tagged with {{ tag }}</p>
                 </form>

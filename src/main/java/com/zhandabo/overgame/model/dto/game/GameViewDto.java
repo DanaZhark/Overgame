@@ -1,6 +1,7 @@
 package com.zhandabo.overgame.model.dto.game;
 
 import com.zhandabo.overgame.model.dto.genre.GenreShortViewDto;
+import com.zhandabo.overgame.model.enums.GameStatus;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -37,4 +38,7 @@ public class GameViewDto {
 
     @ApiModelProperty("Ссылка на игру")
     private String creatorName;
+
+    @ApiModelProperty("Статус игры")
+    private GameStatus status;
 }

@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -28,4 +29,6 @@ public class UserInfoDto {
     @ApiModelProperty("Роль пользователя")
     private RoleCode roleCode;
 
+    @ApiModelProperty("Ссылка на картинку игры")
+    private MultipartFile imgFile;
 }

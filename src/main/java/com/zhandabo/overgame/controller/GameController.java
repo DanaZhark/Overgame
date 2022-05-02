@@ -2,6 +2,7 @@ package com.zhandabo.overgame.controller;
 
 import com.zhandabo.overgame.model.dto.game.GameCreateDto;
 import com.zhandabo.overgame.model.dto.game.GameViewDto;
+import com.zhandabo.overgame.model.enums.GameStatus;
 import com.zhandabo.overgame.service.GameService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -35,15 +36,22 @@ public class GameController {
     }
 
     @GetMapping
-    @ApiOperation("Получение списка всех игр")
-    public List<GameViewDto> getAllGames() {
-        return gameService.getAllGames();
+    @ApiOperation("Получение списка всех accepted игр")
+    public List<GameViewDto> getAllGamesByStatus(@RequestParam GameStatus status) {
+        return gameService.getGamesByStatus(status);
     }
 
     @GetMapping("/{gameId}")
     @ApiOperation("Получение игры по айди")
     public GameViewDto getGameById(@PathVariable("gameId") Long gameId) {
         return gameService.getGameById(gameId);
+    }
+
+    @PutMapping("/moderator/{gameId}")
+    @ApiOperation("Получение игры по айди")
+    public void changeGameStatus(@PathVariable("gameId") Long gameId,
+                                 @RequestParam GameStatus status) {
+        gameService.changeGameStatus(gameId, status);
     }
 
     @GetMapping("/genres/{genreId}")

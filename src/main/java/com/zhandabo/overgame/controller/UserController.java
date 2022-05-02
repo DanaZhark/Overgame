@@ -7,8 +7,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,7 +22,9 @@ public class UserController {
 
     @PostMapping("/register")
     @ApiOperation("Регистрация")
-    public void register(@RequestBody UserInfoDto userInfoDto) {
+    public void register(@RequestPart UserInfoDto userInfoDto,
+                         @RequestPart(value = "imgFile") MultipartFile imgFile) {
+        userInfoDto.setImgFile(imgFile);
         userService.create(userInfoDto);
     }
 
@@ -48,5 +52,10 @@ public class UserController {
         userService.editUser(userEditDto);
     }
 
+    @GetMapping("/developers")
+    @ApiOperation("Получить информацию о текущем пользователе")
+    public List<UserViewDto> getDevelopers() {
+        return userService.getDevelopers();
+    }
 
 }

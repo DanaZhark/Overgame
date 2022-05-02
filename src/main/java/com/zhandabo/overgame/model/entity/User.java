@@ -33,13 +33,20 @@ public class User {
     @ApiModelProperty("Дата создания")
     @Column(name = "created_date")
     private Date createdDate;
+    @ApiModelProperty("URL аватарки")
+    @Column(name = "avatar_url")
+    private String avatarUrl;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private Set<UserRole> roles;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     @JsonIgnore
-    private Set<Favourite> favourites;
+    private Set<FavouriteGames> favouriteGames;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    @JsonIgnore
+    private Set<FavouriteDevelopers> favouriteDevelopers;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     @JsonIgnore

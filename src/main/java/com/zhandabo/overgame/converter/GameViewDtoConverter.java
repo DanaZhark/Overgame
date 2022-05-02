@@ -28,6 +28,7 @@ public class GameViewDtoConverter implements Converter<Game, GameViewDto> {
         target.setGameLink(source.getGameLink());
         target.setImgLink(source.getImgLink());
         target.setPrice(source.getPrice());
+        target.setStatus(source.getStatus());
         List<Genre> genres = source.getGenres().stream().map(GameGenre::getGenre).collect(Collectors.toList());
         List<GenreShortViewDto> genreShortViewDtoList = new ArrayList<>();
         for (Genre genre : genres) {
