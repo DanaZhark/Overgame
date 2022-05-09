@@ -33,6 +33,9 @@ public class GameViewDto {
     @ApiModelProperty("Цена")
     private BigDecimal price;
 
+    @ApiModelProperty("Рейтинг")
+    private BigDecimal rating;
+
     @ApiModelProperty("Список id жанров")
     private List<GenreShortViewDto> genres;
 

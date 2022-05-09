@@ -1,6 +1,7 @@
 package com.zhandabo.overgame.service.impl;
 
 import com.zhandabo.overgame.converter.GameViewDtoConverter;
+import com.zhandabo.overgame.model.dto.PageDTO;
 import com.zhandabo.overgame.model.dto.game.GameCreateDto;
 import com.zhandabo.overgame.model.dto.game.GameViewDto;
 import com.zhandabo.overgame.model.entity.Game;
@@ -14,15 +15,19 @@ import com.zhandabo.overgame.repository.UserRepository;
 import com.zhandabo.overgame.service.GameService;
 import com.zhandabo.overgame.util.ImgFileUtils;
 import com.zhandabo.overgame.util.JwtUtils;
+import com.zhandabo.overgame.util.PageConverterUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -58,32 +63,6 @@ public class GameServiceImpl implements GameService {
         gameRepository.save(game);
 
         createGameGenre(dto.getGenreIds(), game.getId());
-    }
-
-    private String saveFile(MultipartFile file) throws IOException {
-        InputStream inputStream = null;
-        OutputStream outputStream = null;
-        String fileName = file.getOriginalFilename();
-        File newFile = new File(uploadPath + fileName);
-
-        try {
-            inputStream = file.getInputStream();
-
-            if (!newFile.exists()) {
-                newFile.createNewFile();
-            }
-            outputStream = new FileOutputStream(newFile);
-            int read = 0;
-            byte[] bytes = new byte[1024];
-
-            while ((read = inputStream.read(bytes)) != -1) {
-                outputStream.write(bytes, 0, read);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return newFile.getAbsolutePath();
     }
 
     @Override
@@ -128,14 +107,39 @@ public class GameServiceImpl implements GameService {
 
     @Override
     @Transactional
-    public List<GameViewDto> getGamesByStatus(GameStatus status) {
+    public PageDTO<GameViewDto> getGamesByStatus(GameStatus status, Pageable pageable) {
         List<GameViewDto> gameViewDtoList = new ArrayList<>();
-        List<Game> games = gameRepository.getAllByStatus(status);
+        Page<Game> games = gameRepository.getAllByStatus(status, pageable);
+
+        for (Game game : games.getContent()) {
+            gameViewDtoList.add(gameViewDtoConverter.convert(game));
+        }
+        return PageConverterUtils.convert(games, gameViewDtoList);
+    }
+
+    @Override
+    public PageDTO<GameViewDto> getAllAcceptedGames(String gameName, List<Long> genreIds, Pageable pageable) {
+        List<GameViewDto> gameViewDtoList = new ArrayList<>();
+
+        Specification<Game> statusSpec = (root, qb, builder) ->
+                root.get("status").in(GameStatus.ACCEPTED);
+        if (!genreIds.isEmpty()) {
+            Specification<Game> genreSpec = (root, qb, builder) ->
+                    root.get("genres").in(genreIds);
+            statusSpec = statusSpec.and(genreSpec);
+        }
+        if (Objects.nonNull(gameName)) {
+            Specification<Game> nameSpec = (root, qb, builder) -> builder.like(builder.lower(root.get("name").get("ru")), "%" + gameName.toLowerCase() + "%");
+            nameSpec.or((root, qb, builder) -> builder.like(builder.lower(root.get("name").get("en")), "%" + gameName.toLowerCase() + "%"));
+            statusSpec = statusSpec.and(nameSpec);
+        }
+        Page<Game> games = gameRepository.findAll(statusSpec, pageable);
 
         for (Game game : games) {
             gameViewDtoList.add(gameViewDtoConverter.convert(game));
         }
-        return gameViewDtoList;
+
+        return PageConverterUtils.convert(games, gameViewDtoList);
     }
 
     @Override

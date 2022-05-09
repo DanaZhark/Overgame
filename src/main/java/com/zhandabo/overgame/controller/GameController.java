@@ -1,5 +1,6 @@
 package com.zhandabo.overgame.controller;
 
+import com.zhandabo.overgame.model.dto.PageDTO;
 import com.zhandabo.overgame.model.dto.game.GameCreateDto;
 import com.zhandabo.overgame.model.dto.game.GameViewDto;
 import com.zhandabo.overgame.model.enums.GameStatus;
@@ -7,6 +8,9 @@ import com.zhandabo.overgame.service.GameService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -37,8 +41,18 @@ public class GameController {
 
     @GetMapping
     @ApiOperation("Получение списка всех accepted игр")
-    public List<GameViewDto> getAllGamesByStatus(@RequestParam GameStatus status) {
-        return gameService.getGamesByStatus(status);
+    public PageDTO<GameViewDto> getAllGamesByStatus(@RequestParam GameStatus status,
+                                                    @PageableDefault(sort = "dateCreated", direction = Sort.Direction.DESC) Pageable pageable) {
+        return gameService.getGamesByStatus(status, pageable);
+    }
+
+    @GetMapping
+    @ApiOperation("Получение списка всех accepted игр")
+    public PageDTO<GameViewDto> getAllGamesByStatus(
+            @RequestParam String name,
+            @RequestParam List<Long> genreIds,
+            @PageableDefault(sort = "dateCreated", direction = Sort.Direction.DESC) Pageable pageable) {
+        return gameService.getAllAcceptedGames(name, genreIds, pageable);
     }
 
     @GetMapping("/{gameId}")
