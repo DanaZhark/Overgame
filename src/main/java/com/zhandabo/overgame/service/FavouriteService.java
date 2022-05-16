@@ -1,7 +1,7 @@
 package com.zhandabo.overgame.service;
 
-import com.zhandabo.overgame.model.dto.UserViewDto;
 import com.zhandabo.overgame.model.dto.game.GameViewDto;
+import com.zhandabo.overgame.model.dto.user.UserViewDto;
 
 import java.util.List;
 

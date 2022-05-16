@@ -7,8 +7,14 @@ import com.zhandabo.overgame.converter.UserViewDtoConverter;
 import com.zhandabo.overgame.exception.OvergameException;
 import com.zhandabo.overgame.model.constant.ErrorCodeConstant;
 import com.zhandabo.overgame.model.dto.*;
+import com.zhandabo.overgame.model.dto.user.UserEditDto;
+import com.zhandabo.overgame.model.dto.user.UserInfoDto;
+import com.zhandabo.overgame.model.dto.user.UserViewDto;
+import com.zhandabo.overgame.model.entity.Role;
 import com.zhandabo.overgame.model.entity.User;
+import com.zhandabo.overgame.model.entity.UserRole;
 import com.zhandabo.overgame.model.enums.RoleCode;
+import com.zhandabo.overgame.repository.RoleRepository;
 import com.zhandabo.overgame.repository.UserRepository;
 import com.zhandabo.overgame.service.*;
 import com.zhandabo.overgame.util.JwtUtils;
@@ -23,6 +29,7 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Slf4j
 @Service
@@ -35,6 +42,7 @@ public class UserServiceImpl implements UserService {
     private final MailService mailService;
     private final RoleService roleService;
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
     private final UserConverter userConverter;
     private final UserViewDtoConverter userViewDtoConverter;
     private final RoleConverter roleConverter;
@@ -69,8 +77,14 @@ public class UserServiceImpl implements UserService {
             String password = credentialService.generatePassword();
             keycloakId = keycloakService.createUserAndGetKeycloakId(userInfoDto, password);
             Objects.requireNonNull(newUser).setKeycloakId(keycloakId);
-            userRepository.save(newUser);
+            Role role = roleRepository.getByCode(userInfoDto.getRoleCode());
+            newUser = userRepository.save(newUser);
+            UserRole userRole = new UserRole();
+            userRole.setUser(newUser);
+            userRole.setRole(role);
+            newUser.setRoles((Set<UserRole>) userRole);
             mailService.sendRegistrationMessage(userInfoDto, password);
+
         } catch (Exception e) {
             log.error("registerResponse: ", e);
             if (Objects.nonNull(keycloakId)) {

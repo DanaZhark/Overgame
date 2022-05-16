@@ -1,6 +1,7 @@
 package com.zhandabo.overgame.model.entity;
 
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
+import com.zhandabo.overgame.model.enums.BannerCode;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -25,10 +26,6 @@ public class Banner {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ApiModelProperty("Код")
-    @Column(name = "code")
-    private String code;
-
     @ApiModelProperty("Название")
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb", name = "name")
@@ -43,7 +40,9 @@ public class Banner {
     @Column(name = "img_link")
     private String imgLink;
 
+    private BannerCode code;
+
     @ApiModelProperty("Тип банера")
-    @Column(name = "banner_type_id")
-    private Long bannerTypeId;
+    @Column(name = "is_active")
+    private boolean isActive;
 }

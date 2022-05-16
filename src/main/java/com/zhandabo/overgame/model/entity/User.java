@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
@@ -33,6 +34,8 @@ public class User {
     @ApiModelProperty("Дата создания")
     @Column(name = "created_date")
     private Date createdDate;
+    @Column(name = "birthday_date")
+    private LocalDate dateOfBirth;
     @ApiModelProperty("URL аватарки")
     @Column(name = "avatar_url")
     private String avatarUrl;
@@ -47,8 +50,4 @@ public class User {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     @JsonIgnore
     private Set<FavouriteDevelopers> favouriteDevelopers;
-
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
-    @JsonIgnore
-    private Set<AchievementUser> achievements;
 }

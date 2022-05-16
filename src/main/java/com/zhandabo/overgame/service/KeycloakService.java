@@ -3,7 +3,7 @@ package com.zhandabo.overgame.service;
 import com.zhandabo.overgame.model.dto.KeycloakAuthRequestDto;
 import com.zhandabo.overgame.model.dto.KeycloakAuthResponseDto;
 import com.zhandabo.overgame.model.dto.KeycloakAuthWithRefreshTokenDto;
-import com.zhandabo.overgame.model.dto.UserInfoDto;
+import com.zhandabo.overgame.model.dto.user.UserInfoDto;
 
 public interface KeycloakService {
     String createUserAndGetKeycloakId(UserInfoDto adminRequestDto, String password);

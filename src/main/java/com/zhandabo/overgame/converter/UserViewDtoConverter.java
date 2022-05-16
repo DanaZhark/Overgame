@@ -1,6 +1,6 @@
 package com.zhandabo.overgame.converter;
 
-import com.zhandabo.overgame.model.dto.UserViewDto;
+import com.zhandabo.overgame.model.dto.user.UserViewDto;
 import com.zhandabo.overgame.model.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.convert.converter.Converter;

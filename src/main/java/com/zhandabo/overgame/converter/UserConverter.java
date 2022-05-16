@@ -1,6 +1,6 @@
 package com.zhandabo.overgame.converter;
 
-import com.zhandabo.overgame.model.dto.UserInfoDto;
+import com.zhandabo.overgame.model.dto.user.UserInfoDto;
 import com.zhandabo.overgame.model.entity.User;
 import com.zhandabo.overgame.util.ImgFileUtils;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +22,7 @@ public class UserConverter implements Converter<UserInfoDto, User> {
         target.setUsername(source.getUsername());
         target.setEmail(source.getEmail());
         target.setCreatedDate(new Date());
+        target.setDateOfBirth(source.getDateOfBirth());
 
         try {
             ImgFileUtils.saveFile(source.getImgFile(), uploadPath);

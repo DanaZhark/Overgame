@@ -1,4 +1,4 @@
-package com.zhandabo.overgame.model.dto;
+package com.zhandabo.overgame.model.dto.user;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

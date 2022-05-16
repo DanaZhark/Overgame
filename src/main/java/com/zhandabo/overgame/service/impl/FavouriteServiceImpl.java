@@ -2,8 +2,8 @@ package com.zhandabo.overgame.service.impl;
 
 import com.zhandabo.overgame.converter.GameViewDtoConverter;
 import com.zhandabo.overgame.converter.UserViewDtoConverter;
-import com.zhandabo.overgame.model.dto.UserViewDto;
 import com.zhandabo.overgame.model.dto.game.GameViewDto;
+import com.zhandabo.overgame.model.dto.user.UserViewDto;
 import com.zhandabo.overgame.model.entity.FavouriteDevelopers;
 import com.zhandabo.overgame.model.entity.FavouriteGames;
 import com.zhandabo.overgame.model.entity.Game;

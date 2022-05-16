@@ -3,7 +3,7 @@ package com.zhandabo.overgame.service;
 import com.zhandabo.overgame.config.MailConfig;
 import com.zhandabo.overgame.exception.OvergameException;
 import com.zhandabo.overgame.model.constant.ErrorCodeConstant;
-import com.zhandabo.overgame.model.dto.UserInfoDto;
+import com.zhandabo.overgame.model.dto.user.UserInfoDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

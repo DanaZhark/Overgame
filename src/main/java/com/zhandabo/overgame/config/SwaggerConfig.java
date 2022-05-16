@@ -20,7 +20,7 @@ public class SwaggerConfig {
     public Docket produceApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("kz.zhandabo.overgame"))
+                .apis(RequestHandlerSelectors.basePackage("com.zhandabo.overgame"))
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(metaData());
@@ -28,11 +28,11 @@ public class SwaggerConfig {
 
     private ApiInfo metaData() {
         return new ApiInfo(
-                "Otvet Core",
+                "Overgame",
                 "Overgame monolith service auto generated documentation",
                 "1.0",
                 "Terms of service",
-                new Contact("Overgame dev team", "overgame.kz", ""), "", "",
+                new Contact("Overgame dev team", "overgame.kz", "zhandabo@gmail.com"), "", "",
                 Collections.emptyList());
     }
 }

@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/v1/rating")
-@Api(value = "Методы для работы с играми")
+@Api(value = "Методы для работы с рейтингом")
 public class RatingController {
 
     private final RatingService ratingService;

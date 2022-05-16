@@ -1,5 +1,6 @@
-package com.zhandabo.overgame.model.dto;
+package com.zhandabo.overgame.model.dto.user;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sun.istack.NotNull;
 import com.zhandabo.overgame.model.enums.RoleCode;
 import io.swagger.annotations.ApiModel;
@@ -10,25 +11,26 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDate;
 
 @Getter
 @Setter
 @ApiModel("Данные юзера")
 public class UserInfoDto {
 
+    @ApiModelProperty("Дата рождения")
+    @JsonFormat(pattern = "dd.MM.yyyy")
+    LocalDate dateOfBirth;
     @NotBlank
     @ApiModelProperty("Логин пользователя")
     private String username;
-
     @NotBlank
     @Email
     @ApiModelProperty("Почта пользователя")
     private String email;
-
     @NotNull
     @ApiModelProperty("Роль пользователя")
     private RoleCode roleCode;
-
     @ApiModelProperty("Ссылка на картинку игры")
     private MultipartFile imgFile;
 }

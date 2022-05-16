@@ -46,8 +46,8 @@ public class GameController {
         return gameService.getGamesByStatus(status, pageable);
     }
 
-    @GetMapping
-    @ApiOperation("Получение списка всех accepted игр")
+    @GetMapping("/search")
+    @ApiOperation("Поиск игр с фильтрами")
     public PageDTO<GameViewDto> getAllGamesByStatus(
             @RequestParam String name,
             @RequestParam List<Long> genreIds,
@@ -62,7 +62,7 @@ public class GameController {
     }
 
     @PutMapping("/moderator/{gameId}")
-    @ApiOperation("Получение игры по айди")
+    @ApiOperation("Получение игры по статусу")
     public void changeGameStatus(@PathVariable("gameId") Long gameId,
                                  @RequestParam GameStatus status) {
         gameService.changeGameStatus(gameId, status);
