@@ -1,6 +1,7 @@
 package com.zhandabo.overgame.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.zhandabo.overgame.model.enums.RoleCode;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -39,9 +40,8 @@ public class User {
     @ApiModelProperty("URL аватарки")
     @Column(name = "avatar_url")
     private String avatarUrl;
-
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
-    private Set<UserRole> roles;
+    @Column(name = "role_code")
+    private RoleCode role;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     @JsonIgnore

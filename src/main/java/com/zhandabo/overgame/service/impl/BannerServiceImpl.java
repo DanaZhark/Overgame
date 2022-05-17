@@ -19,7 +19,7 @@ public class BannerServiceImpl implements BannerService {
 
     private final BannerRepository bannerRepository;
 
-    private final String uploadPath = "/home/danazharkimbayeva/Documents/IITU/overgame/src/main/resources/static/images/banners/";
+    private final String uploadPath = "/overgame/src/main/resources/static/images/banners/";
 
     @Override
     public void create(BannerCreateDto dto) {

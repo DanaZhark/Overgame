@@ -40,7 +40,7 @@ public class ResourceServerConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/v2/api-docs",
+        web.ignoring().antMatchers(
                 "/configuration/ui",
                 "/swagger-resources/**",
                 "/overgame/**",

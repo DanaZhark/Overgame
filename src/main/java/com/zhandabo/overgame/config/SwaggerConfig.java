@@ -32,7 +32,7 @@ public class SwaggerConfig {
                 "Overgame monolith service auto generated documentation",
                 "1.0",
                 "Terms of service",
-                new Contact("Overgame dev team", "overgame.kz", "zhandabo@gmail.com"), "", "",
+                new Contact("Overgame dev team", "overgame.kz", "admin@overgame.kz"), "", "",
                 Collections.emptyList());
     }
 }

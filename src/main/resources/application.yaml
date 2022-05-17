@@ -15,6 +15,7 @@ spring:
         order_inserts: true
         jdbc:
           batch_size: 50
+    show-sql: true
   security:
     oauth2:
       resourceserver:

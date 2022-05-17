@@ -14,7 +14,7 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class UserConverter implements Converter<UserInfoDto, User> {
 
-    private final String uploadPath = "/home/danazharkimbayeva/Documents/IITU/overgame/src/main/resources/static/images/ava/";
+    private final String uploadPath = "/overgame/src/main/resources/static/images/ava/";
 
     @Override
     public User convert(UserInfoDto source) {
@@ -22,6 +22,7 @@ public class UserConverter implements Converter<UserInfoDto, User> {
         target.setUsername(source.getUsername());
         target.setEmail(source.getEmail());
         target.setCreatedDate(new Date());
+        target.setRole(source.getRoleCode());
         target.setDateOfBirth(source.getDateOfBirth());
 
         try {
@@ -30,7 +31,7 @@ public class UserConverter implements Converter<UserInfoDto, User> {
             e.printStackTrace();
         }
 
-        target.setAvatarUrl("/static/images/games/" + source.getImgFile().getOriginalFilename());
+        target.setAvatarUrl("/static/images/ava/" + source.getImgFile().getOriginalFilename());
         return target;
     }
 }

@@ -5,6 +5,8 @@ create table if not exists users
     username      varchar(200)             not null,
     email         varchar(200)             not null,
     birthday_date timestamp,
+    avatar_url    varchar,
+    role_code     varchar(50),
     created_date  timestamp with time zone not null default now()
 );
 

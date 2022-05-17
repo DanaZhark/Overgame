@@ -39,7 +39,7 @@ public class GameServiceImpl implements GameService {
     private final UserRepository userRepository;
     private final GameViewDtoConverter gameViewDtoConverter;
 
-    private final String uploadPath = "/home/danazharkimbayeva/Documents/IITU/overgame/src/main/resources/static/images/games/";
+    private final String uploadPath = "/overgame/src/main/resources/static/images/games/";
 
     @Override
     @Transactional
@@ -59,7 +59,9 @@ public class GameServiceImpl implements GameService {
         game.setDateCreated(new Date());
         game.setCreatorId(userRepository.getIdByKeycloakId(JwtUtils.getKeycloakId()));
         game.setStatus(GameStatus.PENDING_MODERATOR);
-
+        String userKeycloakId = JwtUtils.getKeycloakId();
+        Long userId = userRepository.getIdByKeycloakId(userKeycloakId);
+        game.setCreatorId(userId);
         gameRepository.save(game);
 
         createGameGenre(dto.getGenreIds(), game.getId());
