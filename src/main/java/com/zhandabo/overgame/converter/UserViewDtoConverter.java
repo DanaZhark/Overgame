@@ -16,6 +16,6 @@ public class UserViewDtoConverter implements Converter<User, UserViewDto> {
         target.setId(source.getId());
         target.setUsername(source.getUsername());
         target.setImg(source.getAvatarUrl());
-        return null;
+        return target;
     }
 }

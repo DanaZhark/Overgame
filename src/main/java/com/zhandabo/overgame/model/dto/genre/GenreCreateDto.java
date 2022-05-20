@@ -21,11 +21,11 @@ public class GenreCreateDto {
     private String code;
 
     @NotBlank
-    @ApiModelProperty("Название жанра")
+    @ApiModelProperty("Название жанра на англ и рус")
     private Map<String, String> name;
 
     @NotNull
-    @ApiModelProperty("Описание жанра")
+    @ApiModelProperty("Описание жанра на англ и рус")
     private Map<String, String> description;
 
     @ApiModelProperty("Ссылка на картинку жанра")

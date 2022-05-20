@@ -66,3 +66,15 @@ keycloak:
   client-secret: ${CLIENT_SECRET:0rf43YiiKtZ8uRTb7v4E9WWfu4bjmWOQ}
   username: ${REALM_USERNAME:overgame_admin}
   password: ${REALM_USER_PASSWORD:admin}
+
+amazon:
+  key:
+    access: 'AKIAZLRPS7UGH2MW7PJA'
+    secret: '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'
+  s3:
+    bucket:
+      name: 'overgame'
+      url: 'https://overgame.s3.us-west-2.amazonaws.com/'
+
+filename:
+  length: 8

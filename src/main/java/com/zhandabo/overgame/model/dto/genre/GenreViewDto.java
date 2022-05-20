@@ -7,19 +7,21 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@ApiModel("Данные игры для создания")
+@ApiModel("Данные жанра для отображения")
 public class GenreViewDto {
 
-    @ApiModelProperty("ID игры")
+    @ApiModelProperty("ID жанра")
     private Long id;
 
+    @ApiModelProperty("Код жанра")
     private String code;
 
-    @ApiModelProperty("Название игры")
+    @ApiModelProperty("Название жанра")
     private String name;
 
-    @ApiModelProperty("Описание игры")
+    @ApiModelProperty("Описание жанра")
     private String description;
 
+    @ApiModelProperty("Изображение жанра")
     private String imgLink;
 }

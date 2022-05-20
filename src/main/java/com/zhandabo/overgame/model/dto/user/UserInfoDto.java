@@ -31,6 +31,6 @@ public class UserInfoDto {
     @NotNull
     @ApiModelProperty("Роль пользователя")
     private RoleCode roleCode;
-    @ApiModelProperty("Ссылка на картинку игры")
+    @ApiModelProperty("Ссылка на аватарку пользователя")
     private MultipartFile imgFile;
 }

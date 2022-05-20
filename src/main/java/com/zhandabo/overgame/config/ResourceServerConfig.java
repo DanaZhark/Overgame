@@ -47,7 +47,10 @@ public class ResourceServerConfig extends WebSecurityConfigurerAdapter {
                 "/v1/users/login",
                 "/v1/users/register",
                 "/v1/genres/**",
-                "/v1/games/**",
+                "/v1/games/{gameId}",
+                "/v1/games/by-status",
+                "/v1/games/search",
+                "/v1/games/genres/{genreId}",
                 "/configuration/security",
                 "/swagger-ui.html",
                 "/webjars/**");

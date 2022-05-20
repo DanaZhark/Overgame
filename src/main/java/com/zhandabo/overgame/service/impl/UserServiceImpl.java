@@ -65,7 +65,6 @@ public class UserServiceImpl implements UserService {
 
         User newUser = userConverter.convert(userInfoDto);
 
-
         String keycloakId = null;
 
         try {

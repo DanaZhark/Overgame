@@ -40,6 +40,7 @@ public class Banner {
     @Column(name = "img_link")
     private String imgLink;
 
+    @Enumerated(EnumType.STRING)
     private BannerCode code;
 
     @ApiModelProperty("Тип банера")

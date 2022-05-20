@@ -22,7 +22,7 @@ public class BannerController {
     private final BannerService bannerService;
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @ApiOperation("Создание игры")
+    @ApiOperation("Создание банера")
     public void create(@RequestPart BannerCreateDto bannerCreateDto,
                        @RequestPart(value = "imgFile") MultipartFile imgFile) {
         bannerCreateDto.setImgFile(imgFile);
@@ -30,13 +30,13 @@ public class BannerController {
     }
 
     @PutMapping("/{bannerId}")
-    @ApiOperation("Редактирование")
+    @ApiOperation("Редактирование банера")
     public void edit(@RequestBody BannerCreateDto bannerCreateDto, @PathVariable Long bannerId) {
         bannerService.edit(bannerCreateDto, bannerId);
     }
 
     @DeleteMapping("/{bannerId}")
-    @ApiOperation("Удаление")
+    @ApiOperation("Удаление банера")
     public void delete(@PathVariable Long bannerId) {
         bannerService.delete(bannerId);
     }

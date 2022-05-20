@@ -20,20 +20,15 @@ public class GenreController {
     private final GenreService genreService;
 
     @PostMapping
-    @ApiOperation("Создание")
+    @ApiOperation("Создание жанра")
     public void create(@RequestBody GenreCreateDto genre) {
         genreService.create(genre);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     @ApiOperation("Получение всех жанров")
     public List<GenreViewDto> getAllGenres() {
         return genreService.getAll();
     }
 
-    @GetMapping("/games/{gameId}")
-    @ApiOperation("Получение жанров игры по айди игры")
-    public List<GenreViewDto> getAllGenres(@PathVariable Long gameId) {
-        return genreService.getGenresByGameId(gameId);
-    }
 }

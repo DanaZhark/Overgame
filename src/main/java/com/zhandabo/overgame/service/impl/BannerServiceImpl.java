@@ -6,11 +6,10 @@ import com.zhandabo.overgame.model.entity.Banner;
 import com.zhandabo.overgame.model.enums.BannerCode;
 import com.zhandabo.overgame.repository.BannerRepository;
 import com.zhandabo.overgame.service.BannerService;
-import com.zhandabo.overgame.util.ImgFileUtils;
+import com.zhandabo.overgame.service.StorageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -18,21 +17,18 @@ import java.util.List;
 public class BannerServiceImpl implements BannerService {
 
     private final BannerRepository bannerRepository;
+    private final StorageService storageService;
 
-    private final String uploadPath = "/overgame/src/main/resources/static/images/banners/";
+    private final String uploadPath = "https://overgame.s3.us-west-2.amazonaws.com/banners/";
 
     @Override
     public void create(BannerCreateDto dto) {
-        try {
-            ImgFileUtils.saveFile(dto.getImgFile(), uploadPath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        storageService.uploadFile(dto.getImgFile(), "banners");
 
         Banner banner = new Banner();
         banner.setName(dto.getName());
         banner.setDescription(dto.getDescription());
-        banner.setImgLink("/static/images/banners/" + dto.getImgFile().getOriginalFilename());
+        banner.setImgLink(uploadPath + dto.getImgFile().getOriginalFilename());
         banner.setCode(dto.getCode());
 
         bannerRepository.save(banner);
@@ -40,16 +36,12 @@ public class BannerServiceImpl implements BannerService {
 
     @Override
     public void edit(BannerCreateDto dto, Long bannerId) {
-        try {
-            ImgFileUtils.saveFile(dto.getImgFile(), uploadPath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        storageService.uploadFile(dto.getImgFile(), "banners");
 
         Banner banner = bannerRepository.getById(bannerId);
         banner.setName(dto.getName());
         banner.setDescription(dto.getDescription());
-        banner.setImgLink("/static/images/banners/" + dto.getImgFile().getOriginalFilename());
+        banner.setImgLink(uploadPath + dto.getImgFile().getOriginalFilename());
         banner.setCode(dto.getCode());
 
         bannerRepository.save(banner);

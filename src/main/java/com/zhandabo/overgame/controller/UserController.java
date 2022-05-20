@@ -26,11 +26,11 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/register")
-    @ApiOperation("Регистрация")
-    public void register(@RequestPart UserInfoDto userInfoDto,
+    @ApiOperation("Регистрация пользователя")
+    public void register(@RequestPart UserInfoDto user,
                          @RequestPart(value = "imgFile") MultipartFile imgFile) {
-        userInfoDto.setImgFile(imgFile);
-        userService.create(userInfoDto);
+        user.setImgFile(imgFile);
+        userService.create(user);
     }
 
     @PostMapping("/login")
@@ -39,16 +39,16 @@ public class UserController {
         return userService.login(keycloakAuthRequestDto);
     }
 
-    @GetMapping("/me")
-    @ApiOperation("Получить информацию о текущем пользователе")
-    public User getMe() {
-        return userService.getCurrentUser();
-    }
-
     @PostMapping("/refresh")
     @ApiOperation("Обновить токен доступа")
     public KeycloakAuthResponseDto refresh(@Valid @RequestBody KeycloakAuthWithRefreshTokenDto keycloakAuthWithRefreshTokenDto) {
         return userService.refresh(keycloakAuthWithRefreshTokenDto);
+    }
+
+    @GetMapping("/me")
+    @ApiOperation("Получить информацию о текущем пользователе")
+    public User getMe() {
+        return userService.getCurrentUser();
     }
 
     @PutMapping("/edit")

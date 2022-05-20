@@ -13,7 +13,8 @@ import com.zhandabo.overgame.repository.GameRepository;
 import com.zhandabo.overgame.repository.GenreRepository;
 import com.zhandabo.overgame.repository.UserRepository;
 import com.zhandabo.overgame.service.GameService;
-import com.zhandabo.overgame.util.ImgFileUtils;
+import com.zhandabo.overgame.service.StorageService;
+import com.zhandabo.overgame.service.UserService;
 import com.zhandabo.overgame.util.JwtUtils;
 import com.zhandabo.overgame.util.PageConverterUtils;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -38,26 +38,24 @@ public class GameServiceImpl implements GameService {
     private final GenreRepository genreRepository;
     private final UserRepository userRepository;
     private final GameViewDtoConverter gameViewDtoConverter;
+    private final StorageService storageService;
+    private final UserService userService;
 
-    private final String uploadPath = "/overgame/src/main/resources/static/images/games/";
+    private final String uploadPath = "https://overgame.s3.us-west-2.amazonaws.com/games/";
 
     @Override
     @Transactional
     public void create(GameCreateDto dto) {
-        try {
-            ImgFileUtils.saveFile(dto.getImgFile(), uploadPath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        storageService.uploadFile(dto.getImgFile(), "games");
 
         Game game = new Game();
         game.setName(dto.getName());
         game.setDescription(dto.getDescription());
         game.setGameLink(dto.getGameLink());
-        game.setImgLink("/static/images/games/" + dto.getImgFile().getOriginalFilename());
+        game.setImgLink(uploadPath + dto.getImgFile().getOriginalFilename());
         game.setPrice(dto.getPrice());
         game.setDateCreated(new Date());
-        game.setCreatorId(userRepository.getIdByKeycloakId(JwtUtils.getKeycloakId()));
+        game.setCreatorId(userService.getCurrentUser().getId());
         game.setStatus(GameStatus.PENDING_MODERATOR);
         String userKeycloakId = JwtUtils.getKeycloakId();
         Long userId = userRepository.getIdByKeycloakId(userKeycloakId);
@@ -70,20 +68,16 @@ public class GameServiceImpl implements GameService {
     @Override
     @Transactional
     public void edit(GameCreateDto dto, Long gameId) {
-        try {
-            ImgFileUtils.saveFile(dto.getImgFile(), uploadPath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        storageService.uploadFile(dto.getImgFile(), "games");
 
         Game game = gameRepository.getById(gameId);
         game.setName(dto.getName());
         game.setDescription(dto.getDescription());
         game.setGameLink(dto.getGameLink());
-        game.setImgLink("/static/images/games/" + dto.getImgFile().getOriginalFilename());
+        game.setImgLink(uploadPath + dto.getImgFile().getOriginalFilename());
         game.setPrice(dto.getPrice());
-        game.setDateCreated(new Date());
-        game.setCreatorId(userRepository.getIdByKeycloakId(JwtUtils.getKeycloakId()));
+        game.setDateUpdated(new Date());
 
         gameRepository.save(game);
 
@@ -146,10 +140,9 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public void changeGameStatus(Long gameId, GameStatus status) {
-        String moderatorId = JwtUtils.getKeycloakId();
         Game game = gameRepository.getGameById(gameId);
         game.setStatus(status);
-        game.setModeratorId(userRepository.getIdByKeycloakId(moderatorId));
+        game.setModeratorId(userService.getCurrentUser().getId());
         gameRepository.save(game);
     }
 

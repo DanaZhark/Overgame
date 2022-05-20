@@ -1,6 +1,7 @@
 package com.zhandabo.overgame.model.dto.game;
 
 import com.zhandabo.overgame.model.dto.genre.GenreShortViewDto;
+import com.zhandabo.overgame.model.dto.user.UserViewDto;
 import com.zhandabo.overgame.model.enums.GameStatus;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@ApiModel("Данные игры для создания")
+@ApiModel("Данные игры для отображения")
 public class GameViewDto {
 
     @ApiModelProperty("ID игры")
@@ -27,7 +28,7 @@ public class GameViewDto {
     @ApiModelProperty("Ссылка на игру")
     private String gameLink;
 
-    @ApiModelProperty("Ссылка на игру")
+    @ApiModelProperty("Ссылка на изображение игры")
     private String imgLink;
 
     @ApiModelProperty("Цена")
@@ -39,8 +40,11 @@ public class GameViewDto {
     @ApiModelProperty("Список id жанров")
     private List<GenreShortViewDto> genres;
 
-    @ApiModelProperty("Ссылка на игру")
-    private String creatorName;
+    @ApiModelProperty("Создатель игры")
+    private UserViewDto creator;
+
+    @ApiModelProperty("Модератор, принявший игру")
+    private UserViewDto moderator;
 
     @ApiModelProperty("Статус игры")
     private GameStatus status;

@@ -63,6 +63,10 @@ public class Game {
     @Column(name = "date_created")
     private Date dateCreated;
 
+    @ApiModelProperty("Дата создания")
+    @Column(name = "date_updated")
+    private Date dateUpdated;
+
     @ApiModelProperty("ID создателя")
     @Column(name = "creator_id")
     private Long creatorId;
@@ -75,5 +79,6 @@ public class Game {
     @JsonIgnore
     Set<GameGenre> genres;
 
+    @Enumerated(EnumType.STRING)
     private GameStatus status;
 }

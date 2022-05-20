@@ -17,17 +17,17 @@ import java.util.Map;
 public class BannerCreateDto {
 
     @NotBlank
-    @ApiModelProperty("Название игры")
+    @ApiModelProperty("Название банера на англ и рус")
     private Map<String, String> name;
 
     @NotNull
-    @ApiModelProperty("Описание игры")
+    @ApiModelProperty("Описание банера на англ и рус")
     private Map<String, String> description;
 
-    @ApiModelProperty("Ссылка на картинку игры")
+    @ApiModelProperty("Ссылка на картинку банера")
     private MultipartFile imgFile;
 
     @NotNull
-    @ApiModelProperty("Список id жанров")
+    @ApiModelProperty("Код банера")
     private BannerCode code;
 }

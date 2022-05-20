@@ -13,15 +13,15 @@ public class BannerViewDto {
 
     private Long id;
 
-    @ApiModelProperty("Название игры")
+    @ApiModelProperty("Название банера")
     private String name;
 
-    @ApiModelProperty("Описание игры")
+    @ApiModelProperty("Описание банера")
     private String description;
 
-    @ApiModelProperty("Ссылка на картинку игры")
+    @ApiModelProperty("Ссылка на картинку банера")
     private String imgUrl;
 
-    @ApiModelProperty("Список id жанров")
+    @ApiModelProperty("Код банера")
     private BannerCode code;
 }

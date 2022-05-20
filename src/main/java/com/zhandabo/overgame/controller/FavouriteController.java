@@ -37,7 +37,7 @@ public class FavouriteController {
     }
 
     @PostMapping("/developer/{developerId}")
-    @ApiOperation("Добавление разработчик в список любимых разработчиков")
+    @ApiOperation("Добавление разработчика в список любимых разработчиков")
     public void addDeveloperToFavorite(@PathVariable("developerId") Long developerId) {
         favouriteService.addDeveloperToFavourite(developerId);
     }

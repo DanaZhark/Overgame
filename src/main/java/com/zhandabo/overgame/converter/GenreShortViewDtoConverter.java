@@ -12,6 +12,7 @@ public class GenreShortViewDtoConverter implements Converter<Genre, GenreShortVi
         GenreShortViewDto target = new GenreShortViewDto();
         target.setId(source.getId());
         target.setName(source.getName().get("en"));
+        target.setCode(source.getCode());
         return target;
     }
 }

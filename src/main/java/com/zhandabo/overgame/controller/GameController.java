@@ -33,14 +33,14 @@ public class GameController {
         gameService.create(game);
     }
 
-    @PutMapping("/{gameId}")
-    @ApiOperation("Редактирование")
-    public void create(@RequestBody GameCreateDto gameCreateDto, @PathVariable Long gameId) {
-        gameService.edit(gameCreateDto, gameId);
+    @PutMapping("/edit/{gameId}")
+    @ApiOperation("Редактирование игры")
+    public void create(@RequestBody GameCreateDto game, @PathVariable Long gameId) {
+        gameService.edit(game, gameId);
     }
 
-    @GetMapping
-    @ApiOperation("Получение списка всех accepted игр")
+    @GetMapping("/by-status")
+    @ApiOperation("Получение пагинированного списка всех игр по статусу")
     public PageDTO<GameViewDto> getAllGamesByStatus(@RequestParam GameStatus status,
                                                     @PageableDefault(sort = "dateCreated", direction = Sort.Direction.DESC) Pageable pageable) {
         return gameService.getGamesByStatus(status, pageable);
@@ -62,7 +62,7 @@ public class GameController {
     }
 
     @PutMapping("/moderator/{gameId}")
-    @ApiOperation("Получение игры по статусу")
+    @ApiOperation("Изменение статуса игры от лица модератора")
     public void changeGameStatus(@PathVariable("gameId") Long gameId,
                                  @RequestParam GameStatus status) {
         gameService.changeGameStatus(gameId, status);

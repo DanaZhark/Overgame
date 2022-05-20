@@ -18,18 +18,18 @@ import java.util.Map;
 public class GameCreateDto {
 
     @NotBlank
-    @ApiModelProperty("Название игры")
+    @ApiModelProperty("Название игры на англ и рус")
     private Map<String, String> name;
 
     @NotNull
-    @ApiModelProperty("Описание игры")
+    @ApiModelProperty("Описание игры на англ и рус")
     private Map<String, String> description;
 
     @NotBlank
     @ApiModelProperty("Ссылка на игру")
     private String gameLink;
 
-    @ApiModelProperty("Ссылка на картинку игры")
+    @ApiModelProperty("Файл с изображением")
     private MultipartFile imgFile;
 
     @NotNull
