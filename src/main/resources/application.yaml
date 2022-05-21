@@ -61,9 +61,9 @@ keycloak:
   auth-server-url: ${AUTH_SERVER_URL:https://overgame.kz/auth}
   reset-password-url: ${RESET_PASSWORD_URL:http://localhost:8090/auth/admin/realms/%s/users/%s/reset-password}
   bearer-only: true
-  realm: ${REALM:master}
+  realm: ${REALM:overgame}
   client-id: ${CLIENT_ID:overgame-client}
-  client-secret: ${CLIENT_SECRET:0rf43YiiKtZ8uRTb7v4E9WWfu4bjmWOQ}
+  client-secret: ${CLIENT_SECRET:3xXM18qtgraafehRXfOTLK1qDH7WxChT}
   username: ${REALM_USERNAME:overgame_admin}
   password: ${REALM_USER_PASSWORD:admin}
 
