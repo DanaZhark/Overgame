@@ -1,7 +1,7 @@
 package com.zhandabo.overgame.model.dto.game;
 
 import com.zhandabo.overgame.model.dto.genre.GenreShortViewDto;
-import com.zhandabo.overgame.model.dto.user.UserViewDto;
+import com.zhandabo.overgame.model.dto.user.UserShortViewDto;
 import com.zhandabo.overgame.model.enums.GameStatus;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -41,10 +41,10 @@ public class GameViewDto {
     private List<GenreShortViewDto> genres;
 
     @ApiModelProperty("Создатель игры")
-    private UserViewDto creator;
+    private UserShortViewDto creator;
 
     @ApiModelProperty("Модератор, принявший игру")
-    private UserViewDto moderator;
+    private UserShortViewDto moderator;
 
     @ApiModelProperty("Статус игры")
     private GameStatus status;

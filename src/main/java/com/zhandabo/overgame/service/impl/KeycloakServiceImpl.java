@@ -8,7 +8,7 @@ import com.zhandabo.overgame.model.dto.KeycloakAuthRequestDto;
 import com.zhandabo.overgame.model.dto.KeycloakAuthResponse;
 import com.zhandabo.overgame.model.dto.KeycloakAuthResponseDto;
 import com.zhandabo.overgame.model.dto.KeycloakAuthWithRefreshTokenDto;
-import com.zhandabo.overgame.model.dto.user.UserInfoDto;
+import com.zhandabo.overgame.model.dto.user.UserCreateDto;
 import com.zhandabo.overgame.service.KeycloakService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -83,7 +83,7 @@ public class KeycloakServiceImpl implements KeycloakService {
     }
 
     @Override
-    public String createUserAndGetKeycloakId(UserInfoDto dto, String password) {
+    public String createUserAndGetKeycloakId(UserCreateDto dto, String password) {
         UserRepresentation user = userRepresentationConverter.convert(dto);
         user.setEnabled(true);
         setUserRepresentationCredentials(user, password);

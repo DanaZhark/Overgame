@@ -1,7 +1,7 @@
 package com.zhandabo.overgame.controller;
 
 import com.zhandabo.overgame.model.dto.game.GameViewDto;
-import com.zhandabo.overgame.model.dto.user.UserViewDto;
+import com.zhandabo.overgame.model.dto.user.UserShortViewDto;
 import com.zhandabo.overgame.service.FavouriteService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -44,7 +44,7 @@ public class FavouriteController {
 
     @GetMapping("/developer")
     @ApiOperation("Получение списка любимых разработчиков пользователя")
-    public List<UserViewDto> getUserFavouriteDevelopers() {
+    public List<UserShortViewDto> getUserFavouriteDevelopers() {
         return favouriteService.getUserFavouriteDevelopers();
     }
 

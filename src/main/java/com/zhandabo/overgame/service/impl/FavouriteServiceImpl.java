@@ -1,9 +1,9 @@
 package com.zhandabo.overgame.service.impl;
 
 import com.zhandabo.overgame.converter.GameViewDtoConverter;
-import com.zhandabo.overgame.converter.UserViewDtoConverter;
+import com.zhandabo.overgame.converter.UserShortViewDtoConverter;
 import com.zhandabo.overgame.model.dto.game.GameViewDto;
-import com.zhandabo.overgame.model.dto.user.UserViewDto;
+import com.zhandabo.overgame.model.dto.user.UserShortViewDto;
 import com.zhandabo.overgame.model.entity.FavouriteDevelopers;
 import com.zhandabo.overgame.model.entity.FavouriteGames;
 import com.zhandabo.overgame.model.entity.Game;
@@ -29,7 +29,7 @@ public class FavouriteServiceImpl implements FavouriteService {
     private final FavouriteDevelopersRepository favouriteDevelopersRepository;
     private final GameViewDtoConverter gameViewDtoConverter;
     private final UserRepository userRepository;
-    private final UserViewDtoConverter userViewDtoConverter;
+    private final UserShortViewDtoConverter userShortViewDtoConverter;
 
     @Override
     public void addGameToFavourite(Long gameId) {
@@ -84,13 +84,13 @@ public class FavouriteServiceImpl implements FavouriteService {
     }
 
     @Override
-    public List<UserViewDto> getUserFavouriteDevelopers() {
+    public List<UserShortViewDto> getUserFavouriteDevelopers() {
         String userId = JwtUtils.getKeycloakId();
-        List<UserViewDto> userViewDtoList = new ArrayList<>();
+        List<UserShortViewDto> userShortViewDtoList = new ArrayList<>();
         List<User> users = userRepository.getFavouriteDevelopersByUserId(userRepository.getIdByKeycloakId(userId));
         for (User user : users) {
-            userViewDtoList.add(userViewDtoConverter.convert(user));
+            userShortViewDtoList.add(userShortViewDtoConverter.convert(user));
         }
-        return userViewDtoList;
+        return userShortViewDtoList;
     }
 }

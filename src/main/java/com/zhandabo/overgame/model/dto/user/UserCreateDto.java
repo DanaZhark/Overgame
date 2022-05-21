@@ -16,11 +16,11 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @ApiModel("Данные юзера")
-public class UserInfoDto {
+public class UserCreateDto {
 
     @ApiModelProperty("Дата рождения")
     @JsonFormat(pattern = "dd.MM.yyyy")
-    LocalDate dateOfBirth;
+    private LocalDate dateOfBirth;
     @NotBlank
     @ApiModelProperty("Логин пользователя")
     private String username;

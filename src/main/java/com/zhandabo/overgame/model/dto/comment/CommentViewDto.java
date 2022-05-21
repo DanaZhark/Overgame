@@ -1,6 +1,6 @@
 package com.zhandabo.overgame.model.dto.comment;
 
-import com.zhandabo.overgame.model.dto.user.UserViewDto;
+import com.zhandabo.overgame.model.dto.user.UserShortViewDto;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +16,6 @@ public class CommentViewDto {
     Long id;
     String text;
     Long gameId;
-    UserViewDto userInfo;
+    UserShortViewDto userInfo;
     Date dateCreated;
 }

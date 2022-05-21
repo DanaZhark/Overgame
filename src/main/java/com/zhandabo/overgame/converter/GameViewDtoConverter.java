@@ -24,7 +24,7 @@ public class GameViewDtoConverter implements Converter<Game, GameViewDto> {
 
     private final GenreShortViewDtoConverter genreShortViewDtoConverter;
     private final UserRepository userRepository;
-    private final UserViewDtoConverter userViewDtoConverter;
+    private final UserShortViewDtoConverter userShortViewDtoConverter;
 
     @Override
     public GameViewDto convert(Game source) {
@@ -45,12 +45,12 @@ public class GameViewDtoConverter implements Converter<Game, GameViewDto> {
         target.setGenres(genreShortViewDtoList);
         Optional<User> creator = userRepository.findById(source.getCreatorId());
         if (creator.isPresent()) {
-            target.setCreator(userViewDtoConverter.convert(creator.get()));
+            target.setCreator(userShortViewDtoConverter.convert(creator.get()));
         }
 
         if (Objects.nonNull(source.getModeratorId()) && GameStatus.ACCEPTED.equals(source.getStatus())) {
             Optional<User> moderator = userRepository.findById(source.getModeratorId());
-            target.setModerator(userViewDtoConverter.convert(moderator.get()));
+            target.setModerator(userShortViewDtoConverter.convert(moderator.get()));
         }
 
         return target;

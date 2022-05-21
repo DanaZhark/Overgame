@@ -41,6 +41,7 @@ public class User {
     @Column(name = "avatar_url")
     private String avatarUrl;
     @Column(name = "role_code")
+    @Enumerated(EnumType.STRING)
     private RoleCode role;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")

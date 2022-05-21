@@ -1,6 +1,6 @@
 package com.zhandabo.overgame.converter;
 
-import com.zhandabo.overgame.model.dto.user.UserInfoDto;
+import com.zhandabo.overgame.model.dto.user.UserCreateDto;
 import com.zhandabo.overgame.model.entity.User;
 import com.zhandabo.overgame.service.StorageService;
 import lombok.RequiredArgsConstructor;
@@ -11,14 +11,14 @@ import java.util.Date;
 
 @Component
 @RequiredArgsConstructor
-public class UserConverter implements Converter<UserInfoDto, User> {
+public class UserConverter implements Converter<UserCreateDto, User> {
 
     private final StorageService storageService;
 
     private final String uploadPath = "https://overgame.s3.us-west-2.amazonaws.com/profile-ava/";
 
     @Override
-    public User convert(UserInfoDto source) {
+    public User convert(UserCreateDto source) {
         User target = new User();
         target.setUsername(source.getUsername());
         target.setEmail(source.getEmail());

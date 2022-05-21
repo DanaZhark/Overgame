@@ -1,7 +1,7 @@
 package com.zhandabo.overgame.service;
 
 import com.zhandabo.overgame.model.dto.game.GameViewDto;
-import com.zhandabo.overgame.model.dto.user.UserViewDto;
+import com.zhandabo.overgame.model.dto.user.UserShortViewDto;
 
 import java.util.List;
 
@@ -18,5 +18,5 @@ public interface FavouriteService {
 
     void removeDeveloperFromFavorite(Long developerId);
 
-    List<UserViewDto> getUserFavouriteDevelopers();
+    List<UserShortViewDto> getUserFavouriteDevelopers();
 }

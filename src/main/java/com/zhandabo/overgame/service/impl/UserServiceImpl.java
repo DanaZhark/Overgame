@@ -3,12 +3,14 @@ package com.zhandabo.overgame.service.impl;
 import com.zhandabo.overgame.client.KeycloakClient;
 import com.zhandabo.overgame.converter.RoleConverter;
 import com.zhandabo.overgame.converter.UserConverter;
+import com.zhandabo.overgame.converter.UserShortViewDtoConverter;
 import com.zhandabo.overgame.converter.UserViewDtoConverter;
 import com.zhandabo.overgame.exception.OvergameException;
 import com.zhandabo.overgame.model.constant.ErrorCodeConstant;
 import com.zhandabo.overgame.model.dto.*;
+import com.zhandabo.overgame.model.dto.user.UserCreateDto;
 import com.zhandabo.overgame.model.dto.user.UserEditDto;
-import com.zhandabo.overgame.model.dto.user.UserInfoDto;
+import com.zhandabo.overgame.model.dto.user.UserShortViewDto;
 import com.zhandabo.overgame.model.dto.user.UserViewDto;
 import com.zhandabo.overgame.model.entity.User;
 import com.zhandabo.overgame.model.enums.RoleCode;
@@ -39,6 +41,7 @@ public class UserServiceImpl implements UserService {
     private final RoleService roleService;
     private final UserRepository userRepository;
     private final UserConverter userConverter;
+    private final UserShortViewDtoConverter userShortViewDtoConverter;
     private final UserViewDtoConverter userViewDtoConverter;
     private final RoleConverter roleConverter;
     private final KeycloakClient keycloakClient;
@@ -49,32 +52,32 @@ public class UserServiceImpl implements UserService {
     private String realm;
 
     @Override
-    public void create(UserInfoDto userInfoDto) {
-        if (Boolean.FALSE.equals(keycloakService.isFreeKeycloakUsername(userInfoDto.getEmail())) ||
-                Boolean.TRUE.equals(userRepository.existsByEmail(userInfoDto.getEmail()))) {
+    public void create(UserCreateDto userCreateDto) {
+        if (Boolean.FALSE.equals(keycloakService.isFreeKeycloakUsername(userCreateDto.getEmail())) ||
+                Boolean.TRUE.equals(userRepository.existsByEmail(userCreateDto.getEmail()))) {
             throw new OvergameException(HttpStatus.BAD_REQUEST, ErrorCodeConstant.USER_EMAIL_ALREADY_EXIST,
                     "messages.exception.user-email-already-exist"
             );
         }
 
-        if (!isRoleAvailable(userInfoDto.getRoleCode())) {
+        if (!isRoleAvailable(userCreateDto.getRoleCode())) {
             throw new OvergameException(HttpStatus.BAD_REQUEST, ErrorCodeConstant.INSUFFICIENT_PERMISSION,
                     "messages.exception.insufficient-permission"
             );
         }
 
-        User newUser = userConverter.convert(userInfoDto);
+        User newUser = userConverter.convert(userCreateDto);
 
         String keycloakId = null;
 
         try {
             String password = credentialService.generatePassword();
-            keycloakId = keycloakService.createUserAndGetKeycloakId(userInfoDto, password);
+            keycloakId = keycloakService.createUserAndGetKeycloakId(userCreateDto, password);
             log.info("User is saved in Keycloak. KeycloakId : " + keycloakId);
             Objects.requireNonNull(newUser).setKeycloakId(keycloakId);
             userRepository.save(newUser);
             log.info("User is saved in DB. userId : " + newUser.getId());
-            mailService.sendRegistrationMessage(userInfoDto, password);
+            mailService.sendRegistrationMessage(userCreateDto, password);
             log.info("Mail with password is successfully send!");
 
         } catch (Exception e) {
@@ -91,18 +94,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public User getCurrentUser() {
-        return userRepository.getByKeycloakId(JwtUtils.getKeycloakId());
+    public UserViewDto getCurrentUser() {
+        User user = userRepository.getByKeycloakId(JwtUtils.getKeycloakId());
+        return userViewDtoConverter.convert(user);
     }
 
     @Override
-    public List<UserViewDto> getDevelopers() {
-        List<UserViewDto> userViewDtoList = new ArrayList<>();
+    public List<UserShortViewDto> getDevelopers() {
+        List<UserShortViewDto> userShortViewDtoList = new ArrayList<>();
         List<User> users = userRepository.getDevelopers();
         for (User user : users) {
-            userViewDtoList.add(userViewDtoConverter.convert(user));
+            userShortViewDtoList.add(userShortViewDtoConverter.convert(user));
         }
-        return userViewDtoList;
+        return userShortViewDtoList;
     }
 
     public List<RoleDto> getAvailableRoles() {

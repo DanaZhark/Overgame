@@ -3,10 +3,10 @@ package com.zhandabo.overgame.controller;
 import com.zhandabo.overgame.model.dto.KeycloakAuthRequestDto;
 import com.zhandabo.overgame.model.dto.KeycloakAuthResponseDto;
 import com.zhandabo.overgame.model.dto.KeycloakAuthWithRefreshTokenDto;
+import com.zhandabo.overgame.model.dto.user.UserCreateDto;
 import com.zhandabo.overgame.model.dto.user.UserEditDto;
-import com.zhandabo.overgame.model.dto.user.UserInfoDto;
+import com.zhandabo.overgame.model.dto.user.UserShortViewDto;
 import com.zhandabo.overgame.model.dto.user.UserViewDto;
-import com.zhandabo.overgame.model.entity.User;
 import com.zhandabo.overgame.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -27,7 +27,7 @@ public class UserController {
 
     @PostMapping("/register")
     @ApiOperation("Регистрация пользователя")
-    public void register(@RequestPart UserInfoDto user,
+    public void register(@RequestPart UserCreateDto user,
                          @RequestPart(value = "imgFile") MultipartFile imgFile) {
         user.setImgFile(imgFile);
         userService.create(user);
@@ -47,7 +47,7 @@ public class UserController {
 
     @GetMapping("/me")
     @ApiOperation("Получить информацию о текущем пользователе")
-    public User getMe() {
+    public UserViewDto getMe() {
         return userService.getCurrentUser();
     }
 
@@ -59,7 +59,7 @@ public class UserController {
 
     @GetMapping("/developers")
     @ApiOperation("Получить список всех разработчиков")
-    public List<UserViewDto> getDevelopers() {
+    public List<UserShortViewDto> getDevelopers() {
         return userService.getDevelopers();
     }
 

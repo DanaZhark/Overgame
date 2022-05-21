@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class CommentViewDtoConverter implements Converter<Comment, CommentViewDto> {
 
-    private final UserViewDtoConverter userViewDtoConverter;
+    private final UserShortViewDtoConverter userShortViewDtoConverter;
 
     @Override
     public CommentViewDto convert(Comment source) {
@@ -19,7 +19,7 @@ public class CommentViewDtoConverter implements Converter<Comment, CommentViewDt
         target.setText(source.getText());
         target.setDateCreated(source.getDateCreated());
         target.setGameId(source.getGame().getId());
-        target.setUserInfo(userViewDtoConverter.convert(source.getUser()));
+        target.setUserInfo(userShortViewDtoConverter.convert(source.getUser()));
         return target;
     }
 }

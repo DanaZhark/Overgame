@@ -3,7 +3,7 @@ package com.zhandabo.overgame.service;
 import com.zhandabo.overgame.config.MailConfig;
 import com.zhandabo.overgame.exception.OvergameException;
 import com.zhandabo.overgame.model.constant.ErrorCodeConstant;
-import com.zhandabo.overgame.model.dto.user.UserInfoDto;
+import com.zhandabo.overgame.model.dto.user.UserCreateDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -82,10 +82,10 @@ public class MailService {
         }
     }
 
-    public void sendRegistrationMessage(UserInfoDto userInfoDto, String password) {
-        String[] args = {userInfoDto.getEmail(), password};
+    public void sendRegistrationMessage(UserCreateDto userCreateDto, String password) {
+        String[] args = {userCreateDto.getEmail(), password};
         String message = getMessage("messages.registration", args);
-        send(message, MAIL_SUBJECT, userInfoDto.getEmail(), password);
+        send(message, MAIL_SUBJECT, userCreateDto.getEmail(), password);
     }
 
     public String getMessage(String code, Object... objects) {

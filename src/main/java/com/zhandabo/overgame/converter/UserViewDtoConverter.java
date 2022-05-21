@@ -15,7 +15,10 @@ public class UserViewDtoConverter implements Converter<User, UserViewDto> {
         UserViewDto target = new UserViewDto();
         target.setId(source.getId());
         target.setUsername(source.getUsername());
-        target.setImg(source.getAvatarUrl());
+        target.setEmail(source.getEmail());
+        target.setDateOfBirth(source.getDateOfBirth());
+        target.setRoleCode(source.getRole());
+        target.setImgUrl(source.getAvatarUrl());
         return target;
     }
 }
