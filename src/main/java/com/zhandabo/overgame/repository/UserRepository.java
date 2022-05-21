@@ -15,8 +15,6 @@ public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificat
 
     Boolean existsByEmail(String email);
 
-    User getByEmail(String email);
-
     @Query(value = "from User u inner join Game g where u.id = g.creatorId")
     List<User> getDevelopers();
 
