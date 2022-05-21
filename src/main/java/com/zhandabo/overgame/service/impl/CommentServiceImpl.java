@@ -9,7 +9,7 @@ import com.zhandabo.overgame.repository.CommentRepository;
 import com.zhandabo.overgame.repository.GameRepository;
 import com.zhandabo.overgame.repository.UserRepository;
 import com.zhandabo.overgame.service.CommentService;
-import com.zhandabo.overgame.util.JwtUtils;
+import com.zhandabo.overgame.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,12 +25,14 @@ public class CommentServiceImpl implements CommentService {
     private final UserRepository userRepository;
     private final GameRepository gameRepository;
     private final CommentViewDtoConverter commentViewDtoConverter;
+    private final UserService userService;
 
     @Override
     public CommentViewDto create(String text, Long gameId) {
-        String userId = JwtUtils.getKeycloakId();
-        User user = userRepository.getByKeycloakId(userId);
-        Game game = gameRepository.getById(gameId);
+        Long userId = userService.getCurrentUser().getId();
+        User user = userRepository.findById(userId).get();
+
+        Game game = gameRepository.findById(gameId).get();
 
         Comment comment = new Comment();
         comment.setText(text);

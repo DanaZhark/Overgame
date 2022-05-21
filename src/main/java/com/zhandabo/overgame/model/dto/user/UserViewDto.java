@@ -1,6 +1,5 @@
 package com.zhandabo.overgame.model.dto.user;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sun.istack.NotNull;
 import com.zhandabo.overgame.model.enums.RoleCode;
 import io.swagger.annotations.ApiModel;
@@ -10,7 +9,6 @@ import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -19,8 +17,7 @@ public class UserViewDto {
 
     private Long id;
     @ApiModelProperty("Дата рождения")
-    @JsonFormat(pattern = "dd.MM.yyyy")
-    private LocalDate dateOfBirth;
+    private String dateOfBirth;
     @NotBlank
     @ApiModelProperty("Логин пользователя")
     private String username;

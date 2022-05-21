@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
+import java.time.format.DateTimeFormatter;
+
 @Component
 @RequiredArgsConstructor
 public class UserViewDtoConverter implements Converter<User, UserViewDto> {
@@ -16,7 +18,7 @@ public class UserViewDtoConverter implements Converter<User, UserViewDto> {
         target.setId(source.getId());
         target.setUsername(source.getUsername());
         target.setEmail(source.getEmail());
-        target.setDateOfBirth(source.getDateOfBirth());
+        target.setDateOfBirth(source.getDateOfBirth().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
         target.setRoleCode(source.getRole());
         target.setImgUrl(source.getAvatarUrl());
         return target;

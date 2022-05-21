@@ -15,7 +15,6 @@ import com.zhandabo.overgame.repository.UserRepository;
 import com.zhandabo.overgame.service.GameService;
 import com.zhandabo.overgame.service.StorageService;
 import com.zhandabo.overgame.service.UserService;
-import com.zhandabo.overgame.util.JwtUtils;
 import com.zhandabo.overgame.util.PageConverterUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -57,9 +56,6 @@ public class GameServiceImpl implements GameService {
         game.setDateCreated(new Date());
         game.setCreatorId(userService.getCurrentUser().getId());
         game.setStatus(GameStatus.PENDING_MODERATOR);
-        String userKeycloakId = JwtUtils.getKeycloakId();
-        Long userId = userRepository.getIdByKeycloakId(userKeycloakId);
-        game.setCreatorId(userId);
         gameRepository.save(game);
 
         createGameGenre(dto.getGenreIds(), game.getId());

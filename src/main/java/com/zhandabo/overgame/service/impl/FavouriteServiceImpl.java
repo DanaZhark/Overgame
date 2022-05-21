@@ -13,7 +13,7 @@ import com.zhandabo.overgame.repository.FavouriteGamesRepository;
 import com.zhandabo.overgame.repository.GameRepository;
 import com.zhandabo.overgame.repository.UserRepository;
 import com.zhandabo.overgame.service.FavouriteService;
-import com.zhandabo.overgame.util.JwtUtils;
+import com.zhandabo.overgame.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -30,12 +30,13 @@ public class FavouriteServiceImpl implements FavouriteService {
     private final GameViewDtoConverter gameViewDtoConverter;
     private final UserRepository userRepository;
     private final UserShortViewDtoConverter userShortViewDtoConverter;
+    private final UserService userService;
 
     @Override
     public void addGameToFavourite(Long gameId) {
         FavouriteGames favouriteGames = new FavouriteGames();
-        String userId = JwtUtils.getKeycloakId();
-        User user = userRepository.getByKeycloakId(userId);
+        Long userId = userService.getCurrentUser().getId();
+        User user = userRepository.findById(userId).get();
         favouriteGames.setGame(gameRepository.getById(gameId));
         favouriteGames.setUser(user);
 
@@ -44,7 +45,7 @@ public class FavouriteServiceImpl implements FavouriteService {
 
     @Override
     public void removeGameFromFavorite(Long gameId) {
-        String userId = JwtUtils.getKeycloakId();
+        Long userId = userService.getCurrentUser().getId();
         FavouriteGames favouriteGames = favouriteGamesRepository.getByGameIdAndUserId(gameId, userId);
 
         favouriteGamesRepository.delete(favouriteGames);
@@ -52,7 +53,7 @@ public class FavouriteServiceImpl implements FavouriteService {
 
     @Override
     public List<GameViewDto> getUserFavouriteGames() {
-        String userId = JwtUtils.getKeycloakId();
+        Long userId = userService.getCurrentUser().getId();
         List<GameViewDto> gameViewDtoList = new ArrayList<>();
         List<Game> games = gameRepository.getFavouriteGamesByUserId(userId);
 
@@ -66,8 +67,8 @@ public class FavouriteServiceImpl implements FavouriteService {
     public void addDeveloperToFavourite(Long developerId) {
 
         FavouriteDevelopers favouriteDevelopers = new FavouriteDevelopers();
-        String userId = JwtUtils.getKeycloakId();
-        User user = userRepository.getByKeycloakId(userId);
+        Long userId = userService.getCurrentUser().getId();
+        User user = userRepository.findById(userId).get();
         User developer = userRepository.getById(developerId);
 
         favouriteDevelopers.setDeveloper(developer);
@@ -78,16 +79,16 @@ public class FavouriteServiceImpl implements FavouriteService {
 
     @Override
     public void removeDeveloperFromFavorite(Long developerId) {
-        String userId = JwtUtils.getKeycloakId();
-        FavouriteDevelopers favouriteDevelopers = favouriteDevelopersRepository.getByDeveloperIdAndUserId(developerId, userRepository.getIdByKeycloakId(userId));
+        Long userId = userService.getCurrentUser().getId();
+        FavouriteDevelopers favouriteDevelopers = favouriteDevelopersRepository.getByDeveloperIdAndUserId(developerId, userId);
         favouriteDevelopersRepository.delete(favouriteDevelopers);
     }
 
     @Override
     public List<UserShortViewDto> getUserFavouriteDevelopers() {
-        String userId = JwtUtils.getKeycloakId();
+        Long userId = userService.getCurrentUser().getId();
         List<UserShortViewDto> userShortViewDtoList = new ArrayList<>();
-        List<User> users = userRepository.getFavouriteDevelopersByUserId(userRepository.getIdByKeycloakId(userId));
+        List<User> users = userRepository.getFavouriteDevelopersByUserId(userId);
         for (User user : users) {
             userShortViewDtoList.add(userShortViewDtoConverter.convert(user));
         }

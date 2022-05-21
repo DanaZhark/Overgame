@@ -24,8 +24,8 @@ public interface GameRepository extends JpaRepository<Game, Long>, JpaSpecificat
 
     @Query(value = "from Game g " +
             "inner join FavouriteGames f on g.id = f.game.id " +
-            "where f.user.keycloakId = :userId")
-    List<Game> getFavouriteGamesByUserId(String userId);
+            "where f.user.id = :userId")
+    List<Game> getFavouriteGamesByUserId(Long userId);
 
     @Query(value = "from Game g where g.status = :status")
     Page<Game> getAllByStatus(GameStatus status, Pageable pageable);

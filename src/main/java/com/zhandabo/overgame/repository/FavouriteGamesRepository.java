@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface FavouriteGamesRepository extends JpaRepository<FavouriteGames, Long> {
 
-    @Query(value = "from FavouriteGames f where f.game.id = :gameId and f.user.keycloakId = :userId")
-    FavouriteGames getByGameIdAndUserId(Long gameId, String userId);
+    @Query(value = "from FavouriteGames f where f.game.id = :gameId and f.user.id = :userId")
+    FavouriteGames getByGameIdAndUserId(Long gameId, Long userId);
 }
