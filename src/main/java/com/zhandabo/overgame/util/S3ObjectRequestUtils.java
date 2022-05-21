@@ -13,6 +13,7 @@ public class S3ObjectRequestUtils {
         try {
             ObjectMetadata metadata = new ObjectMetadata();
             metadata.setContentLength(file.getSize());
+            metadata.setContentType("image/jpeg");
             PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, path, file.getInputStream(), metadata);
             putObjectRequest.putCustomRequestHeader("x-amz-acl", "public-read");
             return putObjectRequest;
