@@ -13,9 +13,6 @@ public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificat
 
     User getByKeycloakId(String keycloakId);
 
-    @Query(value = "from User u where u.keycloakId = :keycloakId")
-    Long getIdByKeycloakId(String keycloakId);
-
     Boolean existsByEmail(String email);
 
     User getByEmail(String email);
