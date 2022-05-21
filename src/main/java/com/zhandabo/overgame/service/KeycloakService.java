@@ -6,6 +6,7 @@ import com.zhandabo.overgame.model.dto.KeycloakAuthWithRefreshTokenDto;
 import com.zhandabo.overgame.model.dto.user.UserInfoDto;
 
 public interface KeycloakService {
+
     String createUserAndGetKeycloakId(UserInfoDto adminRequestDto, String password);
 
     KeycloakAuthResponseDto login(KeycloakAuthRequestDto keycloakAuthRequestDto);
