@@ -20,7 +20,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: ${JWT_SET_URI:http://localhost:8090/auth/realms/overgame/protocol/openid-connect/certs}
+          jwk-set-uri: ${JWT_SET_URI:https://overgame.kz/auth/realms/overgame/protocol/openid-connect/certs}
   servlet:
     multipart:
       max-file-size: 50MB
@@ -59,7 +59,7 @@ spring:
 keycloak:
   value: keycloak
   auth-server-url: ${AUTH_SERVER_URL:https://overgame.kz/auth}
-  reset-password-url: ${RESET_PASSWORD_URL:http://localhost:8090/auth/admin/realms/%s/users/%s/reset-password}
+  reset-password-url: ${RESET_PASSWORD_URL:https://overgame.kz/auth/admin/realms/%s/users/%s/reset-password}
   bearer-only: true
   realm: ${REALM:overgame}
   client-id: ${CLIENT_ID:overgame-client}
