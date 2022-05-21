@@ -70,9 +70,12 @@ public class UserServiceImpl implements UserService {
         try {
             String password = credentialService.generatePassword();
             keycloakId = keycloakService.createUserAndGetKeycloakId(userInfoDto, password);
+            log.info("User is saved in Keycloak. KeycloakId : " + keycloakId);
             Objects.requireNonNull(newUser).setKeycloakId(keycloakId);
             userRepository.save(newUser);
+            log.info("User is saved in DB. userId : " + newUser.getId());
             mailService.sendRegistrationMessage(userInfoDto, password);
+            log.info("Mail with password is successfully send!");
 
         } catch (Exception e) {
             log.error("registerResponse: ", e);

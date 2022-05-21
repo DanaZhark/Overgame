@@ -11,7 +11,7 @@ public class UserRepresentationConverter implements Converter<UserInfoDto, UserR
     @Override
     public UserRepresentation convert(UserInfoDto source) {
         UserRepresentation target = new UserRepresentation();
-        target.setUsername(source.getEmail());
+        target.setUsername(source.getUsername());
         target.setEmail(source.getEmail());
         return target;
     }
