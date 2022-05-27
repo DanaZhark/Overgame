@@ -23,16 +23,16 @@ public class BannerController {
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ApiOperation("Создание банера")
-    public void create(@RequestPart BannerCreateDto bannerCreateDto,
+    public void create(@RequestPart BannerCreateDto banner,
                        @RequestPart(value = "imgFile") MultipartFile imgFile) {
-        bannerCreateDto.setImgFile(imgFile);
-        bannerService.create(bannerCreateDto);
+        banner.setImgFile(imgFile);
+        bannerService.create(banner);
     }
 
     @PutMapping("/{bannerId}")
     @ApiOperation("Редактирование банера")
-    public void edit(@RequestBody BannerCreateDto bannerCreateDto, @PathVariable Long bannerId) {
-        bannerService.edit(bannerCreateDto, bannerId);
+    public void edit(@RequestBody BannerCreateDto banner, @PathVariable Long bannerId) {
+        bannerService.edit(banner, bannerId);
     }
 
     @DeleteMapping("/{bannerId}")
@@ -43,14 +43,13 @@ public class BannerController {
 
     @GetMapping
     @ApiOperation("Получение списка всех банеров")
-    public List<BannerViewDto> getAllBannersByCodeAndIsActive(@RequestParam BannerCode code,
-                                                              @RequestParam Boolean isActive) {
-        return bannerService.getAllBannersByCodeAndIsActive(code, isActive);
+    public List<BannerViewDto> getAllActiveBanners() {
+        return bannerService.getAllActiveBanners();
     }
 
     @GetMapping("/codes")
     @ApiOperation("Получение списка всех кодов банеров")
-    public List<String> getAllBannersCode() {
+    public List<BannerCode> getAllBannersCode() {
         return bannerService.getAllBannersCode();
     }
 }

@@ -14,7 +14,7 @@ public interface BannerService {
 
     void delete(Long bannerId);
 
-    List<BannerViewDto> getAllBannersByCodeAndIsActive(BannerCode code, Boolean isActive);
+    List<BannerViewDto> getAllActiveBanners();
 
-    List<String> getAllBannersCode();
+    List<BannerCode> getAllBannersCode();
 }

@@ -13,7 +13,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name = "comment")
+@Table(name = "comments")
 @ApiModel("Комментарий")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Comment {

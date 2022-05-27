@@ -7,8 +7,8 @@ import com.zhandabo.overgame.model.dto.FileResponse;
 import com.zhandabo.overgame.service.StorageService;
 import com.zhandabo.overgame.util.OvergameExceptionUtils;
 import com.zhandabo.overgame.util.S3ObjectRequestUtils;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,18 +17,15 @@ import javax.annotation.PostConstruct;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class StorageServiceImpl implements StorageService {
 
-    @Autowired
     private final AmazonS3 s3Client;
     @Value("${amazon.s3.bucket.name}")
     private String bucketName;
     @Value("${amazon.s3.bucket.url}")
     private String bucketFullUrl;
 
-    public StorageServiceImpl(AmazonS3 s3Client) {
-        this.s3Client = s3Client;
-    }
 
     @PostConstruct
     public void init() {

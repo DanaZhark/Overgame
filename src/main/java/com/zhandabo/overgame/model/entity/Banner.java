@@ -37,7 +37,7 @@ public class Banner {
     private Map<String, String> description;
 
     @ApiModelProperty("Путь картинки")
-    @Column(name = "img_link")
+    @Column(name = "img")
     private String imgLink;
 
     @Enumerated(EnumType.STRING)

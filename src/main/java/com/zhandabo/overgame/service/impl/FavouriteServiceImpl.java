@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -54,10 +55,12 @@ public class FavouriteServiceImpl implements FavouriteService {
     @Override
     public List<GameViewDto> getUserFavouriteGames() {
         Long userId = userService.getCurrentUser().getId();
+        User user = userRepository.findById(userId).get();
+        Set<FavouriteGames> favouriteGames = user.getFavouriteGames();
         List<GameViewDto> gameViewDtoList = new ArrayList<>();
-        List<Game> games = gameRepository.getFavouriteGamesByUserId(userId);
 
-        for (Game game : games) {
+        for (FavouriteGames favouriteGame : favouriteGames) {
+            Game game = gameRepository.getGameById(favouriteGame.getGame().getId());
             gameViewDtoList.add(gameViewDtoConverter.convert(game));
         }
         return gameViewDtoList;

@@ -46,7 +46,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public CommentViewDto edit(String text, Long commentId) {
-        Comment comment = commentRepository.getById(commentId);
+        Comment comment = commentRepository.findById(commentId).get();
         comment.setText(text);
         commentRepository.save(comment);
         return commentViewDtoConverter.convert(comment);

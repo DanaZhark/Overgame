@@ -30,5 +30,8 @@ public class RatingServiceImpl implements RatingService {
         rating.setUser(userRepository.findById(userId).get());
         rating.setGrade(grade);
         ratingRepository.save(rating);
+
+        game.setRating(ratingRepository.getRatingGameByGameId(gameId));
+        gameRepository.save(game);
     }
 }
