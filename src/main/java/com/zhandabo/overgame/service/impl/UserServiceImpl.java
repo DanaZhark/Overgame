@@ -95,7 +95,8 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserViewDto getCurrentUser() {
-        User user = userRepository.getByKeycloakId(JwtUtils.getKeycloakId());
+        String keycloakId = JwtUtils.getKeycloakId();
+        User user = userRepository.getByKeycloakId(keycloakId);
         return userViewDtoConverter.convert(user);
     }
 

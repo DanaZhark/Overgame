@@ -46,6 +46,12 @@ public class GameController {
         return gameService.getGamesByStatus(status, pageable);
     }
 
+    @GetMapping("/user")
+    @ApiOperation("Получение пагинированного списка всех игр созданных текущим пользователем")
+    public PageDTO<GameViewDto> getAllGamesByDeveloperId(@PageableDefault(sort = "dateCreated", direction = Sort.Direction.DESC) Pageable pageable) {
+        return gameService.getAllGamesByDeveloperId(pageable);
+    }
+
     @GetMapping("/search")
     @ApiOperation("Поиск игр с фильтрами")
     public PageDTO<GameViewDto> getAllGamesByStatus(

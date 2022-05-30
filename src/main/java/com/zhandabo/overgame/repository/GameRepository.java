@@ -31,4 +31,9 @@ public interface GameRepository extends JpaRepository<Game, Long>, JpaSpecificat
     Page<Game> getAllByStatus(GameStatus status, Pageable pageable);
 
     Page<Game> findAllByName(String name, Pageable pageable);
+
+    @Query(value = "from Game g where g.creatorId = :developerId")
+    Page<Game> getAllByDeveloperId(Long developerId, Pageable pageable);
+
+
 }

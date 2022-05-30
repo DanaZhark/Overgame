@@ -110,6 +110,18 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
+    @Transactional
+    public PageDTO<GameViewDto> getAllGamesByDeveloperId(Pageable pageable) {
+        List<GameViewDto> gameViewDtoList = new ArrayList<>();
+        Page<Game> games = gameRepository.getAllByDeveloperId(userService.getCurrentUser().getId(), pageable);
+
+        for (Game game : games.getContent()) {
+            gameViewDtoList.add(gameViewDtoConverter.convert(game));
+        }
+        return PageConverterUtils.convert(games, gameViewDtoList);
+    }
+
+    @Override
     public PageDTO<GameViewDto> getAllAcceptedGames(String gameName, List<Long> genreIds, Pageable pageable) {
         List<GameViewDto> gameViewDtoList = new ArrayList<>();
 

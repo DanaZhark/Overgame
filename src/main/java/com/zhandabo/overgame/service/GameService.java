@@ -18,6 +18,8 @@ public interface GameService {
 
     PageDTO<GameViewDto> getGamesByStatus(GameStatus status, Pageable pageable);
 
+    PageDTO<GameViewDto> getAllGamesByDeveloperId(Pageable pageable);
+
     PageDTO<GameViewDto> getAllAcceptedGames(String name, List<Long> genreIds, Pageable pageable);
 
     void changeGameStatus(Long gameId, GameStatus status);
