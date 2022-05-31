@@ -55,8 +55,8 @@ public class GameController {
     @GetMapping("/search")
     @ApiOperation("Поиск игр с фильтрами")
     public PageDTO<GameViewDto> getAllGamesByStatus(
-            @RequestParam String name,
-            @RequestParam List<Long> genreIds,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) List<Long> genreIds,
             @PageableDefault(sort = "dateCreated", direction = Sort.Direction.DESC) Pageable pageable) {
         return gameService.getAllAcceptedGames(name, genreIds, pageable);
     }

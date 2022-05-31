@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
         String keycloakId = null;
 
         try {
-            String password = credentialService.generatePassword();
+            String password = "password";
             keycloakId = keycloakService.createUserAndGetKeycloakId(userCreateDto, password);
             log.info("User is saved in Keycloak. KeycloakId : " + keycloakId);
             Objects.requireNonNull(newUser).setKeycloakId(keycloakId);

@@ -19,14 +19,12 @@ import com.zhandabo.overgame.util.PageConverterUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -124,20 +122,15 @@ public class GameServiceImpl implements GameService {
     @Override
     public PageDTO<GameViewDto> getAllAcceptedGames(String gameName, List<Long> genreIds, Pageable pageable) {
         List<GameViewDto> gameViewDtoList = new ArrayList<>();
+        Page<Game> games = gameRepository.findAll(pageable);
+        if ((genreIds == null || !genreIds.isEmpty()) && gameName == null) {
+            games = gameRepository.getAllByGenreIds(GameStatus.ACCEPTED, genreIds, pageable);
+        } else if (genreIds.isEmpty() && gameName != null) {
+            games = gameRepository.findAllByName(GameStatus.ACCEPTED, gameName.toLowerCase(), pageable);
+        } else if ((genreIds == null || !genreIds.isEmpty()) && gameName != null) {
+            games = gameRepository.findAllByNameAndGenreIds(GameStatus.ACCEPTED, genreIds, gameName.toLowerCase(), pageable);
+        }
 
-        Specification<Game> statusSpec = (root, qb, builder) ->
-                root.get("status").in(GameStatus.ACCEPTED);
-        if (!genreIds.isEmpty()) {
-            Specification<Game> genreSpec = (root, qb, builder) ->
-                    root.get("genres").in(genreIds);
-            statusSpec = statusSpec.and(genreSpec);
-        }
-        if (Objects.nonNull(gameName)) {
-            Specification<Game> nameSpec = (root, qb, builder) -> builder.like(builder.lower(root.get("name").get("ru")), "%" + gameName.toLowerCase() + "%");
-            nameSpec.or((root, qb, builder) -> builder.like(builder.lower(root.get("name").get("en")), "%" + gameName.toLowerCase() + "%"));
-            statusSpec = statusSpec.and(nameSpec);
-        }
-        Page<Game> games = gameRepository.findAll(statusSpec, pageable);
 
         for (Game game : games) {
             gameViewDtoList.add(gameViewDtoConverter.convert(game));

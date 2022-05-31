@@ -23,6 +23,4 @@ public interface UserService {
     KeycloakAuthResponseDto refresh(KeycloakAuthWithRefreshTokenDto keycloakAuthWithRefreshTokenDto);
 
     void editUser(UserEditDto userEditDto);
-
-
 }
