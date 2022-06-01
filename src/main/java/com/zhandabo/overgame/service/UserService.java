@@ -18,6 +18,8 @@ public interface UserService {
 
     UserViewDto getCurrentUser();
 
+    UserViewDto getUserById(Long userId);
+
     List<UserShortViewDto> getDevelopers();
 
     KeycloakAuthResponseDto refresh(KeycloakAuthWithRefreshTokenDto keycloakAuthWithRefreshTokenDto);

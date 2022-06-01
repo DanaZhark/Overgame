@@ -67,6 +67,20 @@ public class FavouriteServiceImpl implements FavouriteService {
     }
 
     @Override
+    public List<GameViewDto> getUserFavouriteGamesByUserId(Long userId) {
+
+        User user = userRepository.findById(userId).get();
+        Set<FavouriteGames> favouriteGames = user.getFavouriteGames();
+        List<GameViewDto> gameViewDtoList = new ArrayList<>();
+
+        for (FavouriteGames favouriteGame : favouriteGames) {
+            Game game = gameRepository.getGameById(favouriteGame.getGame().getId());
+            gameViewDtoList.add(gameViewDtoConverter.convert(game));
+        }
+        return gameViewDtoList;
+    }
+
+    @Override
     public void addDeveloperToFavourite(Long developerId) {
 
         FavouriteDevelopers favouriteDevelopers = new FavouriteDevelopers();
@@ -90,6 +104,17 @@ public class FavouriteServiceImpl implements FavouriteService {
     @Override
     public List<UserShortViewDto> getUserFavouriteDevelopers() {
         Long userId = userService.getCurrentUser().getId();
+        List<UserShortViewDto> userShortViewDtoList = new ArrayList<>();
+        List<User> users = userRepository.getFavouriteDevelopersByUserId(userId);
+        for (User user : users) {
+            userShortViewDtoList.add(userShortViewDtoConverter.convert(user));
+        }
+        return userShortViewDtoList;
+    }
+
+    @Override
+    public List<UserShortViewDto> getUserFavouriteDevelopersByUserId(Long userId) {
+
         List<UserShortViewDto> userShortViewDtoList = new ArrayList<>();
         List<User> users = userRepository.getFavouriteDevelopersByUserId(userId);
         for (User user : users) {

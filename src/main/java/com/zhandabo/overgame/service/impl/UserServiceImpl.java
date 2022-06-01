@@ -101,6 +101,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserViewDto getUserById(Long userId) {
+        User user = userRepository.findById(userId).get();
+        return userViewDtoConverter.convert(user);
+    }
+
+    @Override
     public List<UserShortViewDto> getDevelopers() {
         List<UserShortViewDto> userShortViewDtoList = new ArrayList<>();
         List<User> users = userRepository.getDevelopers();

@@ -25,9 +25,15 @@ public class FavouriteController {
     }
 
     @GetMapping("/games")
-    @ApiOperation("Получение списка любимых игр пользователя")
+    @ApiOperation("Получение списка любимых игр текущего пользователя")
     public List<GameViewDto> getUserFavouriteGames() {
         return favouriteService.getUserFavouriteGames();
+    }
+
+    @GetMapping("/games/users/{userId}")
+    @ApiOperation("Получение списка любимых игр пользователя")
+    public List<GameViewDto> getUserFavouriteGamesByUserId(@PathVariable("userId") Long userId) {
+        return favouriteService.getUserFavouriteGamesByUserId(userId);
     }
 
     @DeleteMapping("/games/{gameId}")
@@ -43,9 +49,15 @@ public class FavouriteController {
     }
 
     @GetMapping("/developer")
-    @ApiOperation("Получение списка любимых разработчиков пользователя")
+    @ApiOperation("Получение списка любимых разработчиков текущего пользователя")
     public List<UserShortViewDto> getUserFavouriteDevelopers() {
         return favouriteService.getUserFavouriteDevelopers();
+    }
+
+    @GetMapping("/developer/users/{userId}")
+    @ApiOperation("Получение списка любимых разработчиков пользователя")
+    public List<UserShortViewDto> getUserFavouriteDevelopersByUserId(@PathVariable("userId") Long userId) {
+        return favouriteService.getUserFavouriteDevelopersByUserId(userId);
     }
 
     @DeleteMapping("/developer/{developerId}")

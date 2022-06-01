@@ -7,10 +7,11 @@ import java.util.List;
 
 public interface FavouriteService {
 
-
     void addGameToFavourite(Long gameId);
 
     List<GameViewDto> getUserFavouriteGames();
+
+    List<GameViewDto> getUserFavouriteGamesByUserId(Long userId);
 
     void removeGameFromFavorite(Long gameId);
 
@@ -19,4 +20,6 @@ public interface FavouriteService {
     void removeDeveloperFromFavorite(Long developerId);
 
     List<UserShortViewDto> getUserFavouriteDevelopers();
+
+    List<UserShortViewDto> getUserFavouriteDevelopersByUserId(Long userId);
 }

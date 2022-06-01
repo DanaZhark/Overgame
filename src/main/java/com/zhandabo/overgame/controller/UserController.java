@@ -51,6 +51,12 @@ public class UserController {
         return userService.getCurrentUser();
     }
 
+    @GetMapping("/{userId}")
+    @ApiOperation("Получить информацию о пользователе по айди")
+    public UserViewDto getMe(@PathVariable("userId") Long userId) {
+        return userService.getUserById(userId);
+    }
+
     @PutMapping("/edit")
     @ApiOperation("Редактирование данных пользователя")
     public void editUser(@Valid @RequestBody UserEditDto userEditDto) {
