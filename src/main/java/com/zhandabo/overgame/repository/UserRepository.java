@@ -19,7 +19,7 @@ public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificat
     List<User> getDevelopers();
 
     @Query(value = "from User u " +
-            "inner join FavouriteDevelopers fd on u.id = fd.user.id " +
+            "inner join FavouriteDevelopers fd on u.id = fd.developer.id " +
             "where fd.user.id = :userId")
     List<User> getFavouriteDevelopersByUserId(Long userId);
 }
