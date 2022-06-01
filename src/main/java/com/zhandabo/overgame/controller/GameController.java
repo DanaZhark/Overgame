@@ -81,4 +81,10 @@ public class GameController {
         return gameService.getGamesByGenreId(genreId);
     }
 
+    @GetMapping("/recommend/{gameId}")
+    @ApiOperation("Получение списка игр по жанру")
+    public List<GameViewDto> getRecommendGamesByGameId(@PathVariable Long gameId) {
+        return gameService.getRecommendGamesByGameId(gameId);
+    }
+
 }

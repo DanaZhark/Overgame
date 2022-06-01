@@ -46,5 +46,7 @@ public interface GameRepository extends JpaRepository<Game, Long>, JpaSpecificat
     @Query(value = "from Game g where g.creatorId = :developerId")
     Page<Game> getAllByDeveloperId(Long developerId, Pageable pageable);
 
+    @Query(value = "select g.id from game g", nativeQuery = true)
+    List<Long> getAllIds();
 
 }

@@ -26,6 +26,8 @@ public interface GameService {
 
     GameViewDto getGameById(Long gameId);
 
-    List<GameViewDto> getGamesByGenreId(Long genreId);
+    List<GameViewDto> getGamesByGenreId(Long gameId);
+
+    List<GameViewDto> getRecommendGamesByGameId(Long gameId);
 
 }

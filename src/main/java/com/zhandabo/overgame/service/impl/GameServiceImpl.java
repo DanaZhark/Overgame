@@ -25,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
@@ -139,6 +140,11 @@ public class GameServiceImpl implements GameService {
         return PageConverterUtils.convert(games, gameViewDtoList);
     }
 
+    private Random getJupyterResponse(Long gameId) {
+        Random rand = new Random();
+        return rand;
+    }
+
     @Override
     public void changeGameStatus(Long gameId, GameStatus status) {
         Game game = gameRepository.getGameById(gameId);
@@ -163,4 +169,21 @@ public class GameServiceImpl implements GameService {
         }
         return gameViewDtoList;
     }
+
+    @Override
+    public List<GameViewDto> getRecommendGamesByGameId(Long gameId) {
+        List<Long> gameIds = gameRepository.getAllIds();
+        List<GameViewDto> recommendGames = new ArrayList<>();
+        for (int i = 0; i < 12; i++) {
+            int recommendGameIndex = getJupyterResponse(gameId).nextInt(gameIds.size());
+            Long recommendGameId = gameIds.get(recommendGameIndex);
+
+            Game game = gameRepository.getGameById(recommendGameId);
+            GameViewDto gameViewDto = gameViewDtoConverter.convert(game);
+            recommendGames.add(gameViewDto);
+        }
+        return recommendGames;
+    }
+
+
 }

@@ -75,3 +75,6 @@ amazon:
     bucket:
       name: 'overgame'
       url: 'https://overgame.s3.us-west-2.amazonaws.com/'
+
+jupyter-notebook:
+  url: jdbc:postgresql://${JUPYTER_HOST:localhost}:${JUPYTER_PORT:8888}/${JUPYTER_FILE:diploma}
